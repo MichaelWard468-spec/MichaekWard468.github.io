@@ -1,0 +1,2334 @@
+  margin-top: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Screens */
+        .screen {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Start Screen */
+        .start-options {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .option-group {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid #222;
+        }
+
+        .option-group h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .difficulty-buttons, .rating-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .diff-btn, .rating-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 20px 15px;
+            border: 2px solid #333;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .diff-btn:hover, .rating-btn:hover {
+            border-color: var(--accent);
+            background: var(--bg-hover);
+        }
+
+        .diff-btn.selected, .rating-btn.selected {
+            border-color: var(--accent);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .diff-btn .name, .rating-btn .name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .diff-btn .desc {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .easy .name { color: #00ff88; }
+        .medium .name { color: #ffa502; }
+        .hard .name { color: #ff4757; }
+
+        /* Tournament Selection */
+        .tournament-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tournament-card {
+            background: var(--bg-card);
+            border: 2px solid #222;
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .tournament-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .tournament-card.selected {
+            border-color: var(--accent);
+            background: rgba(0, 255, 136, 0.05);
+        }
+
+        .tournament-flag {
+            font-size: 2.5rem;
+        }
+
+        .tournament-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .tournament-info span {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Main Button */
+        .main-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 30px aDOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-0 | World Cup Dream Team</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-hover: #1a1a25;
+            --accent: #00ff88;
+            --accent-dim: #00cc6a;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --bronze: #cd7f32;
+            --text-primary: #ffffff;
+            --text-secondary: #8888aa;
+            --danger: #ff4757;
+            --warning: #ffa502;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -3px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00ccff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 60px rgba(0, 255, 136, 0.3);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1ruto;
+            padding: 20px 40px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00ccff 100%);
+            color: var(--bg-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .main-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3);
+        }
+
+        .main-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Team Builder */
+        .builder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .position-info {
+            text-align: center;
+        }
+
+        .position-info h2 {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .position-info span {
+            color: var(--text-secondary);
+        }
+
+        .team-rating {
+            background: var(--bg-card);
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .team-rating .label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .team-rating .value {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        .rerolls-display {
+            background: var(--bg-card);
+            padding: 15px 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .rerolls-display .label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .rerolls-display .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--warning);
+        }
+
+        /* Formation Display */
+        .formation-selector {
+            margin-bottom: 30px;
+        }
+
+        .formation-selector h3 {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .formation-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .formation-btn {
+            padding: 10px 20px;
+            border: 2px solid #333;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+
+        .formation-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .formation-btn.selected {
+            border-color: var(--accent);
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent);
+        }
+
+        /* Pitch Display */
+        .pitch-container {
+            background: linear-gradient(to bottom, #1a4d1a 0%, #2d5a2d 50%, #1a4d1a 100%);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            aspect-ratio: 3/4;
+            max-height: 500px;
+            overflow: hidden;
+        }
+
+        .pitch-lines {
+            position: absolute;
+            inset: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+        }
+
+        .pitch-center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+
+        .pitch-center-line {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            right: 20px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .player-slot {
+            position: absolute;
+            width: 60px;
+            height: 75px;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .player-slot:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .player-slot.filled .slot-circle {
+            background: linear-gradient(135deg, var(--accent) 0%, #00ccff 100%);
+        }
+
+        .player-slot.current .slot-circle {
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 0 20px var(--accent);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .slot-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            margin: 0 auto 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .slot-name {
+            font-size: 0.65rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 70px;
+        }
+
+        .slot-rating {
+            font-size: 0.6rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .slot-position {
+            font-size: 0.55rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Country Roll */
+        .roll-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .roll-section h3 {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .country-display {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .country-display.rolling {
+            animation: spin 0.1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        .country-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .roll-btn {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            background: var(--accent);
+            color: var(--bg-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .roll-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .roll-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .roll-btn.secondary {
+            background: var(--warning);
+        }
+
+        /* Player Selection */
+        .player-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .player-card {
+            background: var(--bg-card);
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .player-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .player-card.selected {
+            border-color: var(--accent);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .player-card .rating {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .player-card .rating.hidden {
+            color: var(--text-secondary);
+        }
+
+        .player-card .name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+        }
+
+        .player-card .position {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .player-card .position-penalty {
+            font-size: 0.7rem;
+            color: var(--danger);
+            margin-top: 5px;
+        }
+
+        /* Simulation Screen */
+        .sim-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .match-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .match-header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .match-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .match-team {
+            flex: 1;
+            text-align: center;
+        }
+
+        .match-team .flag {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .match-team .name {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .match-team.user .name {
+            color: var(--accent);
+        }
+
+        .match-score {
+            font-size: 3rem;
+            font-weight: 900;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .match-events {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .event {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #222;
+        }
+
+        .event:last-child {
+            border-bottom: none;
+        }
+
+        .event .minute {
+            color: var(--accent);
+            font-weight: 700;
+            min-width: 40px;
+        }
+
+        .event .icon {
+            font-size: 1.2rem;
+        }
+
+        .event .detail {
+            color: var(--text-secondary);
+        }
+
+        .event .player-name {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Commentary Box */
+        .commentary-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .commentary-box p {
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Results Screen */
+        .trophy-display {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .trophy {
+            font-size: 8rem;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .result-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .result-title.winner {
+            color: var(--gold);
+        }
+
+        .result-title.loser {
+            color: var(--text-secondary);
+        }
+
+        .result-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-card .label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--accent);
+        }
+
+        /* Player Stats Table */
+        .player-stats-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        .player-stats-table th,
+        .player-stats-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #222;
+        }
+
+        .player-stats-table th {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            background: var(--bg-card);
+        }
+
+        .player-stats-table tr:hover {
+            background: var(--bg-hover);
+        }
+
+        .player-stats-table .rating-cell {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Match History */
+        .match-history {
+            margin-top: 30px;
+        }
+
+        .match-history h3 {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+        }
+
+        .history-item {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-item .round {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .history-item .result {
+            font-weight: 700;
+        }
+
+        .history-item .result.win {
+            color: var(--accent);
+        }
+
+        .history-item .result.loss {
+            color: var(--danger);
+        }
+
+        /* Group Stage Table */
+        .group-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .group-table th,
+        .group-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .group-table th {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            background: var(--bg-card);
+        }
+
+        .group-table td:first-child {
+            text-align: left;
+        }
+
+        .group-table .team-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .group-table .qualified {
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .group-table .user-team {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* Loading spinner */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #333;
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin-loader 1s linear infinite;
+        }
+
+        @keyframes spin-loader {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading p {
+            margin-top: 20px;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 3rem;
+            }
+            
+            .pitch-container {
+                aspect-ratio: 2/3;
+            }
+            
+            .player-slot {
+                width: 50px;
+                height: 65px;
+            }
+            
+            .slot-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 0.75rem;
+            }
+            
+            .slot-name {
+                font-size: 0.55rem;
+            }
+            
+            .match-score {
+                font-size: 2rem;
+                min-width: 80px;
+            }
+            
+            .match-team .flag {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="logo">8-0</h1>
+            <p class="subtitle">World Cup Dream Team</p>
+        </header>
+
+        <!-- Start Screen -->
+        <div id="startScreen" class="screen active">
+            <div class="start-options">
+                <div class="option-group">
+                    <h3>Select Difficulty</h3>
+                    <div class="difficulty-buttons">
+                        <button class="diff-btn easy selected" data-diff="easy">
+                            <div class="name">Easy</div>
+                            <div class="desc">3 Rerolls • See Ratings</div>
+                        </button>
+                        <button class="diff-btn medium" data-diff="medium">
+                            <div class="name">Medium</div>
+                            <div class="desc">1 Reroll • See Ratings</div>
+                        </button>
+                        <button class="diff-btn hard" data-diff="hard">
+                            <div class="name">Hard</div>
+                            <div class="desc">No Rerolls • Hidden Ratings</div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <h3>Player Ratings Based On</h3>
+                    <div class="rating-buttons">
+                        <button class="rating-btn selected" data-rating="tournament">
+                            <div class="name">Tournament Form</div>
+                        </button>
+                        <button class="rating-btn" data-rating="prime">
+                            <div class="name">Prime Ratings</div>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="main-btn" id="startGameBtn">Choose Tournament</button>
+            </div>
+        </div>
+
+        <!-- Tournament Selection -->
+        <div id="tournamentScreen" class="screen">
+            <h2 style="text-align: center; margin-bottom: 30px;">Select Your World Cup</h2>
+            <div class="tournament-grid" id="tournamentGrid"></div>
+            <button class="main-btn" id="confirmTournamentBtn" disabled>Build Your Team</button>
+        </div>
+
+        <!-- Team Builder -->
+        <div id="builderScreen" class="screen">
+            <div class="builder-header">
+                <div class="rerolls-display">
+                    <div class="label">Rerolls Left</div>
+                    <div class="value" id="rerollsLeft">3</div>
+                </div>
+                <div class="position-info">
+                    <h2 id="currentPosition">Goalkeeper</h2>
+                    <span id="positionCount">Position 1 of 11</span>
+                </div>
+                <div class="team-rating">
+                    <div class="label">Team Rating</div>
+                    <div class="value" id="teamRating">0</div>
+                </div>
+            </div>
+
+            <div class="formation-selector">
+                <h3>Formation</h3>
+                <div class="formation-options" id="formationOptions"></div>
+            </div>
+
+            <div class="pitch-container" id="pitchContainer">
+                <div class="pitch-lines"></div>
+                <div class="pitch-center-circle"></div>
+                <div class="pitch-center-line"></div>
+            </div>
+
+            <div class="roll-section" id="rollSection">
+                <h3>Roll for Country</h3>
+                <div class="country-display" id="countryFlag">🌍</div>
+                <div class="country-name" id="countryName">Press Roll</div>
+                <button class="roll-btn" id="rollCountryBtn">🎲 Roll Country</button>
+                <button class="roll-btn secondary" id="rerollBtn" style="display: none;">🔄 Reroll</button>
+            </div>
+
+            <div id="playerSelection" style="display: none;">
+                <h3 style="margin-bottom: 15px;">Select a Player</h3>
+                <div class="player-grid" id="playerGrid"></div>
+                <button class="main-btn" id="confirmPlayerBtn" disabled>Confirm Selection</button>
+            </div>
+        </div>
+
+        <!-- Simulation Screen -->
+        <div id="simScreen" class="screen">
+            <div class="sim-container">
+                <div id="simContent"></div>
+                <button class="main-btn" id="nextMatchBtn" style="display: none;">Next Match</button>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="resultsScreen" class="screen">
+            <div id="resultsContent"></div>
+            <button class="main-btn" id="playAgainBtn">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        // ============ GAME DATA ============
+        const TOURNAMENTS = [
+            { id: 'wc2022', name: 'Qatar 2022', flag: '🇶🇦', year: 2022 },
+            { id: 'wc2018', name: 'Russia 2018', flag: '🇷🇺', year: 2018 },
+            { id: 'wc2014', name: 'Brazil 2014', flag: '🇧🇷', year: 2014 },
+            { id: 'wc2010', name: 'South Africa 2010', flag: '🇿🇦', year: 2010 },
+            { id: 'wc2006', name: 'Germany 2006', flag: '🇩🇪', year: 2006 },
+            { id: 'wc1998', name: 'France 1998', flag: '🇫🇷', year: 1998 }
+        ];
+
+        const FORMATIONS = {
+            '4-3-3': { positions: ['GK', 'RB', 'CB', 'CB', 'LB', 'CM', 'CM', 'CM', 'RW', 'ST', 'LW'] },
+            '4-4-2': { positions: ['GK', 'RB', 'CB', 'CB', 'LB', 'RM', 'CM', 'CM', 'LM', 'ST', 'ST'] },
+            '3-5-2': { positions: ['GK', 'CB', 'CB', 'CB', 'RM', 'CM', 'CDM', 'CM', 'LM', 'ST', 'ST'] },
+            '4-2-3-1': { positions: ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CDM', 'RW', 'CAM', 'LW', 'ST'] },
+            '4-1-4-1': { positions: ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'RM', 'CM', 'CM', 'LM', 'ST'] },
+            '5-3-2': { positions: ['GK', 'RWB', 'CB', 'CB', 'CB', 'LWB', 'CM', 'CM', 'CM', 'ST', 'ST'] },
+            '3-4-3': { positions: ['GK', 'CB', 'CB', 'CB', 'RM', 'CM', 'CM', 'LM', 'RW', 'ST', 'LW'] }
+        };
+
+        const POSITION_COORDINATES = {
+            '4-3-3': {
+                GK: { x: 50, y: 90 },
+                RB: { x: 85, y: 70 }, CB_1: { x: 65, y: 75 }, CB_2: { x: 35, y: 75 }, LB: { x: 15, y: 70 },
+                CM_1: { x: 70, y: 50 }, CM_2: { x: 50, y: 55 }, CM_3: { x: 30, y: 50 },
+                RW: { x: 85, y: 25 }, ST: { x: 50, y: 15 }, LW: { x: 15, y: 25 }
+            },
+            '4-4-2': {
+                GK: { x: 50, y: 90 },
+                RB: { x: 85, y: 70 }, CB_1: { x: 65, y: 75 }, CB_2: { x: 35, y: 75 }, LB: { x: 15, y: 70 },
+                RM: { x: 85, y: 45 }, CM_1: { x: 60, y: 50 }, CM_2: { x: 40, y: 50 }, LM: { x: 15, y: 45 },
+                ST_1: { x: 60, y: 18 }, ST_2: { x: 40, y: 18 }
+            },
+            '3-5-2': {
+                GK: { x: 50, y: 90 },
+                CB_1: { x: 70, y: 75 }, CB_2: { x: 50, y: 78 }, CB_3: { x: 30, y: 75 },
+                RM: { x: 90, y: 45 }, CM_1: { x: 65, y: 50 }, CDM: { x: 50, y: 60 }, CM_2: { x: 35, y: 50 }, LM: { x: 10, y: 45 },
+                ST_1: { x: 60, y: 18 }, ST_2: { x: 40, y: 18 }
+            },
+            '4-2-3-1': {
+                GK: { x: 50, y: 90 },
+                RB: { x: 85, y: 70 }, CB_1: { x: 65, y: 75 }, CB_2: { x: 35, y: 75 }, LB: { x: 15, y: 70 },
+                CDM_1: { x: 60, y: 55 }, CDM_2: { x: 40, y: 55 },
+                RW: { x: 80, y: 35 }, CAM: { x: 50, y: 38 }, LW: { x: 20, y: 35 },
+                ST: { x: 50, y: 15 }
+            },
+            '4-1-4-1': {
+                GK: { x: 50, y: 90 },
+                RB: { x: 85, y: 70 }, CB_1: { x: 65, y: 75 }, CB_2: { x: 35, y: 75 }, LB: { x: 15, y: 70 },
+                CDM: { x: 50, y: 58 },
+                RM: { x: 85, y: 40 }, CM_1: { x: 60, y: 45 }, CM_2: { x: 40, y: 45 }, LM: { x: 15, y: 40 },
+                ST: { x: 50, y: 15 }
+            },
+            '5-3-2': {
+                GK: { x: 50, y: 90 },
+                RWB: { x: 90, y: 60 }, CB_1: { x: 70, y: 75 }, CB_2: { x: 50, y: 78 }, CB_3: { x: 30, y: 75 }, LWB: { x: 10, y: 60 },
+                CM_1: { x: 65, y: 45 }, CM_2: { x: 50, y: 50 }, CM_3: { x: 35, y: 45 },
+                ST_1: { x: 60, y: 18 }, ST_2: { x: 40, y: 18 }
+            },
+            '3-4-3': {
+                GK: { x: 50, y: 90 },
+                CB_1: { x: 70, y: 75 }, CB_2: { x: 50, y: 78 }, CB_3: { x: 30, y: 75 },
+                RM: { x: 85, y: 48 }, CM_1: { x: 60, y: 52 }, CM_2: { x: 40, y: 52 }, LM: { x: 15, y: 48 },
+                RW: { x: 80, y: 22 }, ST: { x: 50, y: 15 }, LW: { x: 20, y: 22 }
+            }
+        };
+
+        const COUNTRIES = {
+            wc2022: [
+                { name: 'Argentina', flag: '🇦🇷', rating: 88 },
+                { name: 'France', flag: '🇫🇷', rating: 89 },
+                { name: 'Brazil', flag: '🇧🇷', rating: 90 },
+                { name: 'England', flag: '🏴', rating: 86 },
+                { name: 'Germany', flag: '🇩🇪', rating: 85 },
+                { name: 'Spain', flag: '🇪🇸', rating: 87 },
+                { name: 'Netherlands', flag: '🇳🇱', rating: 85 },
+                { name: 'Portugal', flag: '🇵🇹', rating: 86 },
+                { name: 'Croatia', flag: '🇭🇷', rating: 84 },
+                { name: 'Morocco', flag: '🇲🇦', rating: 82 },
+                { name: 'Belgium', flag: '🇧🇪', rating: 85 },
+                { name: 'Japan', flag: '🇯🇵', rating: 79 },
+                { name: 'Senegal', flag: '🇸🇳', rating: 80 },
+                { name: 'USA', flag: '🇺🇸', rating: 78 },
+                { name: 'Switzerland', flag: '🇨🇭', rating: 81 },
+                { name: 'Poland', flag: '🇵🇱', rating: 80 },
+                { name: 'South Korea', flag: '🇰🇷', rating: 78 },
+                { name: 'Australia', flag: '🇦🇺', rating: 76 },
+                { name: 'Mexico', flag: '🇲🇽', rating: 79 },
+                { name: 'Denmark', flag: '🇩🇰', rating: 82 },
+                { name: 'Uruguay', flag: '🇺🇾', rating: 82 },
+                { name: 'Tunisia', flag: '🇹🇳', rating: 76 },
+                { name: 'Serbia', flag: '🇷🇸', rating: 80 },
+                { name: 'Cameroon', flag: '🇨🇲', rating: 77 },
+                { name: 'Ghana', flag: '🇬🇭', rating: 76 },
+                { name: 'Saudi Arabia', flag: '🇸🇦', rating: 74 },
+                { name: 'Iran', flag: '🇮🇷', rating: 75 },
+                { name: 'Costa Rica', flag: '🇨🇷', rating: 73 },
+                { name: 'Canada', flag: '🇨🇦', rating: 75 },
+                { name: 'Ecuador', flag: '🇪🇨', rating: 77 },
+                { name: 'Wales', flag: '🏴', rating: 76 },
+                { name: 'Qatar', flag: '🇶🇦', rating: 72 }
+            ],
+            wc2018: [
+                { name: 'France', flag: '🇫🇷', rating: 88 },
+                { name: 'Croatia', flag: '🇭🇷', rating: 84 },
+                { name: 'Belgium', flag: '🇧🇪', rating: 87 },
+                { name: 'England', flag: '🏴', rating: 84 },
+                { name: 'Brazil', flag: '🇧🇷', rating: 89 },
+                { name: 'Uruguay', flag: '🇺🇾', rating: 84 },
+                { name: 'Argentina', flag: '🇦🇷', rating: 86 },
+                { name: 'Germany', flag: '🇩🇪', rating: 88 },
+                { name: 'Spain', flag: '🇪🇸', rating: 88 },
+                { name: 'Portugal', flag: '🇵🇹', rating: 85 },
+                { name: 'Russia', flag: '🇷🇺', rating: 78 },
+                { name: 'Sweden', flag: '🇸🇪', rating: 79 },
+                { name: 'Denmark', flag: '🇩🇰', rating: 80 },
+                { name: 'Switzerland', flag: '🇨🇭', rating: 80 },
+                { name: 'Colombia', flag: '🇨🇴', rating: 82 },
+                { name: 'Mexico', flag: '🇲🇽', rating: 80 },
+                { name: 'Japan', flag: '🇯🇵', rating: 77 },
+                { name: 'South Korea', flag: '🇰🇷', rating: 76 },
+                { name: 'Senegal', flag: '🇸🇳', rating: 77 },
+                { name: 'Nigeria', flag: '🇳🇬', rating: 77 },
+                { name: 'Poland', flag: '🇵🇱', rating: 79 },
+                { name: 'Egypt', flag: '🇪🇬', rating: 76 },
+                { name: 'Morocco', flag: '🇲🇦', rating: 76 },
+                { name: 'Tunisia', flag: '🇹🇳', rating: 74 },
+                { name: 'Iceland', flag: '🇮🇸', rating: 75 },
+                { name: 'Serbia', flag: '🇷🇸', rating: 78 },
+                { name: 'Costa Rica', flag: '🇨🇷', rating: 75 },
+                { name: 'Australia', flag: '🇦🇺', rating: 74 },
+                { name: 'Iran', flag: '🇮🇷', rating: 74 },
+                { name: 'Peru', flag: '🇵🇪', rating: 78 },
+                { name: 'Saudi Arabia', flag: '🇸🇦', rating: 72 },
+                { name: 'Panama', flag: '🇵🇦', rating: 70 }
+            ],
+            wc2014: [
+                { name: 'Germany', flag: '🇩🇪', rating: 90 },
+                { name: 'Argentina', flag: '🇦🇷', rating: 87 },
+                { name: 'Netherlands', flag: '🇳🇱', rating: 86 },
+                { name: 'Brazil', flag: '🇧🇷', rating: 88 },
+                { name: 'Colombia', flag: '🇨🇴', rating: 84 },
+                { name: 'France', flag: '🇫🇷', rating: 84 },
+                { name: 'Belgium', flag: '🇧🇪', rating: 83 },
+                { name: 'Costa Rica', flag: '🇨🇷', rating: 77 },
+                { name: 'Chile', flag: '🇨🇱', rating: 83 },
+                { name: 'Mexico', flag: '🇲🇽', rating: 79 },
+                { name: 'Switzerland', flag: '🇨🇭', rating: 79 },
+                { name: 'Uruguay', flag: '🇺🇾', rating: 84 },
+                { name: 'Greece', flag: '🇬🇷', rating: 77 },
+                { name: 'USA', flag: '🇺🇸', rating: 77 },
+                { name: 'Algeria', flag: '🇩🇿', rating: 76 },
+                { name: 'Nigeria', flag: '🇳🇬', rating: 77 },
+                { name: 'Spain', flag: '🇪🇸', rating: 87 },
+                { name: 'Portugal', flag: '🇵🇹', rating: 85 },
+                { name: 'England', flag: '🏴', rating: 82 },
+                { name: 'Italy', flag: '🇮🇹', rating: 84 },
+                { name: 'Croatia', flag: '🇭🇷', rating: 80 },
+                { name: 'Russia', flag: '🇷🇺', rating: 76 },
+                { name: 'Japan', flag: '🇯🇵', rating: 76 },
+                { name: 'South Korea', flag: '🇰🇷', rating: 75 },
+                { name: 'Australia', flag: '🇦🇺', rating: 73 },
+                { name: 'Iran', flag: '🇮🇷', rating: 73 },
+                { name: 'Ghana', flag: '🇬🇭', rating: 77 },
+                { name: 'Ivory Coast', flag: '🇨🇮', rating: 79 },
+                { name: 'Cameroon', flag: '🇨🇲', rating: 75 },
+                { name: 'Ecuador', flag: '🇪🇨', rating: 77 },
+                { name: 'Honduras', flag: '🇭🇳', rating: 71 },
+                { name: 'Bosnia', flag: '🇧🇦', rating: 78 }
+            ],
+            wc2010: [
+                { name: 'Spain', flag: '🇪🇸', rating: 91 },
+                { name: 'Netherlands', flag: '🇳🇱', rating: 87 },
+                { name: 'Germany', flag: '🇩🇪', rating: 87 },
+                { name: 'Uruguay', flag: '🇺🇾', rating: 84 },
+                { name: 'Argentina', flag: '🇦🇷', rating: 86 },
+                { name: 'Brazil', flag: '🇧🇷', rating: 88 },
+                { name: 'Ghana', flag: '🇬🇭', rating: 79 },
+                { name: 'Paraguay', flag: '🇵🇾', rating: 78 },
+                { name: 'Portugal', flag: '🇵🇹', rating: 84 },
+                { name: 'Chile', flag: '🇨🇱', rating: 80 },
+                { name: 'England', flag: '🏴', rating: 84 },
+                { name: 'USA', flag: '🇺🇸', rating: 77 },
+                { name: 'Japan', flag: '🇯🇵', rating: 76 },
+                { name: 'South Korea', flag: '🇰🇷', rating: 77 },
+                { name: 'Mexico', flag: '🇲🇽', rating: 79 },
+                { name: 'Slovakia', flag: '🇸🇰', rating: 76 },
+                { name: 'Italy', flag: '🇮🇹', rating: 85 },
+                { name: 'France', flag: '🇫🇷', rating: 84 },
+                { name: 'Ivory Coast', flag: '🇨🇮', rating: 80 },
+                { name: 'Nigeria', flag: '🇳🇬', rating: 76 },
+                { name: 'Slovenia', flag: '🇸🇮', rating: 74 },
+                { name: 'Switzerland', flag: '🇨🇭', rating: 78 },
+                { name: 'Denmark', flag: '🇩🇰', rating: 79 },
+                { name: 'Serbia', flag: '🇷🇸', rating: 77 },
+                { name: 'Australia', flag: '🇦🇺', rating: 74 },
+                { name: 'South Africa', flag: '🇿🇦', rating: 73 },
+                { name: 'Cameroon', flag: '🇨🇲', rating: 77 },
+                { name: 'Greece', flag: '🇬🇷', rating: 76 },
+                { name: 'Algeria', flag: '🇩🇿', rating: 74 },
+                { name: 'New Zealand', flag: '🇳🇿', rating: 68 },
+                { name: 'Honduras', flag: '🇭🇳', rating: 71 },
+                { name: 'North Korea', flag: '🇰🇵', rating: 67 }
+            ],
+            wc2006: [
+                { name: 'Italy', flag: '🇮🇹', rating: 89 },
+                { name: 'France', flag: '🇫🇷', rating: 88 },
+                { name: 'Germany', flag: '🇩🇪', rating: 87 },
+                { name: 'Portugal', flag: '🇵🇹', rating: 85 },
+                { name: 'Brazil', flag: '🇧🇷', rating: 90 },
+                { name: 'Argentina', flag: '🇦🇷', rating: 87 },
+                { name: 'England', flag: '🏴', rating: 86 },
+                { name: 'Ukraine', flag: '🇺🇦', rating: 79 },
+                { name: 'Spain', flag: '🇪🇸', rating: 85 },
+                { name: 'Netherlands', flag: '🇳🇱', rating: 84 },
+                { name: 'Switzerland', flag: '🇨🇭', rating: 78 },
+                { name: 'Ecuador', flag: '🇪🇨', rating: 77 },
+                { name: 'Australia', flag: '🇦🇺', rating: 76 },
+                { name: 'Ghana', flag: '🇬🇭', rating: 77 },
+                { name: 'Mexico', flag: '🇲🇽', rating: 79 },
+                { name: 'Sweden', flag: '🇸🇪', rating: 80 },
+                { name: 'Czech Republic', flag: '🇨🇿', rating: 82 },
+                { name: 'USA', flag: '🇺🇸', rating: 76 },
+                { name: 'Croatia', flag: '🇭🇷', rating: 79 },
+                { name: 'Japan', flag: '🇯🇵', rating: 75 },
+                { name: 'South Korea', flag: '🇰🇷', rating: 77 },
+                { name: 'Poland', flag: '🇵🇱', rating: 78 },
+                { name: 'Ivory Coast', flag: '🇨🇮', rating: 79 },
+                { name: 'Serbia', flag: '🇷🇸', rating: 77 },
+                { name: 'Tunisia', flag: '🇹🇳', rating: 74 },
+                { name: 'Saudi Arabia', flag: '🇸🇦', rating: 72 },
+                { name: 'Iran', flag: '🇮🇷', rating: 73 },
+                { name: 'Togo', flag: '🇹🇬', rating: 72 },
+                { name: 'Costa Rica', flag: '🇨🇷', rating: 74 },
+                { name: 'Angola', flag: '🇦🇴', rating: 73 },
+                { name: 'Trinidad', flag: '🇹🇹', rating: 70 },
+                { name: 'Paraguay', flag: '🇵🇾', rating: 77 }
+            ],
+            wc1998: [
+                { name: 'France', flag: '🇫🇷', rating: 89 },
+                { name: 'Brazil', flag: '🇧🇷', rating: 91 },
+                { name: 'Croatia', flag: '🇭🇷', rating: 82 },
+                { name: 'Netherlands', flag: '🇳🇱', rating: 86 },
+                { name: 'Italy', flag: '🇮🇹', rating: 86 },
+                { name: 'Argentina', flag: '🇦🇷', rating: 87 },
+                { name: 'Germany', flag: '🇩🇪', rating: 86 },
+                { name: 'Denmark', flag: '🇩🇰', rating: 81 },
+                { name: 'England', flag: '🏴', rating: 84 },
+                { name: 'Romania', flag: '🇷🇴', rating: 80 },
+                { name: 'Nigeria', flag: '🇳🇬', rating: 79 },
+                { name: 'Mexico', flag: '🇲🇽', rating: 78 },
+                { name: 'Norway', flag: '🇳🇴', rating: 78 },
+                { name: 'Chile', flag: '🇨🇱', rating: 79 },
+                { name: 'Paraguay', flag: '🇵🇾', rating: 77 },
+                { name: 'Spain', flag: '🇪🇸', rating: 83 },
+                { name: 'Yugoslavia', flag: '🇷🇸', rating: 79 },
+                { name: 'Belgium', flag: '🇧🇪', rating: 79 },
+                { name: 'Morocco', flag: '🇲🇦', rating: 76 },
+                { name: 'Jamaica', flag: '🇯🇲', rating: 71 },
+                { name: 'Japan', flag: '🇯🇵', rating: 73 },
+                { name: 'South Korea', flag: '🇰🇷', rating: 74 },
+                { name: 'USA', flag: '🇺🇸', rating: 75 },
+                { name: 'Iran', flag: '🇮🇷', rating: 74 },
+                { name: 'Colombia', flag: '🇨🇴', rating: 78 },
+                { name: 'Cameroon', flag: '🇨🇲', rating: 77 },
+                { name: 'Tunisia', flag: '🇹🇳', rating: 74 },
+                { name: 'Saudi Arabia', flag: '🇸🇦', rating: 73 },
+                { name: 'South Africa', flag: '🇿🇦', rating: 74 },
+                { name: 'Scotland', flag: '🏴', rating: 76 },
+                { name: 'Austria', flag: '🇦🇹', rating: 76 },
+                { name: 'Bulgaria', flag: '🇧🇬', rating: 78 }
+            ]
+        };
+
+        // Player database by country and tournament
+        const PLAYERS_DB = {
+            // Generate players dynamically based on country and position
+        };
+
+        const POSITION_NAMES = {
+            GK: 'Goalkeeper',
+            RB: 'Right Back',
+            CB: 'Centre Back',
+            LB: 'Left Back',
+            RWB: 'Right Wing Back',
+            LWB: 'Left Wing Back',
+            CDM: 'Defensive Midfielder',
+            CM: 'Central Midfielder',
+            CAM: 'Attacking Midfielder',
+            RM: 'Right Midfielder',
+            LM: 'Left Midfielder',
+            RW: 'Right Winger',
+            LW: 'Left Winger',
+            ST: 'Striker'
+        };
+
+        const POSITION_GROUPS = {
+            GK: ['GK'],
+            DEF: ['RB', 'CB', 'LB', 'RWB', 'LWB'],
+            MID: ['CDM', 'CM', 'CAM', 'RM', 'LM'],
+            ATT: ['RW', 'LW', 'ST']
+        };
+
+        // Famous player names by position and era
+        const FAMOUS_PLAYERS = {
+            GK: ['Neuer', 'Courtois', 'Lloris', 'Alisson', 'Ederson', 'Oblak', 'ter Stegen', 'Donnarumma', 'Maignan', 'Pickford', 'Schmeichel', 'Buffon', 'Casillas', 'Cech', 'Howard', 'Ochoa'],
+            DEF: ['Van Dijk', 'Dias', 'Marquinhos', 'Kimpembe', 'Rudiger', 'Stones', 'Maguire', 'Romero', 'Araujo', 'Gvardiol', 'Kounde', 'Upamecano', 'Militao', 'Bastoni', 'Kim', 'Saliba', 'Walker', 'Cancelo', 'Alexander-Arnold', 'Robertson', 'Davies', 'Hakimi', 'Theo', 'Alba', 'Carvajal', 'Pavard', 'Hernandez', 'Ramos', 'Pique', 'Thiago Silva', 'Chiellini', 'Bonucci'],
+            MID: ['De Bruyne', 'Modric', 'Kroos', 'Bellingham', 'Pedri', 'Gavi', 'Tchouameni', 'Valverde', 'Barella', 'Mount', 'Rice', 'Kante', 'Pogba', 'Bruno', 'Odegaard', 'Saka', 'Foden', 'Grealish', 'Musiala', 'Wirtz', 'Camavinga', 'Rabiot', 'Verratti', 'De Jong', 'Bernardo', 'Zielinski', 'Szoboszlai', 'Amrabat', 'Ounahi', 'Iniesta', 'Xavi'],
+            ATT: ['Mbappe', 'Haaland', 'Vinicius', 'Messi', 'Ronaldo', 'Neymar', 'Lewandowski', 'Kane', 'Benzema', 'Griezmann', 'Dembele', 'Sane', 'Gnabry', 'Rashford', 'Sterling', 'Richarlison', 'Nunez', 'Diaz', 'Salah', 'Depay', 'Gakpo', 'Morata', 'Felix', 'Leao', 'Osimhen', 'En-Nesyri', 'Suarez', 'Cavani', 'Giroud', 'Muller', 'Werner', 'Havertz', 'Firmino']
+        };
+
+        const COMMENTARY = {
+            bottlejob: [
+                "Absolutely bottled it! The pressure got to them in the end.",
+                "What a collapse! They'll be replaying this in their nightmares.",
+                "Spursy performance from {team}. Had it and threw it away!",
+                "The biggest choke job since... well, since the last big choke job.",
+                "They folded like a cheap deckchair. Devastating.",
+                "Mentality monsters? More like mentality minnows tonight."
+            ],
+            comeback: [
+                "WHAT A COMEBACK! Istanbul vibes from {team}!",
+                "Written off at half time, champions by full time! Incredible!",
+                "They never stopped believing! Heart of champions!",
+                "From the dead! Lazarus himself would be impressed!",
+                "The stuff of legends! They'll make movies about this!"
+            ],
+            dominant: [
+                "Total football masterclass from {team}.",
+                "A clinic in how to play the beautiful game.",
+                "They made their opponents look like amateurs. Ruthless.",
+                "Peak tiki-taka. The opposition couldn't get near the ball.",
+                "Absolutely dismantled them. No mercy shown."
+            ],
+            scrappy: [
+                "Ugly but effective. Three points is three points.",
+                "A win's a win, even if it wasn't pretty.",
+                "Backs to the wall stuff. Pure determination.",
+                "Shithousing their way to glory. Respect.",
+                "The beautiful game? Not today. But they don't care."
+            ],
+            upset: [
+                "GIANT KILLING! Nobody saw this coming!",
+                "The minnows have done it! Fairy tale stuff!",
+                "David beats Goliath! Football, bloody hell!",
+                "This will go down in World Cup history!",
+                "The shock of the tournament! Unbelievable scenes!"
+            ],
+            heartbreak: [
+                "So close yet so far. Heartbreak for {team}.",
+                "They gave everything. Nothing to be ashamed of.",
+                "Football can be so cruel. Devastating for {team}.",
+                "The dream is over. They'll be back stronger.",
+                "Penalties are a lottery. Cruel way to go out."
+            ],
+            penalty_drama: [
+                "Penalty shootout drama! It had everything!",
+                "Nerves of steel from the spot kick heroes!",
+                "The goalkeeper became a legend tonight!",
+                "Spot kick heroics decided this epic encounter!",
+                "A lottery, but someone had to win it."
+            ]
+        };
+
+        // ============ GAME STATE ============
+        let gameState = {
+            difficulty: 'easy',
+            ratingMode: 'tournament',
+            tournament: null,
+            formation: '4-3-3',
+            rerollsLeft: 3,
+            currentPositionIndex: 0,
+            team: [],
+            rolledCountry: null,
+            selectedPlayer: null,
+            matches: [],
+            eliminated: false,
+            groupStage: null,
+            knockoutRound: null
+        };
+
+        // ============ DOM ELEMENTS ============
+        const screens = {
+            start: document.getElementById('startScreen'),
+            tournament: document.getElementById('tournamentScreen'),
+            builder: document.getElementById('builderScreen'),
+            sim: document.getElementById('simScreen'),
+            results: document.getElementById('resultsScreen')
+        };
+
+        // ============ UTILITY FUNCTIONS ============
+        function showScreen(screenId) {
+            Object.values(screens).forEach(s => s.classList.remove('active'));
+            screens[screenId].classList.add('active');
+        }
+
+        function getRandomElement(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
+        }
+
+        function generatePlayer(position, country, tournamentId) {
+            const posGroup = Object.entries(POSITION_GROUPS).find(([_, positions]) => 
+                positions.includes(position.replace(/_\d+$/, ''))
+            )?.[0] || 'MID';
+            
+            const basePosition = position.replace(/_\d+$/, '');
+            const names = FAMOUS_PLAYERS[posGroup] || FAMOUS_PLAYERS.MID;
+            
+            // Generate 4 players for selection
+            const players = [];
+            const usedNames = new Set();
+            
+            for (let i = 0; i < 4; i++) {
+                let name;
+                do {
+                    name = getRandomElement(names);
+                } while (usedNames.has(name) && usedNames.size < names.length);
+                usedNames.add(name);
+                
+                const baseRating = country.rating + Math.floor(Math.random() * 10) - 5;
+                const rating = Math.min(99, Math.max(60, baseRating + (gameState.ratingMode === 'prime' ? 5 : 0)));
+                
+                // Random natural positions for the player
+                const naturalPositions = [basePosition];
+                if (Math.random() > 0.5) {
+                    const samePosGroup = POSITION_GROUPS[posGroup];
+                    naturalPositions.push(getRandomElement(samePosGroup.filter(p => p !== basePosition)));
+                }
+                
+                players.push({
+                    name,
+                    rating,
+                    position: basePosition,
+                    naturalPositions,
+                    country: country.name,
+                    countryFlag: country.flag,
+                    goals: 0,
+                    assists: 0,
+                    matchRating: 0,
+                    matchesPlayed: 0
+                });
+            }
+            
+            return players;
+        }
+
+        function calculatePositionPenalty(player, requiredPosition) {
+            const basePos = requiredPosition.replace(/_\d+$/, '');
+            if (player.naturalPositions.includes(basePos)) {
+                return 0;
+            }
+            
+            // Find which group the player's position is in vs required
+            const playerGroup = Object.entries(POSITION_GROUPS).find(([_, positions]) => 
+                positions.includes(player.position)
+            )?.[0];
+            const requiredGroup = Object.entries(POSITION_GROUPS).find(([_, positions]) => 
+                positions.includes(basePos)
+            )?.[0];
+            
+            if (playerGroup === requiredGroup) return -3;
+            if ((playerGroup === 'DEF' && requiredGroup === 'MID') || 
+                (playerGroup === 'MID' && requiredGroup === 'DEF') ||
+                (playerGroup === 'MID' && requiredGroup === 'ATT') ||
+                (playerGroup === 'ATT' && requiredGroup === 'MID')) return -5;
+            
+            return -8; // GK playing outfield or vice versa
+        }
+
+        function calculateTeamRating() {
+            if (gameState.team.length === 0) return 0;
+            
+            let total = 0;
+            gameState.team.forEach(p => {
+                const penalty = calculatePositionPenalty(p.player, p.position);
+                total += p.player.rating + penalty;
+            });
+            
+            return Math.round(total / gameState.team.length);
+        }
+
+        // ============ UI FUNCTIONS ============
+        function initStartScreen() {
+            const diffBtns = document.querySelectorAll('.diff-btn');
+            diffBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    diffBtns.forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    gameState.difficulty = btn.dataset.diff;
+                });
+            });
+
+            const ratingBtns = document.querySelectorAll('.rating-btn');
+            ratingBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    ratingBtns.forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    gameState.ratingMode = btn.dataset.rating;
+                });
+            });
+
+            document.getElementById('startGameBtn').addEventListener('click', () => {
+                gameState.rerollsLeft = gameState.difficulty === 'easy' ? 3 : 
+                                        gameState.difficulty === 'medium' ? 1 : 0;
+                showScreen('tournament');
+                renderTournaments();
+            });
+        }
+
+        function renderTournaments() {
+            const grid = document.getElementById('tournamentGrid');
+            grid.innerHTML = TOURNAMENTS.map(t => `
+                <div class="tournament-card" data-id="${t.id}">
+                    <span class="tournament-flag">${t.flag}</span>
+                    <div class="tournament-info">
+                        <h4>${t.name}</h4>
+                        <span>FIFA World Cup ${t.year}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.tournament-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    grid.querySelectorAll('.tournament-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    gameState.tournament = TOURNAMENTS.find(t => t.id === card.dataset.id);
+                    document.getElementById('confirmTournamentBtn').disabled = false;
+                });
+            });
+
+            document.getElementById('confirmTournamentBtn').addEventListener('click', () => {
+                showScreen('builder');
+                initBuilder();
+            });
+        }
+
+        function initBuilder() {
+            renderFormations();
+            renderPitch();
+            updateBuilderUI();
+            
+            document.getElementById('rollCountryBtn').addEventListener('click', rollCountry);
+            document.getElementById('rerollBtn').addEventListener('click', rerollCountry);
+            document.getElementById('confirmPlayerBtn').addEventListener('click', confirmPlayer);
+        }
+
+        function renderFormations() {
+            const container = document.getElementById('formationOptions');
+            container.innerHTML = Object.keys(FORMATIONS).map(f => `
+                <button class="formation-btn ${f === gameState.formation ? 'selected' : ''}" data-formation="${f}">
+                    ${f}
+                </button>
+            `).join('');
+
+            container.querySelectorAll('.formation-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    container.querySelectorAll('.formation-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    gameState.formation = btn.dataset.formation;
+                    renderPitch();
+                    updateBuilderUI();
+                });
+            });
+        }
+
+        function renderPitch() {
+            const container = document.getElementById('pitchContainer');
+            // Clear existing slots
+            container.querySelectorAll('.player-slot').forEach(s => s.remove());
+
+            const formation = gameState.formation;
+            const positions = FORMATIONS[formation].positions;
+            const coords = POSITION_COORDINATES[formation];
+
+            positions.forEach((pos, index) => {
+                // Handle duplicate positions (CB_1, CB_2, etc.)
+                let coordKey = pos;
+                let count = 1;
+                for (let i = 0; i < index; i++) {
+                    if (positions[i] === pos) count++;
+                }
+                if (count > 1) coordKey = `${pos}_${count}`;
+                
+                const coord = coords[coordKey] || coords[pos] || { x: 50, y: 50 };
+                const positionId = count > 1 ? `${pos}_${count}` : pos;
+                
+                const teamPlayer = gameState.team.find(t => t.position === positionId);
+                const isCurrent = index === gameState.currentPositionIndex;
+                
+                const slot = document.createElement('div');
+                slot.className = `player-slot ${teamPlayer ? 'filled' : ''} ${isCurrent ? 'current' : ''}`;
+                slot.style.left = `${coord.x}%`;
+                slot.style.top = `${coord.y}%`;
+                slot.innerHTML = `
+                    <div class="slot-circle">${teamPlayer ? teamPlayer.player.rating : (index + 1)}</div>
+                    <div class="slot-name">${teamPlayer ? teamPlayer.player.name : ''}</div>
+                    <div class="slot-position">${pos}</div>
+                `;
+                container.appendChild(slot);
+            });
+        }
+
+        function updateBuilderUI() {
+            const positions = FORMATIONS[gameState.formation].positions;
+            const currentPos = positions[gameState.currentPositionIndex];
+            const basePos = currentPos ? currentPos.replace(/_\d+$/, '') : '';
+            
+            document.getElementById('currentPosition').textContent = POSITION_NAMES[basePos] || currentPos;
+            document.getElementById('positionCount').textContent = `Position ${gameState.currentPositionIndex + 1} of 11`;
+            document.getElementById('teamRating').textContent = calculateTeamRating();
+            document.getElementById('rerollsLeft').textContent = gameState.rerollsLeft;
+        }
+
+        function rollCountry() {
+            const rollSection = document.getElementById('rollSection');
+            const flagDisplay = document.getElementById('countryFlag');
+            const nameDisplay = document.getElementById('countryName');
+            const rollBtn = document.getElementById('rollCountryBtn');
+            const rerollBtn = document.getElementById('rerollBtn');
+            
+            flagDisplay.classList.add('rolling');
+            rollBtn.disabled = true;
+            
+            const countries = COUNTRIES[gameState.tournament.id];
+            let iterations = 0;
+            const maxIterations = 20;
+            
+            const interval = setInterval(() => {
+                const randomCountry = getRandomElement(countries);
+                flagDisplay.textContent = randomCountry.flag;
+                nameDisplay.textContent = randomCountry.name;
+                iterations++;
+                
+                if (iterations >= maxIterations) {
+                    clearInterval(interval);
+                    flagDisplay.classList.remove('rolling');
+                    
+                    // Final selection
+                    gameState.rolledCountry = getRandomElement(countries);
+                    flagDisplay.textContent = gameState.rolledCountry.flag;
+                    nameDisplay.textContent = gameState.rolledCountry.name;
+                    
+                    rollBtn.style.display = 'none';
+                    if (gameState.rerollsLeft > 0) {
+                        rerollBtn.style.display = 'inline-block';
+                    }
+                    
+                    showPlayerSelection();
+                }
+            }, 80);
+        }
+
+        function rerollCountry() {
+            if (gameState.rerollsLeft <= 0) return;
+            
+            gameState.rerollsLeft--;
+            updateBuilderUI();
+            
+            const flagDisplay = document.getElementById('countryFlag');
+            const nameDisplay = document.getElementById('countryName');
+            const rerollBtn = document.getElementById('rerollBtn');
+            
+            flagDisplay.classList.add('rolling');
+            
+            const countries = COUNTRIES[gameState.tournament.id];
+            let iterations = 0;
+            const maxIterations = 15;
+            
+            const interval = setInterval(() => {
+                const randomCountry = getRandomElement(countries);
+                flagDisplay.textContent = randomCountry.flag;
+                nameDisplay.textContent = randomCountry.name;
+                iterations++;
+                
+                if (iterations >= maxIterations) {
+                    clearInterval(interval);
+                    flagDisplay.classList.remove('rolling');
+                    
+                    gameState.rolledCountry = getRandomElement(countries);
+                    flagDisplay.textContent = gameState.rolledCountry.flag;
+                    nameDisplay.textContent = gameState.rolledCountry.name;
+                    
+                    if (gameState.rerollsLeft <= 0) {
+                        rerollBtn.style.display = 'none';
+                    }
+                    
+                    showPlayerSelection();
+                }
+            }, 80);
+        }
+
+        function showPlayerSelection() {
+            const container = document.getElementById('playerSelection');
+            const grid = document.getElementById('playerGrid');
+            
+            const positions = FORMATIONS[gameState.formation].positions;
+            let currentPos = positions[gameState.currentPositionIndex];
+            
+            // Handle duplicate positions
+            let count = 1;
+            for (let i = 0; i < gameState.currentPositionIndex; i++) {
+                if (positions[i] === currentPos) count++;
+            }
+            const positionId = count > 1 ? `${currentPos}_${count}` : currentPos;
+            
+            const players = generatePlayer(positionId, gameState.rolledCountry, gameState.tournament.id);
+            
+            grid.innerHTML = players.map((p, i) => {
+                const penalty = calculatePositionPenalty(p, positionId);
+                const showRating = gameState.difficulty !== 'hard';
+                
+                return `
+                    <div class="player-card" data-index="${i}">
+                        <div class="rating ${showRating ? '' : 'hidden'}">
+                            ${showRating ? p.rating : '??'}
+                        </div>
+                        <div class="name">${p.name}</div>
+                        <div class="position">${p.position} • ${p.countryFlag}</div>
+                        ${penalty !== 0 ? `<div class="position-penalty">${penalty} out of position</div>` : ''}
+                    </div>
+                `;
+            }).join('');
+            
+            container.style.display = 'block';
+            
+            // Store players for selection
+            container.dataset.players = JSON.stringify(players);
+            container.dataset.positionId = positionId;
+            
+            grid.querySelectorAll('.player-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    grid.querySelectorAll('.player-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    gameState.selectedPlayer = parseInt(card.dataset.index);
+                    document.getElementById('confirmPlayerBtn').disabled = false;
+                });
+            });
+        }
+
+        function confirmPlayer() {
+            const container = document.getElementById('playerSelection');
+            const players = JSON.parse(container.dataset.players);
+            const positionId = container.dataset.positionId;
+            
+            const selectedPlayer = players[gameState.selectedPlayer];
+            
+            gameState.team.push({
+                position: positionId,
+                player: selectedPlayer
+            });
+            
+            gameState.currentPositionIndex++;
+            gameState.selectedPlayer = null;
+            gameState.rolledCountry = null;
+            
+            // Reset UI
+            container.style.display = 'none';
+            document.getElementById('confirmPlayerBtn').disabled = true;
+            document.getElementById('rollCountryBtn').style.display = 'inline-block';
+            document.getElementById('rerollBtn').style.display = 'none';
+            document.getElementById('countryFlag').textContent = '🌍';
+            document.getElementById('countryName').textContent = 'Press Roll';
+            
+            renderPitch();
+            updateBuilderUI();
+            
+            // Check if team is complete
+            if (gameState.currentPositionIndex >= 11) {
+                startTournament();
+            }
+        }
+
+        // ============ SIMULATION ============
+        function startTournament() {
+            showScreen('sim');
+            gameState.matches = [];
+            gameState.eliminated = false;
+            
+            // Create tournament structure
+            setupGroupStage();
+        }
+
+        function setupGroupStage() {
+            const countries = [...COUNTRIES[gameState.tournament.id]];
+            
+            // Create groups
+            const groups = { A: [], B: [], C: [], D: [], E: [], F: [], G: [], H: [] };
+            const groupNames = Object.keys(groups);
+            
+            // Shuffle countries
+            for (let i = countries.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [countries[i], countries[j]] = [countries[j], countries[i]];
+            }
+            
+            // Assign to groups
+            countries.forEach((country, i) => {
+                const groupIndex = i % 8;
+                groups[groupNames[groupIndex]].push({
+                    ...country,
+                    points: 0,
+                    gd: 0,
+                    gf: 0,
+                    ga: 0,
+                    played: 0
+                });
+            });
+            
+            // Create user team entry
+            const userTeam = {
+                name: 'Dream Team',
+                flag: '⭐',
+                rating: calculateTeamRating(),
+                points: 0,
+                gd: 0,
+                gf: 0,
+                ga: 0,
+                played: 0,
+                isUser: true
+            };
+            
+            // Add user to a random group, replacing weakest team
+            const userGroup = getRandomElement(groupNames);
+            groups[userGroup].sort((a, b) => a.rating - b.rating);
+            groups[userGroup][0] = userTeam;
+            
+            gameState.groupStage = {
+                groups,
+                userGroup,
+                currentMatchIndex: 0,
+                phase: 'group'
+            };
+            
+            simulateGroupStage();
+        }
+
+        function simulateGroupStage() {
+            const { groups, userGroup } = gameState.groupStage;
+            const userTeamGroup = groups[userGroup];
+            const userTeam = userTeamGroup.find(t => t.isUser);
+            const opponents = userTeamGroup.filter(t => !t.isUser);
+            
+            // User plays 3 group games
+            showGroupMatchSequence(userTeam, opponents, 0);
+        }
+
+        function showGroupMatchSequence(userTeam, opponents, matchIndex) {
+            if (matchIndex >= 3) {
+                // All group games done, show standings then proceed
+                showGroupStandings();
+                return;
+            }
+            
+            const opponent = opponents[matchIndex];
+            const result = simulateMatch(userTeam, opponent, 'group');
+            
+            // Update standings
+            if (result.userWin) {
+                userTeam.points += 3;
+            } else if (result.draw) {
+                userTeam.points += 1;
+                opponent.points += 1;
+            } else {
+                opponent.points += 3;
+            }
+            
+            userTeam.gf += result.userGoals;
+            userTeam.ga += result.opponentGoals;
+            userTeam.gd += (result.userGoals - result.opponentGoals);
+            userTeam.played++;
+            
+            opponent.gf += result.opponentGoals;
+            opponent.ga += result.userGoals;
+            opponent.gd += (result.opponentGoals - result.userGoals);
+            opponent.played++;
+            
+            gameState.matches.push(result);
+            
+            displayMatch(result, 'GROUP STAGE - MATCH ' + (matchIndex + 1), () => {
+                showGroupMatchSequence(userTeam, opponents, matchIndex + 1);
+            });
+        }
+
+        function simulateMatch(team1, team2, stage) {
+            const rating1 = team1.rating;
+            const rating2 = team2.rating;
+            
+            const ratingDiff = (rating1 - rating2) / 100;
+            const baseProb = 0.5 + (ratingDiff * 0.4);
+            
+            // Simulate goals
+            let goals1 = 0, goals2 = 0;
+            const maxGoals = stage === 'group' ? 5 : 4;
+            
+            for (let i = 0; i < 10; i++) {
+                if (Math.random() < (baseProb * 0.25)) goals1++;
+                if (Math.random() < ((1 - baseProb) * 0.25)) goals2++;
+            }
+            
+            goals1 = Math.min(goals1, maxGoals);
+            goals2 = Math.min(goals2, maxGoals);
+            
+            // In knockout, handle draws
+            let penalties = false;
+            let extraTime = false;
+            
+            if (stage !== 'group' && goals1 === goals2) {
+                extraTime = true;
+                // Extra time
+                if (Math.random() < baseProb * 0.3) goals1++;
+                else if (Math.random() < (1 - baseProb) * 0.3) goals2++;
+                
+                // Still draw? Penalties
+                if (goals1 === goals2) {
+                    penalties = true;
+                    if (Math.random() < 0.5 + (ratingDiff * 0.1)) {
+                        goals1++;
+                    } else {
+                        goals2++;
+                    }
+                }
+            }
+            
+            // Generate events
+            const events = [];
+            const scorers1 = [];
+            const scorers2 = [];
+            
+            for (let i = 0; i < goals1; i++) {
+                const minute = Math.floor(Math.random() * 90) + 1;
+                const scorer = team1.isUser ? 
+                    getRandomElement(gameState.team).player : 
+                    { name: `${team1.name} Player` };
+                events.push({ minute, type: 'goal', team: 'home', player: scorer.name });
+                scorers1.push(scorer.name);
+                
+                if (team1.isUser) {
+                    const teamPlayer = gameState.team.find(t => t.player.name === scorer.name);
+                    if (teamPlayer) teamPlayer.player.goals++;
+                }
+            }
+            
+            for (let i = 0; i < goals2; i++) {
+                const minute = Math.floor(Math.random() * 90) + 1;
+                const scorer = team2.isUser ? 
+                    getRandomElement(gameState.team).player : 
+                    { name: `${team2.name} Player` };
+                events.push({ minute, type: 'goal', team: 'away', player: scorer.name });
+                scorers2.push(scorer.name);
+                
+                if (team2.isUser) {
+                    const teamPlayer = gameState.team.find(t => t.player.name === scorer.name);
+                    if (teamPlayer) teamPlayer.player.goals++;
+                }
+            }
+            
+            // Add some random cards
+            if (Math.random() > 0.7) {
+                events.push({
+                    minute: Math.floor(Math.random() * 90) + 1,
+                    type: 'yellow',
+                    team: Math.random() > 0.5 ? 'home' : 'away',
+                    player: 'A Player'
+                });
+            }
+            
+            events.sort((a, b) => a.minute - b.minute);
+            
+            // Generate commentary
+            const commentary = generateCommentary(team1, team2, goals1, goals2, penalties, extraTime);
+            
+            return {
+                team1,
+                team2,
+                score1: goals1,
+                score2: goals2,
+                userGoals: team1.isUser ? goals1 : goals2,
+                opponentGoals: team1.isUser ? goals2 : goals1,
+                userWin: team1.isUser ? goals1 > goals2 : goals2 > goals1,
+                draw: goals1 === goals2 && stage === 'group',
+                events,
+                commentary,
+                penalties,
+                extraTime,
+                stage
+            };
+        }
+
+        function generateCommentary(team1, team2, goals1, goals2, penalties, extraTime) {
+            const userTeam = team1.isUser ? team1 : team2;
+            const opponent = team1.isUser ? team2 : team1;
+            const userGoals = team1.isUser ? goals1 : goals2;
+            const oppGoals = team1.isUser ? goals2 : goals1;
+            
+            let type = 'scrappy';
+            
+            if (userGoals > oppGoals) {
+                if (userGoals - oppGoals >= 3) type = 'dominant';
+                else if (userTeam.rating < opponent.rating - 5) type = 'upset';
+                else type = 'scrappy';
+            } else if (userGoals < oppGoals) {
+                if (goals1 + goals2 >= 4 && Math.random() > 0.5) type = 'bottlejob';
+                else type = 'heartbreak';
+            } else {
+                type = 'scrappy';
+            }
+            
+            if (penalties) type = 'penalty_drama';
+            
+            let comment = getRandomElement(COMMENTARY[type]);
+            comment = comment.replace('{team}', userTeam.name);
+            
+            return comment;
+        }
+
+        function displayMatch(result, header, onContinue) {
+            const container = document.getElementById('simContent');
+            const btn = document.getElementById('nextMatchBtn');
+            
+            container.innerHTML = `
+                <div class="match-card">
+                    <div class="match-header">${header}</div>
+                    <div class="match-teams">
+                        <div class="match-team ${result.team1.isUser ? 'user' : ''}">
+                            <div class="flag">${result.team1.flag}</div>
+                            <div class="name">${result.team1.name}</div>
+                        </div>
+                        <div class="match-score">
+                            ${result.score1} - ${result.score2}
+                            ${result.penalties ? '<br><small>(pens)</small>' : ''}
+                            ${result.extraTime && !result.penalties ? '<br><small>(AET)</small>' : ''}
+                        </div>
+                        <div class="match-team ${result.team2.isUser ? 'user' : ''}">
+                            <div class="flag">${result.team2.flag}</div>
+                            <div class="name">${result.team2.name}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="match-events">
+                        ${result.events.map(e => `
+                            <div class="event">
+                                <span class="minute">${e.minute}'</span>
+                                <span class="icon">${e.type === 'goal' ? '⚽' : e.type === 'yellow' ? '🟨' : '🟥'}</span>
+                                <span class="player-name">${e.player}</span>
+                                <span class="detail">${e.team === 'home' ? result.team1.name : result.team2.name}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="commentary-box">
+                        <p>"${result.commentary}"</p>
+                    </div>
+                </div>
+            `;
+            
+            btn.style.display = 'block';
+            btn.onclick = () => {
+                btn.style.display = 'none';
+                onContinue();
+            };
+        }
+
+        function showGroupStandings() {
+            const { groups, userGroup } = gameState.groupStage;
+            const group = groups[userGroup];
+            
+            // Simulate other matches in the group
+            for (let i = 0; i < group.length; i++) {
+                for (let j = i + 1; j < group.length; j++) {
+                    if (group[i].isUser || group[j].isUser) continue;
+                    
+                    const result = simulateMatch(group[i], group[j], 'group');
+                    if (result.score1 > result.score2) {
+                        group[i].points += 3;
+                    } else if (result.score1 < result.score2) {
+                        group[j].points += 3;
+                    } else {
+                        group[i].points += 1;
+                        group[j].points += 1;
+                    }
+                    group[i].gf += result.score1;
+                    group[i].ga += result.score2;
+                    group[i].gd += (result.score1 - result.score2);
+                    group[j].gf += result.score2;
+                    group[j].ga += result.score1;
+                    group[j].gd += (result.score2 - result.score1);
+                }
+            }
+            
+            // Sort group
+            group.sort((a, b) => b.points - a.points || b.gd - a.gd || b.gf - a.gf);
+            
+            const userTeam = group.find(t => t.isUser);
+            const userPosition = group.indexOf(userTeam);
+            const qualified = userPosition < 2;
+            
+            const container = document.getElementById('simContent');
+            container.innerHTML = `
+                <div class="match-card">
+                    <div class="match-header">GROUP ${userGroup} - FINAL STANDINGS</div>
+                    
+                    <table class="group-table">
+                        <thead>
+                            <tr>
+                                <th>Team</th>
+                                <th>P</th>
+                                <th>GD</th>
+                                <th>Pts</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${group.map((team, i) => `
+                                <tr class="${i < 2 ? 'qualified' : ''} ${team.isUser ? 'user-team' : ''}">
+                                    <td>
+                                        <div class="team-row">
+                                            <span>${team.flag}</span>
+                                            <span>${team.name}</span>
+                                        </div>
+                                    </td>
+                                    <td>3</td>
+                                    <td>${team.gd > 0 ? '+' : ''}${team.gd}</td>
+                                    <td>${team.points}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                    
+                    <div class="commentary-box">
+                        <p>${qualified ? 
+                            '"Your Dream Team advances to the knockout rounds! The real competition begins now!"' :
+                            '"Crashed out in the group stages. Not the World Cup dream you were hoping for..."'
+                        }</p>
+                    </div>
+                </div>
+            `;
+            
+            const btn = document.getElementById('nextMatchBtn');
+            btn.style.display = 'block';
+            btn.textContent = qualified ? 'Round of 16' : 'See Results';
+            btn.onclick = () => {
+                btn.style.display = 'none';
+                if (qualified) {
+                    startKnockout(userTeam, 'R16');
+                } else {
+                    gameState.eliminated = true;
+                    showResults();
+                }
+            };
+        }
+
+        function startKnockout(userTeam, round) {
+            // Get a random opponent based on round
+            const countries = COUNTRIES[gameState.tournament.id];
+            const ratingRange = {
+                'R16': [75, 85],
+                'QF': [80, 88],
+                'SF': [83, 90],
+                'F': [85, 92]
+            }[round];
+            
+            const possibleOpponents = countries.filter(c => 
+                c.rating >= ratingRange[0] && c.rating <= ratingRange[1]
+            );
+            
+            const opponent = getRandomElement(possibleOpponents);
+            const result = simulateMatch(userTeam, opponent, round);
+            
+            gameState.matches.push(result);
+            
+            const roundNames = {
+                'R16': 'ROUND OF 16',
+                'QF': 'QUARTER-FINAL',
+                'SF': 'SEMI-FINAL',
+                'F': 'FINAL'
+            };
+            
+            const userWon = result.team1.isUser ? result.score1 > result.score2 : result.score2 > result.score1;
+            
+            displayMatch(result, roundNames[round], () => {
+                if (!userWon) {
+                    gameState.eliminated = true;
+                    gameState.knockoutRound = round;
+                    showResults();
+                } else if (round === 'F') {
+                    gameState.knockoutRound = 'CHAMPION';
+                    showResults();
+                } else {
+                    const nextRound = {
+                        'R16': 'QF',
+                        'QF': 'SF',
+                        'SF': 'F'
+                    }[round];
+                    startKnockout(userTeam, nextRound);
+                }
+            });
+        }
+
+        function showResults() {
+            showScreen('results');
+            
+            const isChampion = gameState.knockoutRound === 'CHAMPION';
+            const roundReached = gameState.knockoutRound || 'GROUP';
+            
+            const container = document.getElementById('resultsContent');
+            
+            // Calculate total stats
+            const totalGoals = gameState.matches.reduce((sum, m) => sum + m.userGoals, 0);
+            const totalConceded = gameState.matches.reduce((sum, m) => sum + m.opponentGoals, 0);
+            const wins = gameState.matches.filter(m => m.userWin).length;
+            const draws = gameState.matches.filter(m => m.draw).length;
+            const losses = gameState.matches.length - wins - draws;
+            
+            // Sort players by goals
+            const playerStats = gameState.team.map(t => ({
+                ...t.player,
+                position: t.position,
+                effectiveRating: t.player.rating + calculatePositionPenalty(t.player, t.position)
+            })).sort((a, b) => b.goals - a.goals);
+            
+            container.innerHTML = `
+                <div class="trophy-display">
+                    <div class="trophy">${isChampion ? '🏆' : '😢'}</div>
+                    <h1 class="result-title ${isChampion ? 'winner' : 'loser'}">
+                        ${isChampion ? 'WORLD CHAMPIONS!' : 'ELIMINATED'}
+                    </h1>
+                    <p class="result-subtitle">
+                        ${isChampion ? 
+                            `Your Dream Team conquered ${gameState.tournament.name}!` : 
+                            `Knocked out in the ${roundReached === 'GROUP' ? 'Group Stage' : roundReached}`
+                        }
+                    </p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="label">Team Rating</div>
+                        <div class="value">${calculateTeamRating()}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Matches</div>
+                        <div class="value">${gameState.matches.length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Record</div>
+                        <div class="value">${wins}W ${draws}D ${losses}L</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Goals</div>
+                        <div class="value">${totalGoals} - ${totalConceded}</div>
+                    </div>
+                </div>
+                
+                <h3 style="margin: 30px 0 20px; color: var(--text-secondary);">Player Statistics</h3>
+                
+                <table class="player-stats-table">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Nation</th>
+                            <th>Pos</th>
+                            <th>Rating</th>
+                            <th>Goals</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${playerStats.map(p => `
+                            <tr>
+                                <td>${p.name}</td>
+                                <td>${p.countryFlag}</td>
+                                <td>${p.position.replace(/_\d+$/, '')}</td>
+                                <td class="rating-cell">${p.effectiveRating}</td>
+                                <td>${p.goals}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <div class="match-history">
+                    <h3>Match History</h3>
+                    ${gameState.matches.map(m => {
+                        const userScore = m.team1.isUser ? m.score1 : m.score2;
+                        const oppScore = m.team1.isUser ? m.score2 : m.score1;
+                        const opponent = m.team1.isUser ? m.team2 : m.team1;
+                        const won = userScore > oppScore;
+                        const draw = userScore === oppScore;
+                        
+                        return `
+                            <div class="history-item">
+                                <span class="round">${m.stage}</span>
+                                <span>${opponent.flag} ${opponent.name}</span>
+                                <span class="result ${won ? 'win' : draw ? '' : 'loss'}">
+                                    ${userScore} - ${oppScore}
+                                </span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+            
+            document.getElementById('playAgainBtn').onclick = () => {
+                // Reset game state
+                gameState = {
+                    difficulty: 'easy',
+                    ratingMode: 'tournament',
+                    tournament: null,
+                    formation: '4-3-3',
+                    rerollsLeft: 3,
+                    currentPositionIndex: 0,
+                    team: [],
+                    rolledCountry: null,
+                    selectedPlayer: null,
+                    matches: [],
+                    eliminated: false,
+                    groupStage: null,
+                    knockoutRound: null
+                };
+                
+                // Reset UI
+                document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
+                document.querySelector('.diff-btn.easy').classList.add('selected');
+                document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+                document.querySelector('.rating-btn[data-rating="tournament"]').classList.add('selected');
+                document.getElementById('confirmTournamentBtn').disabled = true;
+                
+                showScreen('start');
+            };
+        }
+
+        // ============ INIT ============
+        initStartScreen();
+    </script>
+</body>
+</html>
