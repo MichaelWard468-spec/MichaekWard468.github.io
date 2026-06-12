@@ -1,4 +1,66 @@
-  margin-top: 10px;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Champions of Europe | Dream Team Builder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-hover: #1a1a25;
+            --accent: #00ff88;
+            --accent-dim: #00cc6a;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --bronze: #cd7f32;
+            --text-primary: #ffffff;
+            --text-secondary: #8888aa;
+            --danger: #ff4757;
+            --warning: #ffa502;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -3px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00ccff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 60px rgba(0, 255, 136, 0.3);
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: 10px;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
@@ -103,8 +165,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
-            align-items: center;
-            gap: 15px;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .tournament-card:hover {
@@ -117,7 +179,7 @@
             background: rgba(0, 255, 136, 0.05);
         }
 
-        .tournament-flag {
+        .tournament-badge {
             font-size: 2.5rem;
         }
 
@@ -136,68 +198,7 @@
             display: block;
             width: 100%;
             max-width: 400px;
-            margin: 30px aDOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8-0 | World Cup Dream Team</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-dark: #0a0a0f;
-            --bg-card: #12121a;
-            --bg-hover: #1a1a25;
-            --accent: #00ff88;
-            --accent-dim: #00cc6a;
-            --gold: #ffd700;
-            --silver: #c0c0c0;
-            --bronze: #cd7f32;
-            --text-primary: #ffffff;
-            --text-secondary: #8888aa;
-            --danger: #ff4757;
-            --warning: #ffa502;
-        }
-
-        body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Header */
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            position: relative;
-        }
-
-        .logo {
-            font-size: 4rem;
-            font-weight: 900;
-            letter-spacing: -3px;
-            background: linear-gradient(135deg, var(--accent) 0%, #00ccff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 60px rgba(0, 255, 136, 0.3);
-        }
-
-        .subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1ruto;
+            margin: 30px auto;
             padding: 20px 40px;
             font-size: 1.2rem;
             font-weight: 700;
@@ -424,7 +425,7 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
-        /* Country Roll */
+        /* Club Roll */
         .roll-section {
             background: var(--bg-card);
             border-radius: 16px;
@@ -438,13 +439,13 @@
             color: var(--text-secondary);
         }
 
-        .country-display {
+        .club-display {
             font-size: 4rem;
             margin-bottom: 10px;
             transition: transform 0.3s ease;
         }
 
-        .country-display.rolling {
+        .club-display.rolling {
             animation: spin 0.1s linear infinite;
         }
 
@@ -453,7 +454,7 @@
             to { transform: rotateY(360deg); }
         }
 
-        .country-name {
+        .club-name {
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 20px;
@@ -580,7 +581,7 @@
             text-align: center;
         }
 
-        .match-team .flag {
+        .match-team .badge {
             font-size: 3rem;
             margin-bottom: 10px;
         }
@@ -719,36 +720,6 @@
             color: var(--accent);
         }
 
-        /* Player Stats Table */
-        .player-stats-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 30px;
-        }
-
-        .player-stats-table th,
-        .player-stats-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #222;
-        }
-
-        .player-stats-table th {
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            background: var(--bg-card);
-        }
-
-        .player-stats-table tr:hover {
-            background: var(--bg-hover);
-        }
-
-        .player-stats-table .rating-cell {
-            color: var(--accent);
-            font-weight: 700;
-        }
-
         /* Match History */
         .match-history {
             margin-top: 30px;
@@ -784,46 +755,6 @@
 
         .history-item .result.loss {
             color: var(--danger);
-        }
-
-        /* Group Stage Table */
-        .group-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        .group-table th,
-        .group-table td {
-            padding: 12px 15px;
-            text-align: center;
-            border-bottom: 1px solid #222;
-        }
-
-        .group-table th {
-            color: var(--text-secondary);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            background: var(--bg-card);
-        }
-
-        .group-table td:first-child {
-            text-align: left;
-        }
-
-        .group-table .team-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .group-table .qualified {
-            background: rgba(0, 255, 136, 0.1);
-        }
-
-        .group-table .user-team {
-            color: var(--accent);
-            font-weight: 700;
         }
 
         /* Loading spinner */
@@ -883,7 +814,7 @@
                 min-width: 80px;
             }
             
-            .match-team .flag {
+            .match-team .badge {
                 font-size: 2rem;
             }
         }
@@ -892,8 +823,8 @@
 <body>
     <div class="container">
         <header class="header">
-            <h1 class="logo">8-0</h1>
-            <p class="subtitle">World Cup Dream Team</p>
+            <h1 class="logo">⭐ CHAMPIONS OF EUROPE ⭐</h1>
+            <p class="subtitle">UEFA Champions League Dream Team</p>
         </header>
 
         <!-- Start Screen -->
@@ -921,7 +852,7 @@
                     <h3>Player Ratings Based On</h3>
                     <div class="rating-buttons">
                         <button class="rating-btn selected" data-rating="tournament">
-                            <div class="name">Tournament Form</div>
+                            <div class="name">Competition Form</div>
                         </button>
                         <button class="rating-btn" data-rating="prime">
                             <div class="name">Prime Ratings</div>
@@ -935,7 +866,7 @@
 
         <!-- Tournament Selection -->
         <div id="tournamentScreen" class="screen">
-            <h2 style="text-align: center; margin-bottom: 30px;">Select Your World Cup</h2>
+            <h2 style="text-align: center; margin-bottom: 30px;">Select Your European Cup Era</h2>
             <div class="tournament-grid" id="tournamentGrid"></div>
             <button class="main-btn" id="confirmTournamentBtn" disabled>Build Your Team</button>
         </div>
@@ -969,10 +900,10 @@
             </div>
 
             <div class="roll-section" id="rollSection">
-                <h3>Roll for Country</h3>
-                <div class="country-display" id="countryFlag">🌍</div>
-                <div class="country-name" id="countryName">Press Roll</div>
-                <button class="roll-btn" id="rollCountryBtn">🎲 Roll Country</button>
+                <h3>Roll for Club</h3>
+                <div class="club-display" id="clubBadge">⚽</div>
+                <div class="club-name" id="clubName">Press Roll</div>
+                <button class="roll-btn" id="rollClubBtn">🎲 Roll Club</button>
                 <button class="roll-btn secondary" id="rerollBtn" style="display: none;">🔄 Reroll</button>
             </div>
 
@@ -999,1336 +930,461 @@
     </div>
 
     <script>
-        // ============ GAME DATA ============
-        const TOURNAMENTS = [
-            { id: 'wc2022', name: 'Qatar 2022', flag: '🇶🇦', year: 2022 },
-            { id: 'wc2018', name: 'Russia 2018', flag: '🇷🇺', year: 2018 },
-            { id: 'wc2014', name: 'Brazil 2014', flag: '🇧🇷', year: 2014 },
-            { id: 'wc2010', name: 'South Africa 2010', flag: '🇿🇦', year: 2010 },
-            { id: 'wc2006', name: 'Germany 2006', flag: '🇩🇪', year: 2006 },
-            { id: 'wc1998', name: 'France 1998', flag: '🇫🇷', year: 1998 }
+        // Game data for Champions League eras
+        const tournaments = [
+            { id: 'european-cup-60s', name: 'European Cup Era (1960s)', badge: '🏆', years: '1960-1969', famous: 'Real Madrid' },
+            { id: 'european-cup-70s', name: 'European Cup Era (1970s)', badge: '🏆', years: '1970-1979', famous: 'Bayern Munich' },
+            { id: 'european-cup-80s', name: 'European Cup Era (1980s)', badge: '🏆', years: '1980-1989', famous: 'AC Milan' },
+            { id: 'champions-league-90s', name: 'Champions League (1990s)', badge: '⭐', years: '1992-1999', famous: 'Manchester United' },
+            { id: 'champions-league-2000s', name: 'Champions League (2000s)', badge: '⭐', years: '2000-2009', famous: 'AC Milan' },
+            { id: 'champions-league-2010s', name: 'Champions League (2010s)', badge: '⭐', years: '2010-2019', famous: 'Barcelona' },
+            { id: 'champions-league-2020s', name: 'Champions League (2020s)', badge: '⭐', years: '2020-2024', famous: 'Real Madrid' }
         ];
 
-        const FORMATIONS = {
-            '4-3-3': { positions: ['GK', 'RB', 'CB', 'CB', 'LB', 'CM', 'CM', 'CM', 'RW', 'ST', 'LW'] },
-            '4-4-2': { positions: ['GK', 'RB', 'CB', 'CB', 'LB', 'RM', 'CM', 'CM', 'LM', 'ST', 'ST'] },
-            '3-5-2': { positions: ['GK', 'CB', 'CB', 'CB', 'RM', 'CM', 'CDM', 'CM', 'LM', 'ST', 'ST'] },
-            '4-2-3-1': { positions: ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'CDM', 'RW', 'CAM', 'LW', 'ST'] },
-            '4-1-4-1': { positions: ['GK', 'RB', 'CB', 'CB', 'LB', 'CDM', 'RM', 'CM', 'CM', 'LM', 'ST'] },
-            '5-3-2': { positions: ['GK', 'RWB', 'CB', 'CB', 'CB', 'LWB', 'CM', 'CM', 'CM', 'ST', 'ST'] },
-            '3-4-3': { positions: ['GK', 'CB', 'CB', 'CB', 'RM', 'CM', 'CM', 'LM', 'RW', 'ST', 'LW'] }
+        const clubsDatabase = {
+            'european-cup-60s': ['🇪🇸 Real Madrid', '🇮🇹 AC Milan', '🇬🇪 Eintracht Frankfurt', '🇵🇹 Benfica', '🇪🇸 Barcelona'],
+            'european-cup-70s': ['🇩🇪 Bayern Munich', '🇮🇹 AC Milan', '🇮🇹 Inter Milan', '🇫🇷 Saint-Étienne', '🇳🇱 Ajax'],
+            'european-cup-80s': ['🇮🇹 AC Milan', '🇩🇪 Hamburg', '🇳🇱 PSV Eindhoven', '🇬🇧 Nottingham Forest', '🇪🇸 Real Madrid'],
+            'champions-league-90s': ['🇬🇧 Manchester United', '🇩🇪 Bayern Munich', '🇮🇹 AC Milan', '🇫🇷 Olympique Marseille', '🇪🇸 Real Madrid'],
+            'champions-league-2000s': ['🇮🇹 AC Milan', '🇪🇸 Real Madrid', '🇮🇹 Inter Milan', '🇩🇪 Bayern Munich', '🇮🇹 Roma'],
+            'champions-league-2010s': ['🇪🇸 Barcelona', '🇬🇧 Manchester United', '🇩🇪 Bayern Munich', '🇮🇹 AC Milan', '🇪🇸 Real Madrid'],
+            'champions-league-2020s': ['🇪🇸 Real Madrid', '🇫🇷 Paris Saint-Germain', '🇬🇧 Manchester City', '🇬🇧 Liverpool', '🇩🇪 Bayern Munich']
         };
 
-        const POSITION_COORDINATES = {
-            '4-3-3': {
-                GK: { x: 50, y: 90 },
-                RB: { x: 85, y: 70 }, CB_1: { x: 65, y: 75 }, CB_2: { x: 35, y: 75 }, LB: { x: 15, y: 70 },
-                CM_1: { x: 70, y: 50 }, CM_2: { x: 50, y: 55 }, CM_3: { x: 30, y: 50 },
-                RW: { x: 85, y: 25 }, ST: { x: 50, y: 15 }, LW: { x: 15, y: 25 }
-            },
-            '4-4-2': {
-                GK: { x: 50, y: 90 },
-                RB: { x: 85, y: 70 }, CB_1: { x: 65, y: 75 }, CB_2: { x: 35, y: 75 }, LB: { x: 15, y: 70 },
-                RM: { x: 85, y: 45 }, CM_1: { x: 60, y: 50 }, CM_2: { x: 40, y: 50 }, LM: { x: 15, y: 45 },
-                ST_1: { x: 60, y: 18 }, ST_2: { x: 40, y: 18 }
-            },
-            '3-5-2': {
-                GK: { x: 50, y: 90 },
-                CB_1: { x: 70, y: 75 }, CB_2: { x: 50, y: 78 }, CB_3: { x: 30, y: 75 },
-                RM: { x: 90, y: 45 }, CM_1: { x: 65, y: 50 }, CDM: { x: 50, y: 60 }, CM_2: { x: 35, y: 50 }, LM: { x: 10, y: 45 },
-                ST_1: { x: 60, y: 18 }, ST_2: { x: 40, y: 18 }
-            },
-            '4-2-3-1': {
-                GK: { x: 50, y: 90 },
-                RB: { x: 85, y: 70 }, CB_1: { x: 65, y: 75 }, CB_2: { x: 35, y: 75 }, LB: { x: 15, y: 70 },
-                CDM_1: { x: 60, y: 55 }, CDM_2: { x: 40, y: 55 },
-                RW: { x: 80, y: 35 }, CAM: { x: 50, y: 38 }, LW: { x: 20, y: 35 },
-                ST: { x: 50, y: 15 }
-            },
-            '4-1-4-1': {
-                GK: { x: 50, y: 90 },
-                RB: { x: 85, y: 70 }, CB_1: { x: 65, y: 75 }, CB_2: { x: 35, y: 75 }, LB: { x: 15, y: 70 },
-                CDM: { x: 50, y: 58 },
-                RM: { x: 85, y: 40 }, CM_1: { x: 60, y: 45 }, CM_2: { x: 40, y: 45 }, LM: { x: 15, y: 40 },
-                ST: { x: 50, y: 15 }
-            },
-            '5-3-2': {
-                GK: { x: 50, y: 90 },
-                RWB: { x: 90, y: 60 }, CB_1: { x: 70, y: 75 }, CB_2: { x: 50, y: 78 }, CB_3: { x: 30, y: 75 }, LWB: { x: 10, y: 60 },
-                CM_1: { x: 65, y: 45 }, CM_2: { x: 50, y: 50 }, CM_3: { x: 35, y: 45 },
-                ST_1: { x: 60, y: 18 }, ST_2: { x: 40, y: 18 }
-            },
-            '3-4-3': {
-                GK: { x: 50, y: 90 },
-                CB_1: { x: 70, y: 75 }, CB_2: { x: 50, y: 78 }, CB_3: { x: 30, y: 75 },
-                RM: { x: 85, y: 48 }, CM_1: { x: 60, y: 52 }, CM_2: { x: 40, y: 52 }, LM: { x: 15, y: 48 },
-                RW: { x: 80, y: 22 }, ST: { x: 50, y: 15 }, LW: { x: 20, y: 22 }
-            }
-        };
-
-        const COUNTRIES = {
-            wc2022: [
-                { name: 'Argentina', flag: '🇦🇷', rating: 88 },
-                { name: 'France', flag: '🇫🇷', rating: 89 },
-                { name: 'Brazil', flag: '🇧🇷', rating: 90 },
-                { name: 'England', flag: '🏴', rating: 86 },
-                { name: 'Germany', flag: '🇩🇪', rating: 85 },
-                { name: 'Spain', flag: '🇪🇸', rating: 87 },
-                { name: 'Netherlands', flag: '🇳🇱', rating: 85 },
-                { name: 'Portugal', flag: '🇵🇹', rating: 86 },
-                { name: 'Croatia', flag: '🇭🇷', rating: 84 },
-                { name: 'Morocco', flag: '🇲🇦', rating: 82 },
-                { name: 'Belgium', flag: '🇧🇪', rating: 85 },
-                { name: 'Japan', flag: '🇯🇵', rating: 79 },
-                { name: 'Senegal', flag: '🇸🇳', rating: 80 },
-                { name: 'USA', flag: '🇺🇸', rating: 78 },
-                { name: 'Switzerland', flag: '🇨🇭', rating: 81 },
-                { name: 'Poland', flag: '🇵🇱', rating: 80 },
-                { name: 'South Korea', flag: '🇰🇷', rating: 78 },
-                { name: 'Australia', flag: '🇦🇺', rating: 76 },
-                { name: 'Mexico', flag: '🇲🇽', rating: 79 },
-                { name: 'Denmark', flag: '🇩🇰', rating: 82 },
-                { name: 'Uruguay', flag: '🇺🇾', rating: 82 },
-                { name: 'Tunisia', flag: '🇹🇳', rating: 76 },
-                { name: 'Serbia', flag: '🇷🇸', rating: 80 },
-                { name: 'Cameroon', flag: '🇨🇲', rating: 77 },
-                { name: 'Ghana', flag: '🇬🇭', rating: 76 },
-                { name: 'Saudi Arabia', flag: '🇸🇦', rating: 74 },
-                { name: 'Iran', flag: '🇮🇷', rating: 75 },
-                { name: 'Costa Rica', flag: '🇨🇷', rating: 73 },
-                { name: 'Canada', flag: '🇨🇦', rating: 75 },
-                { name: 'Ecuador', flag: '🇪🇨', rating: 77 },
-                { name: 'Wales', flag: '🏴', rating: 76 },
-                { name: 'Qatar', flag: '🇶🇦', rating: 72 }
+        // Player database with positions
+        const playerDatabase = {
+            'goalkeeper': [
+                { name: 'Buffon', rating: 95, position: 'GK' },
+                { name: 'Neuer', rating: 96, position: 'GK' },
+                { name: 'van der Sar', rating: 93, position: 'GK' },
+                { name: 'Casillas', rating: 92, position: 'GK' },
+                { name: 'Yashin', rating: 91, position: 'GK' },
+                { name: 'De Sanctis', rating: 84, position: 'GK' },
+                { name: 'Reina', rating: 85, position: 'GK' },
+                { name: 'Handanovic', rating: 83, position: 'GK' }
             ],
-            wc2018: [
-                { name: 'France', flag: '🇫🇷', rating: 88 },
-                { name: 'Croatia', flag: '🇭🇷', rating: 84 },
-                { name: 'Belgium', flag: '🇧🇪', rating: 87 },
-                { name: 'England', flag: '🏴', rating: 84 },
-                { name: 'Brazil', flag: '🇧🇷', rating: 89 },
-                { name: 'Uruguay', flag: '🇺🇾', rating: 84 },
-                { name: 'Argentina', flag: '🇦🇷', rating: 86 },
-                { name: 'Germany', flag: '🇩🇪', rating: 88 },
-                { name: 'Spain', flag: '🇪🇸', rating: 88 },
-                { name: 'Portugal', flag: '🇵🇹', rating: 85 },
-                { name: 'Russia', flag: '🇷🇺', rating: 78 },
-                { name: 'Sweden', flag: '🇸🇪', rating: 79 },
-                { name: 'Denmark', flag: '🇩🇰', rating: 80 },
-                { name: 'Switzerland', flag: '🇨🇭', rating: 80 },
-                { name: 'Colombia', flag: '🇨🇴', rating: 82 },
-                { name: 'Mexico', flag: '🇲🇽', rating: 80 },
-                { name: 'Japan', flag: '🇯🇵', rating: 77 },
-                { name: 'South Korea', flag: '🇰🇷', rating: 76 },
-                { name: 'Senegal', flag: '🇸🇳', rating: 77 },
-                { name: 'Nigeria', flag: '🇳🇬', rating: 77 },
-                { name: 'Poland', flag: '🇵🇱', rating: 79 },
-                { name: 'Egypt', flag: '🇪🇬', rating: 76 },
-                { name: 'Morocco', flag: '🇲🇦', rating: 76 },
-                { name: 'Tunisia', flag: '🇹🇳', rating: 74 },
-                { name: 'Iceland', flag: '🇮🇸', rating: 75 },
-                { name: 'Serbia', flag: '🇷🇸', rating: 78 },
-                { name: 'Costa Rica', flag: '🇨🇷', rating: 75 },
-                { name: 'Australia', flag: '🇦🇺', rating: 74 },
-                { name: 'Iran', flag: '🇮🇷', rating: 74 },
-                { name: 'Peru', flag: '🇵🇪', rating: 78 },
-                { name: 'Saudi Arabia', flag: '🇸🇦', rating: 72 },
-                { name: 'Panama', flag: '🇵🇦', rating: 70 }
+            'defender': [
+                { name: 'Maldini', rating: 97, position: 'DEF' },
+                { name: 'Ramos', rating: 96, position: 'DEF' },
+                { name: 'Beckenbauer', rating: 97, position: 'DEF' },
+                { name: 'Baresi', rating: 95, position: 'DEF' },
+                { name: 'Cannavaro', rating: 93, position: 'DEF' },
+                { name: 'Nesta', rating: 91, position: 'DEF' },
+                { name: 'van Dijk', rating: 94, position: 'DEF' },
+                { name: 'Carvalho', rating: 90, position: 'DEF' }
             ],
-            wc2014: [
-                { name: 'Germany', flag: '🇩🇪', rating: 90 },
-                { name: 'Argentina', flag: '🇦🇷', rating: 87 },
-                { name: 'Netherlands', flag: '🇳🇱', rating: 86 },
-                { name: 'Brazil', flag: '🇧🇷', rating: 88 },
-                { name: 'Colombia', flag: '🇨🇴', rating: 84 },
-                { name: 'France', flag: '🇫🇷', rating: 84 },
-                { name: 'Belgium', flag: '🇧🇪', rating: 83 },
-                { name: 'Costa Rica', flag: '🇨🇷', rating: 77 },
-                { name: 'Chile', flag: '🇨🇱', rating: 83 },
-                { name: 'Mexico', flag: '🇲🇽', rating: 79 },
-                { name: 'Switzerland', flag: '🇨🇭', rating: 79 },
-                { name: 'Uruguay', flag: '🇺🇾', rating: 84 },
-                { name: 'Greece', flag: '🇬🇷', rating: 77 },
-                { name: 'USA', flag: '🇺🇸', rating: 77 },
-                { name: 'Algeria', flag: '🇩🇿', rating: 76 },
-                { name: 'Nigeria', flag: '🇳🇬', rating: 77 },
-                { name: 'Spain', flag: '🇪🇸', rating: 87 },
-                { name: 'Portugal', flag: '🇵🇹', rating: 85 },
-                { name: 'England', flag: '🏴', rating: 82 },
-                { name: 'Italy', flag: '🇮🇹', rating: 84 },
-                { name: 'Croatia', flag: '🇭🇷', rating: 80 },
-                { name: 'Russia', flag: '🇷🇺', rating: 76 },
-                { name: 'Japan', flag: '🇯🇵', rating: 76 },
-                { name: 'South Korea', flag: '🇰🇷', rating: 75 },
-                { name: 'Australia', flag: '🇦🇺', rating: 73 },
-                { name: 'Iran', flag: '🇮🇷', rating: 73 },
-                { name: 'Ghana', flag: '🇬🇭', rating: 77 },
-                { name: 'Ivory Coast', flag: '🇨🇮', rating: 79 },
-                { name: 'Cameroon', flag: '🇨🇲', rating: 75 },
-                { name: 'Ecuador', flag: '🇪🇨', rating: 77 },
-                { name: 'Honduras', flag: '🇭🇳', rating: 71 },
-                { name: 'Bosnia', flag: '🇧🇦', rating: 78 }
+            'midfielder': [
+                { name: 'Zidane', rating: 98, position: 'MID' },
+                { name: 'Iniesta', rating: 97, position: 'MID' },
+                { name: 'Gerrard', rating: 94, position: 'MID' },
+                { name: 'Scholes', rating: 92, position: 'MID' },
+                { name: 'Pirlo', rating: 96, position: 'MID' },
+                { name: 'Xavi', rating: 97, position: 'MID' },
+                { name: 'Seedorf', rating: 93, position: 'MID' },
+                { name: 'Totti', rating: 94, position: 'MID' }
             ],
-            wc2010: [
-                { name: 'Spain', flag: '🇪🇸', rating: 91 },
-                { name: 'Netherlands', flag: '🇳🇱', rating: 87 },
-                { name: 'Germany', flag: '🇩🇪', rating: 87 },
-                { name: 'Uruguay', flag: '🇺🇾', rating: 84 },
-                { name: 'Argentina', flag: '🇦🇷', rating: 86 },
-                { name: 'Brazil', flag: '🇧🇷', rating: 88 },
-                { name: 'Ghana', flag: '🇬🇭', rating: 79 },
-                { name: 'Paraguay', flag: '🇵🇾', rating: 78 },
-                { name: 'Portugal', flag: '🇵🇹', rating: 84 },
-                { name: 'Chile', flag: '🇨🇱', rating: 80 },
-                { name: 'England', flag: '🏴', rating: 84 },
-                { name: 'USA', flag: '🇺🇸', rating: 77 },
-                { name: 'Japan', flag: '🇯🇵', rating: 76 },
-                { name: 'South Korea', flag: '🇰🇷', rating: 77 },
-                { name: 'Mexico', flag: '🇲🇽', rating: 79 },
-                { name: 'Slovakia', flag: '🇸🇰', rating: 76 },
-                { name: 'Italy', flag: '🇮🇹', rating: 85 },
-                { name: 'France', flag: '🇫🇷', rating: 84 },
-                { name: 'Ivory Coast', flag: '🇨🇮', rating: 80 },
-                { name: 'Nigeria', flag: '🇳🇬', rating: 76 },
-                { name: 'Slovenia', flag: '🇸🇮', rating: 74 },
-                { name: 'Switzerland', flag: '🇨🇭', rating: 78 },
-                { name: 'Denmark', flag: '🇩🇰', rating: 79 },
-                { name: 'Serbia', flag: '🇷🇸', rating: 77 },
-                { name: 'Australia', flag: '🇦🇺', rating: 74 },
-                { name: 'South Africa', flag: '🇿🇦', rating: 73 },
-                { name: 'Cameroon', flag: '🇨🇲', rating: 77 },
-                { name: 'Greece', flag: '🇬🇷', rating: 76 },
-                { name: 'Algeria', flag: '🇩🇿', rating: 74 },
-                { name: 'New Zealand', flag: '🇳🇿', rating: 68 },
-                { name: 'Honduras', flag: '🇭🇳', rating: 71 },
-                { name: 'North Korea', flag: '🇰🇵', rating: 67 }
-            ],
-            wc2006: [
-                { name: 'Italy', flag: '🇮🇹', rating: 89 },
-                { name: 'France', flag: '🇫🇷', rating: 88 },
-                { name: 'Germany', flag: '🇩🇪', rating: 87 },
-                { name: 'Portugal', flag: '🇵🇹', rating: 85 },
-                { name: 'Brazil', flag: '🇧🇷', rating: 90 },
-                { name: 'Argentina', flag: '🇦🇷', rating: 87 },
-                { name: 'England', flag: '🏴', rating: 86 },
-                { name: 'Ukraine', flag: '🇺🇦', rating: 79 },
-                { name: 'Spain', flag: '🇪🇸', rating: 85 },
-                { name: 'Netherlands', flag: '🇳🇱', rating: 84 },
-                { name: 'Switzerland', flag: '🇨🇭', rating: 78 },
-                { name: 'Ecuador', flag: '🇪🇨', rating: 77 },
-                { name: 'Australia', flag: '🇦🇺', rating: 76 },
-                { name: 'Ghana', flag: '🇬🇭', rating: 77 },
-                { name: 'Mexico', flag: '🇲🇽', rating: 79 },
-                { name: 'Sweden', flag: '🇸🇪', rating: 80 },
-                { name: 'Czech Republic', flag: '🇨🇿', rating: 82 },
-                { name: 'USA', flag: '🇺🇸', rating: 76 },
-                { name: 'Croatia', flag: '🇭🇷', rating: 79 },
-                { name: 'Japan', flag: '🇯🇵', rating: 75 },
-                { name: 'South Korea', flag: '🇰🇷', rating: 77 },
-                { name: 'Poland', flag: '🇵🇱', rating: 78 },
-                { name: 'Ivory Coast', flag: '🇨🇮', rating: 79 },
-                { name: 'Serbia', flag: '🇷🇸', rating: 77 },
-                { name: 'Tunisia', flag: '🇹🇳', rating: 74 },
-                { name: 'Saudi Arabia', flag: '🇸🇦', rating: 72 },
-                { name: 'Iran', flag: '🇮🇷', rating: 73 },
-                { name: 'Togo', flag: '🇹🇬', rating: 72 },
-                { name: 'Costa Rica', flag: '🇨🇷', rating: 74 },
-                { name: 'Angola', flag: '🇦🇴', rating: 73 },
-                { name: 'Trinidad', flag: '🇹🇹', rating: 70 },
-                { name: 'Paraguay', flag: '🇵🇾', rating: 77 }
-            ],
-            wc1998: [
-                { name: 'France', flag: '🇫🇷', rating: 89 },
-                { name: 'Brazil', flag: '🇧🇷', rating: 91 },
-                { name: 'Croatia', flag: '🇭🇷', rating: 82 },
-                { name: 'Netherlands', flag: '🇳🇱', rating: 86 },
-                { name: 'Italy', flag: '🇮🇹', rating: 86 },
-                { name: 'Argentina', flag: '🇦🇷', rating: 87 },
-                { name: 'Germany', flag: '🇩🇪', rating: 86 },
-                { name: 'Denmark', flag: '🇩🇰', rating: 81 },
-                { name: 'England', flag: '🏴', rating: 84 },
-                { name: 'Romania', flag: '🇷🇴', rating: 80 },
-                { name: 'Nigeria', flag: '🇳🇬', rating: 79 },
-                { name: 'Mexico', flag: '🇲🇽', rating: 78 },
-                { name: 'Norway', flag: '🇳🇴', rating: 78 },
-                { name: 'Chile', flag: '🇨🇱', rating: 79 },
-                { name: 'Paraguay', flag: '🇵🇾', rating: 77 },
-                { name: 'Spain', flag: '🇪🇸', rating: 83 },
-                { name: 'Yugoslavia', flag: '🇷🇸', rating: 79 },
-                { name: 'Belgium', flag: '🇧🇪', rating: 79 },
-                { name: 'Morocco', flag: '🇲🇦', rating: 76 },
-                { name: 'Jamaica', flag: '🇯🇲', rating: 71 },
-                { name: 'Japan', flag: '🇯🇵', rating: 73 },
-                { name: 'South Korea', flag: '🇰🇷', rating: 74 },
-                { name: 'USA', flag: '🇺🇸', rating: 75 },
-                { name: 'Iran', flag: '🇮🇷', rating: 74 },
-                { name: 'Colombia', flag: '🇨🇴', rating: 78 },
-                { name: 'Cameroon', flag: '🇨🇲', rating: 77 },
-                { name: 'Tunisia', flag: '🇹🇳', rating: 74 },
-                { name: 'Saudi Arabia', flag: '🇸🇦', rating: 73 },
-                { name: 'South Africa', flag: '🇿🇦', rating: 74 },
-                { name: 'Scotland', flag: '🏴', rating: 76 },
-                { name: 'Austria', flag: '🇦🇹', rating: 76 },
-                { name: 'Bulgaria', flag: '🇧🇬', rating: 78 }
+            'forward': [
+                { name: 'Messi', rating: 99, position: 'FWD' },
+                { name: 'Ronaldo', rating: 99, position: 'FWD' },
+                { name: 'Maradona', rating: 98, position: 'FWD' },
+                { name: 'Ronaldinho', rating: 97, position: 'FWD' },
+                { name: 'Cristiano', rating: 98, position: 'FWD' },
+                { name: 'Platini', rating: 94, position: 'FWD' },
+                { name: 'Van Basten', rating: 96, position: 'FWD' },
+                { name: 'Gerd Müller', rating: 95, position: 'FWD' }
             ]
         };
 
-        // Player database by country and tournament
-        const PLAYERS_DB = {
-            // Generate players dynamically based on country and position
-        };
-
-        const POSITION_NAMES = {
-            GK: 'Goalkeeper',
-            RB: 'Right Back',
-            CB: 'Centre Back',
-            LB: 'Left Back',
-            RWB: 'Right Wing Back',
-            LWB: 'Left Wing Back',
-            CDM: 'Defensive Midfielder',
-            CM: 'Central Midfielder',
-            CAM: 'Attacking Midfielder',
-            RM: 'Right Midfielder',
-            LM: 'Left Midfielder',
-            RW: 'Right Winger',
-            LW: 'Left Winger',
-            ST: 'Striker'
-        };
-
-        const POSITION_GROUPS = {
-            GK: ['GK'],
-            DEF: ['RB', 'CB', 'LB', 'RWB', 'LWB'],
-            MID: ['CDM', 'CM', 'CAM', 'RM', 'LM'],
-            ATT: ['RW', 'LW', 'ST']
-        };
-
-        // Famous player names by position and era
-        const FAMOUS_PLAYERS = {
-            GK: ['Neuer', 'Courtois', 'Lloris', 'Alisson', 'Ederson', 'Oblak', 'ter Stegen', 'Donnarumma', 'Maignan', 'Pickford', 'Schmeichel', 'Buffon', 'Casillas', 'Cech', 'Howard', 'Ochoa'],
-            DEF: ['Van Dijk', 'Dias', 'Marquinhos', 'Kimpembe', 'Rudiger', 'Stones', 'Maguire', 'Romero', 'Araujo', 'Gvardiol', 'Kounde', 'Upamecano', 'Militao', 'Bastoni', 'Kim', 'Saliba', 'Walker', 'Cancelo', 'Alexander-Arnold', 'Robertson', 'Davies', 'Hakimi', 'Theo', 'Alba', 'Carvajal', 'Pavard', 'Hernandez', 'Ramos', 'Pique', 'Thiago Silva', 'Chiellini', 'Bonucci'],
-            MID: ['De Bruyne', 'Modric', 'Kroos', 'Bellingham', 'Pedri', 'Gavi', 'Tchouameni', 'Valverde', 'Barella', 'Mount', 'Rice', 'Kante', 'Pogba', 'Bruno', 'Odegaard', 'Saka', 'Foden', 'Grealish', 'Musiala', 'Wirtz', 'Camavinga', 'Rabiot', 'Verratti', 'De Jong', 'Bernardo', 'Zielinski', 'Szoboszlai', 'Amrabat', 'Ounahi', 'Iniesta', 'Xavi'],
-            ATT: ['Mbappe', 'Haaland', 'Vinicius', 'Messi', 'Ronaldo', 'Neymar', 'Lewandowski', 'Kane', 'Benzema', 'Griezmann', 'Dembele', 'Sane', 'Gnabry', 'Rashford', 'Sterling', 'Richarlison', 'Nunez', 'Diaz', 'Salah', 'Depay', 'Gakpo', 'Morata', 'Felix', 'Leao', 'Osimhen', 'En-Nesyri', 'Suarez', 'Cavani', 'Giroud', 'Muller', 'Werner', 'Havertz', 'Firmino']
-        };
-
-        const COMMENTARY = {
-            bottlejob: [
-                "Absolutely bottled it! The pressure got to them in the end.",
-                "What a collapse! They'll be replaying this in their nightmares.",
-                "Spursy performance from {team}. Had it and threw it away!",
-                "The biggest choke job since... well, since the last big choke job.",
-                "They folded like a cheap deckchair. Devastating.",
-                "Mentality monsters? More like mentality minnows tonight."
-            ],
-            comeback: [
-                "WHAT A COMEBACK! Istanbul vibes from {team}!",
-                "Written off at half time, champions by full time! Incredible!",
-                "They never stopped believing! Heart of champions!",
-                "From the dead! Lazarus himself would be impressed!",
-                "The stuff of legends! They'll make movies about this!"
-            ],
-            dominant: [
-                "Total football masterclass from {team}.",
-                "A clinic in how to play the beautiful game.",
-                "They made their opponents look like amateurs. Ruthless.",
-                "Peak tiki-taka. The opposition couldn't get near the ball.",
-                "Absolutely dismantled them. No mercy shown."
-            ],
-            scrappy: [
-                "Ugly but effective. Three points is three points.",
-                "A win's a win, even if it wasn't pretty.",
-                "Backs to the wall stuff. Pure determination.",
-                "Shithousing their way to glory. Respect.",
-                "The beautiful game? Not today. But they don't care."
-            ],
-            upset: [
-                "GIANT KILLING! Nobody saw this coming!",
-                "The minnows have done it! Fairy tale stuff!",
-                "David beats Goliath! Football, bloody hell!",
-                "This will go down in World Cup history!",
-                "The shock of the tournament! Unbelievable scenes!"
-            ],
-            heartbreak: [
-                "So close yet so far. Heartbreak for {team}.",
-                "They gave everything. Nothing to be ashamed of.",
-                "Football can be so cruel. Devastating for {team}.",
-                "The dream is over. They'll be back stronger.",
-                "Penalties are a lottery. Cruel way to go out."
-            ],
-            penalty_drama: [
-                "Penalty shootout drama! It had everything!",
-                "Nerves of steel from the spot kick heroes!",
-                "The goalkeeper became a legend tonight!",
-                "Spot kick heroics decided this epic encounter!",
-                "A lottery, but someone had to win it."
-            ]
-        };
-
-        // ============ GAME STATE ============
         let gameState = {
+            currentTournament: null,
+            currentClub: null,
             difficulty: 'easy',
-            ratingMode: 'tournament',
-            tournament: null,
-            formation: '4-3-3',
+            ratingBasis: 'tournament',
             rerollsLeft: 3,
-            currentPositionIndex: 0,
             team: [],
-            rolledCountry: null,
             selectedPlayer: null,
-            matches: [],
-            eliminated: false,
-            groupStage: null,
-            knockoutRound: null
+            formation: '4-3-3',
+            showRatings: true
         };
 
-        // ============ DOM ELEMENTS ============
-        const screens = {
-            start: document.getElementById('startScreen'),
-            tournament: document.getElementById('tournamentScreen'),
-            builder: document.getElementById('builderScreen'),
-            sim: document.getElementById('simScreen'),
-            results: document.getElementById('resultsScreen')
-        };
+        // DOM Elements
+        const startBtn = document.getElementById('startGameBtn');
+        const tournamentGrid = document.getElementById('tournamentGrid');
+        const confirmTournamentBtn = document.getElementById('confirmTournamentBtn');
+        const rollClubBtn = document.getElementById('rollClubBtn');
+        const rerollBtn = document.getElementById('rerollBtn');
+        const confirmPlayerBtn = document.getElementById('confirmPlayerBtn');
+        const playAgainBtn = document.getElementById('playAgainBtn');
 
-        // ============ UTILITY FUNCTIONS ============
-        function showScreen(screenId) {
-            Object.values(screens).forEach(s => s.classList.remove('active'));
-            screens[screenId].classList.add('active');
-        }
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+        });
 
-        function getRandomElement(arr) {
-            return arr[Math.floor(Math.random() * arr.length)];
-        }
+        function setupEventListeners() {
+            startBtn.addEventListener('click', startGame);
+            confirmTournamentBtn.addEventListener('click', goToBuilder);
+            rollClubBtn.addEventListener('click', rollClub);
+            rerollBtn.addEventListener('click', rerollClub);
+            confirmPlayerBtn.addEventListener('click', confirmPlayer);
+            playAgainBtn.addEventListener('click', resetGame);
 
-        function generatePlayer(position, country, tournamentId) {
-            const posGroup = Object.entries(POSITION_GROUPS).find(([_, positions]) => 
-                positions.includes(position.replace(/_\d+$/, ''))
-            )?.[0] || 'MID';
-            
-            const basePosition = position.replace(/_\d+$/, '');
-            const names = FAMOUS_PLAYERS[posGroup] || FAMOUS_PLAYERS.MID;
-            
-            // Generate 4 players for selection
-            const players = [];
-            const usedNames = new Set();
-            
-            for (let i = 0; i < 4; i++) {
-                let name;
-                do {
-                    name = getRandomElement(names);
-                } while (usedNames.has(name) && usedNames.size < names.length);
-                usedNames.add(name);
-                
-                const baseRating = country.rating + Math.floor(Math.random() * 10) - 5;
-                const rating = Math.min(99, Math.max(60, baseRating + (gameState.ratingMode === 'prime' ? 5 : 0)));
-                
-                // Random natural positions for the player
-                const naturalPositions = [basePosition];
-                if (Math.random() > 0.5) {
-                    const samePosGroup = POSITION_GROUPS[posGroup];
-                    naturalPositions.push(getRandomElement(samePosGroup.filter(p => p !== basePosition)));
-                }
-                
-                players.push({
-                    name,
-                    rating,
-                    position: basePosition,
-                    naturalPositions,
-                    country: country.name,
-                    countryFlag: country.flag,
-                    goals: 0,
-                    assists: 0,
-                    matchRating: 0,
-                    matchesPlayed: 0
-                });
-            }
-            
-            return players;
-        }
-
-        function calculatePositionPenalty(player, requiredPosition) {
-            const basePos = requiredPosition.replace(/_\d+$/, '');
-            if (player.naturalPositions.includes(basePos)) {
-                return 0;
-            }
-            
-            // Find which group the player's position is in vs required
-            const playerGroup = Object.entries(POSITION_GROUPS).find(([_, positions]) => 
-                positions.includes(player.position)
-            )?.[0];
-            const requiredGroup = Object.entries(POSITION_GROUPS).find(([_, positions]) => 
-                positions.includes(basePos)
-            )?.[0];
-            
-            if (playerGroup === requiredGroup) return -3;
-            if ((playerGroup === 'DEF' && requiredGroup === 'MID') || 
-                (playerGroup === 'MID' && requiredGroup === 'DEF') ||
-                (playerGroup === 'MID' && requiredGroup === 'ATT') ||
-                (playerGroup === 'ATT' && requiredGroup === 'MID')) return -5;
-            
-            return -8; // GK playing outfield or vice versa
-        }
-
-        function calculateTeamRating() {
-            if (gameState.team.length === 0) return 0;
-            
-            let total = 0;
-            gameState.team.forEach(p => {
-                const penalty = calculatePositionPenalty(p.player, p.position);
-                total += p.player.rating + penalty;
-            });
-            
-            return Math.round(total / gameState.team.length);
-        }
-
-        // ============ UI FUNCTIONS ============
-        function initStartScreen() {
-            const diffBtns = document.querySelectorAll('.diff-btn');
-            diffBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    diffBtns.forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    gameState.difficulty = btn.dataset.diff;
+            // Difficulty buttons
+            document.querySelectorAll('.diff-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    gameState.difficulty = this.dataset.diff;
+                    gameState.rerollsLeft = this.dataset.diff === 'easy' ? 3 : this.dataset.diff === 'medium' ? 1 : 0;
+                    gameState.showRatings = this.dataset.diff !== 'hard';
                 });
             });
 
-            const ratingBtns = document.querySelectorAll('.rating-btn');
-            ratingBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    ratingBtns.forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    gameState.ratingMode = btn.dataset.rating;
+            // Rating buttons
+            document.querySelectorAll('.rating-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    gameState.ratingBasis = this.dataset.rating;
                 });
             });
 
-            document.getElementById('startGameBtn').addEventListener('click', () => {
-                gameState.rerollsLeft = gameState.difficulty === 'easy' ? 3 : 
-                                        gameState.difficulty === 'medium' ? 1 : 0;
-                showScreen('tournament');
-                renderTournaments();
-            });
+            // Formation buttons
+            setupFormations();
+        }
+
+        function startGame() {
+            showScreen('tournamentScreen');
+            renderTournaments();
         }
 
         function renderTournaments() {
-            const grid = document.getElementById('tournamentGrid');
-            grid.innerHTML = TOURNAMENTS.map(t => `
-                <div class="tournament-card" data-id="${t.id}">
-                    <span class="tournament-flag">${t.flag}</span>
-                    <div class="tournament-info">
-                        <h4>${t.name}</h4>
-                        <span>FIFA World Cup ${t.year}</span>
-                    </div>
-                </div>
-            `).join('');
-
-            grid.querySelectorAll('.tournament-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    grid.querySelectorAll('.tournament-card').forEach(c => c.classList.remove('selected'));
+            tournamentGrid.innerHTML = '';
+            tournaments.forEach(tournament => {
+                const card = document.createElement('div');
+                card.className = 'tournament-card';
+                if (gameState.currentTournament === tournament.id) {
                     card.classList.add('selected');
-                    gameState.tournament = TOURNAMENTS.find(t => t.id === card.dataset.id);
-                    document.getElementById('confirmTournamentBtn').disabled = false;
-                });
-            });
-
-            document.getElementById('confirmTournamentBtn').addEventListener('click', () => {
-                showScreen('builder');
-                initBuilder();
-            });
-        }
-
-        function initBuilder() {
-            renderFormations();
-            renderPitch();
-            updateBuilderUI();
-            
-            document.getElementById('rollCountryBtn').addEventListener('click', rollCountry);
-            document.getElementById('rerollBtn').addEventListener('click', rerollCountry);
-            document.getElementById('confirmPlayerBtn').addEventListener('click', confirmPlayer);
-        }
-
-        function renderFormations() {
-            const container = document.getElementById('formationOptions');
-            container.innerHTML = Object.keys(FORMATIONS).map(f => `
-                <button class="formation-btn ${f === gameState.formation ? 'selected' : ''}" data-formation="${f}">
-                    ${f}
-                </button>
-            `).join('');
-
-            container.querySelectorAll('.formation-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    container.querySelectorAll('.formation-btn').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    gameState.formation = btn.dataset.formation;
-                    renderPitch();
-                    updateBuilderUI();
-                });
-            });
-        }
-
-        function renderPitch() {
-            const container = document.getElementById('pitchContainer');
-            // Clear existing slots
-            container.querySelectorAll('.player-slot').forEach(s => s.remove());
-
-            const formation = gameState.formation;
-            const positions = FORMATIONS[formation].positions;
-            const coords = POSITION_COORDINATES[formation];
-
-            positions.forEach((pos, index) => {
-                // Handle duplicate positions (CB_1, CB_2, etc.)
-                let coordKey = pos;
-                let count = 1;
-                for (let i = 0; i < index; i++) {
-                    if (positions[i] === pos) count++;
                 }
-                if (count > 1) coordKey = `${pos}_${count}`;
-                
-                const coord = coords[coordKey] || coords[pos] || { x: 50, y: 50 };
-                const positionId = count > 1 ? `${pos}_${count}` : pos;
-                
-                const teamPlayer = gameState.team.find(t => t.position === positionId);
-                const isCurrent = index === gameState.currentPositionIndex;
-                
-                const slot = document.createElement('div');
-                slot.className = `player-slot ${teamPlayer ? 'filled' : ''} ${isCurrent ? 'current' : ''}`;
-                slot.style.left = `${coord.x}%`;
-                slot.style.top = `${coord.y}%`;
-                slot.innerHTML = `
-                    <div class="slot-circle">${teamPlayer ? teamPlayer.player.rating : (index + 1)}</div>
-                    <div class="slot-name">${teamPlayer ? teamPlayer.player.name : ''}</div>
-                    <div class="slot-position">${pos}</div>
+                card.innerHTML = `
+                    <div class="tournament-badge">${tournament.badge}</div>
+                    <div class="tournament-info">
+                        <h4>${tournament.name}</h4>
+                        <span>${tournament.years}</span>
+                        <span>Famous: ${tournament.famous}</span>
+                    </div>
                 `;
-                container.appendChild(slot);
+                card.addEventListener('click', () => {
+                    gameState.currentTournament = tournament.id;
+                    renderTournaments();
+                    confirmTournamentBtn.disabled = false;
+                });
+                tournamentGrid.appendChild(card);
             });
         }
 
-        function updateBuilderUI() {
-            const positions = FORMATIONS[gameState.formation].positions;
-            const currentPos = positions[gameState.currentPositionIndex];
-            const basePos = currentPos ? currentPos.replace(/_\d+$/, '') : '';
-            
-            document.getElementById('currentPosition').textContent = POSITION_NAMES[basePos] || currentPos;
-            document.getElementById('positionCount').textContent = `Position ${gameState.currentPositionIndex + 1} of 11`;
-            document.getElementById('teamRating').textContent = calculateTeamRating();
-            document.getElementById('rerollsLeft').textContent = gameState.rerollsLeft;
+        function goToBuilder() {
+            showScreen('builderScreen');
+            setupFormations();
+            gameState.team = [];
+            updateTeamRating();
+            rollClub();
         }
 
-        function rollCountry() {
-            const rollSection = document.getElementById('rollSection');
-            const flagDisplay = document.getElementById('countryFlag');
-            const nameDisplay = document.getElementById('countryName');
-            const rollBtn = document.getElementById('rollCountryBtn');
-            const rerollBtn = document.getElementById('rerollBtn');
-            
-            flagDisplay.classList.add('rolling');
-            rollBtn.disabled = true;
-            
-            const countries = COUNTRIES[gameState.tournament.id];
-            let iterations = 0;
-            const maxIterations = 20;
-            
-            const interval = setInterval(() => {
-                const randomCountry = getRandomElement(countries);
-                flagDisplay.textContent = randomCountry.flag;
-                nameDisplay.textContent = randomCountry.name;
-                iterations++;
-                
-                if (iterations >= maxIterations) {
-                    clearInterval(interval);
-                    flagDisplay.classList.remove('rolling');
-                    
-                    // Final selection
-                    gameState.rolledCountry = getRandomElement(countries);
-                    flagDisplay.textContent = gameState.rolledCountry.flag;
-                    nameDisplay.textContent = gameState.rolledCountry.name;
-                    
-                    rollBtn.style.display = 'none';
-                    if (gameState.rerollsLeft > 0) {
-                        rerollBtn.style.display = 'inline-block';
-                    }
-                    
-                    showPlayerSelection();
-                }
-            }, 80);
+        function setupFormations() {
+            const formationContainer = document.getElementById('formationOptions');
+            formationContainer.innerHTML = '';
+            const formations = ['4-3-3', '3-4-3', '4-4-2', '5-3-2'];
+            formations.forEach(formation => {
+                const btn = document.createElement('button');
+                btn.className = `formation-btn ${formation === gameState.formation ? 'selected' : ''}`;
+                btn.textContent = formation;
+                btn.addEventListener('click', () => {
+                    gameState.formation = formation;
+                    document.querySelectorAll('.formation-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                });
+                formationContainer.appendChild(btn);
+            });
         }
 
-        function rerollCountry() {
-            if (gameState.rerollsLeft <= 0) return;
+        function rollClub() {
+            const clubs = clubsDatabase[gameState.currentTournament];
+            const randomClub = clubs[Math.floor(Math.random() * clubs.length)];
+            gameState.currentClub = randomClub;
+            document.getElementById('clubBadge').textContent = randomClub.split(' ')[0];
+            document.getElementById('clubName').textContent = randomClub;
             
-            gameState.rerollsLeft--;
-            updateBuilderUI();
+            if (gameState.rerollsLeft > 0) {
+                rerollBtn.style.display = 'inline-block';
+            } else {
+                rerollBtn.style.display = 'none';
+            }
             
-            const flagDisplay = document.getElementById('countryFlag');
-            const nameDisplay = document.getElementById('countryName');
-            const rerollBtn = document.getElementById('rerollBtn');
-            
-            flagDisplay.classList.add('rolling');
-            
-            const countries = COUNTRIES[gameState.tournament.id];
-            let iterations = 0;
-            const maxIterations = 15;
-            
-            const interval = setInterval(() => {
-                const randomCountry = getRandomElement(countries);
-                flagDisplay.textContent = randomCountry.flag;
-                nameDisplay.textContent = randomCountry.name;
-                iterations++;
-                
-                if (iterations >= maxIterations) {
-                    clearInterval(interval);
-                    flagDisplay.classList.remove('rolling');
-                    
-                    gameState.rolledCountry = getRandomElement(countries);
-                    flagDisplay.textContent = gameState.rolledCountry.flag;
-                    nameDisplay.textContent = gameState.rolledCountry.name;
-                    
-                    if (gameState.rerollsLeft <= 0) {
-                        rerollBtn.style.display = 'none';
-                    }
-                    
-                    showPlayerSelection();
-                }
-            }, 80);
+            showPlayerSelection();
+        }
+
+        function rerollClub() {
+            if (gameState.rerollsLeft > 0) {
+                gameState.rerollsLeft--;
+                document.getElementById('rerollsLeft').textContent = gameState.rerollsLeft;
+                rollClub();
+            }
         }
 
         function showPlayerSelection() {
-            const container = document.getElementById('playerSelection');
-            const grid = document.getElementById('playerGrid');
+            const positionIndex = gameState.team.length;
+            const positions = ['goalkeeper', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward', 'forward', 'forward'];
             
-            const positions = FORMATIONS[gameState.formation].positions;
-            let currentPos = positions[gameState.currentPositionIndex];
-            
-            // Handle duplicate positions
-            let count = 1;
-            for (let i = 0; i < gameState.currentPositionIndex; i++) {
-                if (positions[i] === currentPos) count++;
+            if (positionIndex >= 11) {
+                startSimulation();
+                return;
             }
-            const positionId = count > 1 ? `${currentPos}_${count}` : currentPos;
-            
-            const players = generatePlayer(positionId, gameState.rolledCountry, gameState.tournament.id);
-            
-            grid.innerHTML = players.map((p, i) => {
-                const penalty = calculatePositionPenalty(p, positionId);
-                const showRating = gameState.difficulty !== 'hard';
-                
-                return `
-                    <div class="player-card" data-index="${i}">
-                        <div class="rating ${showRating ? '' : 'hidden'}">
-                            ${showRating ? p.rating : '??'}
-                        </div>
-                        <div class="name">${p.name}</div>
-                        <div class="position">${p.position} • ${p.countryFlag}</div>
-                        ${penalty !== 0 ? `<div class="position-penalty">${penalty} out of position</div>` : ''}
-                    </div>
+
+            const currentPosition = positions[positionIndex];
+            document.getElementById('currentPosition').textContent = currentPosition.charAt(0).toUpperCase() + currentPosition.slice(1);
+            document.getElementById('positionCount').textContent = `Position ${positionIndex + 1} of 11`;
+
+            const playerGrid = document.getElementById('playerGrid');
+            playerGrid.innerHTML = '';
+
+            const availablePlayers = playerDatabase[currentPosition];
+            availablePlayers.forEach(player => {
+                const card = document.createElement('div');
+                card.className = 'player-card';
+                const displayRating = gameState.showRatings ? player.rating : '?';
+                card.innerHTML = `
+                    <div class="rating ${!gameState.showRatings ? 'hidden' : ''}">${displayRating}</div>
+                    <div class="name">${player.name}</div>
+                    <div class="position">${player.position}</div>
                 `;
-            }).join('');
-            
-            container.style.display = 'block';
-            
-            // Store players for selection
-            container.dataset.players = JSON.stringify(players);
-            container.dataset.positionId = positionId;
-            
-            grid.querySelectorAll('.player-card').forEach(card => {
                 card.addEventListener('click', () => {
-                    grid.querySelectorAll('.player-card').forEach(c => c.classList.remove('selected'));
+                    gameState.selectedPlayer = player;
+                    document.querySelectorAll('.player-card').forEach(c => c.classList.remove('selected'));
                     card.classList.add('selected');
-                    gameState.selectedPlayer = parseInt(card.dataset.index);
-                    document.getElementById('confirmPlayerBtn').disabled = false;
+                    confirmPlayerBtn.disabled = false;
                 });
+                playerGrid.appendChild(card);
             });
+
+            document.getElementById('playerSelection').style.display = 'block';
+            document.getElementById('rollSection').style.display = 'none';
+            confirmPlayerBtn.disabled = true;
         }
 
         function confirmPlayer() {
-            const container = document.getElementById('playerSelection');
-            const players = JSON.parse(container.dataset.players);
-            const positionId = container.dataset.positionId;
-            
-            const selectedPlayer = players[gameState.selectedPlayer];
-            
-            gameState.team.push({
-                position: positionId,
-                player: selectedPlayer
-            });
-            
-            gameState.currentPositionIndex++;
-            gameState.selectedPlayer = null;
-            gameState.rolledCountry = null;
-            
-            // Reset UI
-            container.style.display = 'none';
-            document.getElementById('confirmPlayerBtn').disabled = true;
-            document.getElementById('rollCountryBtn').style.display = 'inline-block';
-            document.getElementById('rerollBtn').style.display = 'none';
-            document.getElementById('countryFlag').textContent = '🌍';
-            document.getElementById('countryName').textContent = 'Press Roll';
-            
-            renderPitch();
-            updateBuilderUI();
-            
-            // Check if team is complete
-            if (gameState.currentPositionIndex >= 11) {
-                startTournament();
+            if (gameState.selectedPlayer) {
+                gameState.team.push({...gameState.selectedPlayer, club: gameState.currentClub});
+                updateTeamRating();
+                gameState.selectedPlayer = null;
+                document.getElementById('playerSelection').style.display = 'none';
+                document.getElementById('rollSection').style.display = 'block';
+                rollClub();
             }
         }
 
-        // ============ SIMULATION ============
-        function startTournament() {
-            showScreen('sim');
-            gameState.matches = [];
-            gameState.eliminated = false;
-            
-            // Create tournament structure
-            setupGroupStage();
+        function updateTeamRating() {
+            const avgRating = gameState.team.length > 0 
+                ? Math.round(gameState.team.reduce((sum, p) => sum + p.rating, 0) / gameState.team.length)
+                : 0;
+            document.getElementById('teamRating').textContent = avgRating;
         }
 
-        function setupGroupStage() {
-            const countries = [...COUNTRIES[gameState.tournament.id]];
-            
-            // Create groups
-            const groups = { A: [], B: [], C: [], D: [], E: [], F: [], G: [], H: [] };
-            const groupNames = Object.keys(groups);
-            
-            // Shuffle countries
-            for (let i = countries.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [countries[i], countries[j]] = [countries[j], countries[i]];
-            }
-            
-            // Assign to groups
-            countries.forEach((country, i) => {
-                const groupIndex = i % 8;
-                groups[groupNames[groupIndex]].push({
-                    ...country,
-                    points: 0,
-                    gd: 0,
-                    gf: 0,
-                    ga: 0,
-                    played: 0
-                });
-            });
-            
-            // Create user team entry
-            const userTeam = {
-                name: 'Dream Team',
-                flag: '⭐',
-                rating: calculateTeamRating(),
-                points: 0,
-                gd: 0,
-                gf: 0,
-                ga: 0,
-                played: 0,
-                isUser: true
-            };
-            
-            // Add user to a random group, replacing weakest team
-            const userGroup = getRandomElement(groupNames);
-            groups[userGroup].sort((a, b) => a.rating - b.rating);
-            groups[userGroup][0] = userTeam;
-            
-            gameState.groupStage = {
-                groups,
-                userGroup,
-                currentMatchIndex: 0,
-                phase: 'group'
-            };
-            
-            simulateGroupStage();
+        function startSimulation() {
+            showScreen('simScreen');
+            runSimulation();
         }
 
-        function simulateGroupStage() {
-            const { groups, userGroup } = gameState.groupStage;
-            const userTeamGroup = groups[userGroup];
-            const userTeam = userTeamGroup.find(t => t.isUser);
-            const opponents = userTeamGroup.filter(t => !t.isUser);
-            
-            // User plays 3 group games
-            showGroupMatchSequence(userTeam, opponents, 0);
-        }
+        function runSimulation() {
+            const simContent = document.getElementById('simContent');
+            simContent.innerHTML = '';
 
-        function showGroupMatchSequence(userTeam, opponents, matchIndex) {
-            if (matchIndex >= 3) {
-                // All group games done, show standings then proceed
-                showGroupStandings();
-                return;
-            }
-            
-            const opponent = opponents[matchIndex];
-            const result = simulateMatch(userTeam, opponent, 'group');
-            
-            // Update standings
-            if (result.userWin) {
-                userTeam.points += 3;
-            } else if (result.draw) {
-                userTeam.points += 1;
-                opponent.points += 1;
-            } else {
-                opponent.points += 3;
-            }
-            
-            userTeam.gf += result.userGoals;
-            userTeam.ga += result.opponentGoals;
-            userTeam.gd += (result.userGoals - result.opponentGoals);
-            userTeam.played++;
-            
-            opponent.gf += result.opponentGoals;
-            opponent.ga += result.userGoals;
-            opponent.gd += (result.opponentGoals - result.userGoals);
-            opponent.played++;
-            
-            gameState.matches.push(result);
-            
-            displayMatch(result, 'GROUP STAGE - MATCH ' + (matchIndex + 1), () => {
-                showGroupMatchSequence(userTeam, opponents, matchIndex + 1);
-            });
-        }
-
-        function simulateMatch(team1, team2, stage) {
-            const rating1 = team1.rating;
-            const rating2 = team2.rating;
-            
-            const ratingDiff = (rating1 - rating2) / 100;
-            const baseProb = 0.5 + (ratingDiff * 0.4);
-            
-            // Simulate goals
-            let goals1 = 0, goals2 = 0;
-            const maxGoals = stage === 'group' ? 5 : 4;
-            
-            for (let i = 0; i < 10; i++) {
-                if (Math.random() < (baseProb * 0.25)) goals1++;
-                if (Math.random() < ((1 - baseProb) * 0.25)) goals2++;
-            }
-            
-            goals1 = Math.min(goals1, maxGoals);
-            goals2 = Math.min(goals2, maxGoals);
-            
-            // In knockout, handle draws
-            let penalties = false;
-            let extraTime = false;
-            
-            if (stage !== 'group' && goals1 === goals2) {
-                extraTime = true;
-                // Extra time
-                if (Math.random() < baseProb * 0.3) goals1++;
-                else if (Math.random() < (1 - baseProb) * 0.3) goals2++;
+            // Simulate multiple matches
+            const matches = generateMatches(3);
+            matches.forEach((match, index) => {
+                const matchCard = document.createElement('div');
+                matchCard.className = 'match-card';
                 
-                // Still draw? Penalties
-                if (goals1 === goals2) {
-                    penalties = true;
-                    if (Math.random() < 0.5 + (ratingDiff * 0.1)) {
-                        goals1++;
-                    } else {
-                        goals2++;
-                    }
-                }
-            }
-            
-            // Generate events
-            const events = [];
-            const scorers1 = [];
-            const scorers2 = [];
-            
-            for (let i = 0; i < goals1; i++) {
-                const minute = Math.floor(Math.random() * 90) + 1;
-                const scorer = team1.isUser ? 
-                    getRandomElement(gameState.team).player : 
-                    { name: `${team1.name} Player` };
-                events.push({ minute, type: 'goal', team: 'home', player: scorer.name });
-                scorers1.push(scorer.name);
-                
-                if (team1.isUser) {
-                    const teamPlayer = gameState.team.find(t => t.player.name === scorer.name);
-                    if (teamPlayer) teamPlayer.player.goals++;
-                }
-            }
-            
-            for (let i = 0; i < goals2; i++) {
-                const minute = Math.floor(Math.random() * 90) + 1;
-                const scorer = team2.isUser ? 
-                    getRandomElement(gameState.team).player : 
-                    { name: `${team2.name} Player` };
-                events.push({ minute, type: 'goal', team: 'away', player: scorer.name });
-                scorers2.push(scorer.name);
-                
-                if (team2.isUser) {
-                    const teamPlayer = gameState.team.find(t => t.player.name === scorer.name);
-                    if (teamPlayer) teamPlayer.player.goals++;
-                }
-            }
-            
-            // Add some random cards
-            if (Math.random() > 0.7) {
-                events.push({
-                    minute: Math.floor(Math.random() * 90) + 1,
-                    type: 'yellow',
-                    team: Math.random() > 0.5 ? 'home' : 'away',
-                    player: 'A Player'
-                });
-            }
-            
-            events.sort((a, b) => a.minute - b.minute);
-            
-            // Generate commentary
-            const commentary = generateCommentary(team1, team2, goals1, goals2, penalties, extraTime);
-            
-            return {
-                team1,
-                team2,
-                score1: goals1,
-                score2: goals2,
-                userGoals: team1.isUser ? goals1 : goals2,
-                opponentGoals: team1.isUser ? goals2 : goals1,
-                userWin: team1.isUser ? goals1 > goals2 : goals2 > goals1,
-                draw: goals1 === goals2 && stage === 'group',
-                events,
-                commentary,
-                penalties,
-                extraTime,
-                stage
-            };
-        }
+                const userScore = generateScore();
+                const opponentScore = generateScore();
+                const isWin = userScore > opponentScore;
 
-        function generateCommentary(team1, team2, goals1, goals2, penalties, extraTime) {
-            const userTeam = team1.isUser ? team1 : team2;
-            const opponent = team1.isUser ? team2 : team1;
-            const userGoals = team1.isUser ? goals1 : goals2;
-            const oppGoals = team1.isUser ? goals2 : goals1;
-            
-            let type = 'scrappy';
-            
-            if (userGoals > oppGoals) {
-                if (userGoals - oppGoals >= 3) type = 'dominant';
-                else if (userTeam.rating < opponent.rating - 5) type = 'upset';
-                else type = 'scrappy';
-            } else if (userGoals < oppGoals) {
-                if (goals1 + goals2 >= 4 && Math.random() > 0.5) type = 'bottlejob';
-                else type = 'heartbreak';
-            } else {
-                type = 'scrappy';
-            }
-            
-            if (penalties) type = 'penalty_drama';
-            
-            let comment = getRandomElement(COMMENTARY[type]);
-            comment = comment.replace('{team}', userTeam.name);
-            
-            return comment;
-        }
-
-        function displayMatch(result, header, onContinue) {
-            const container = document.getElementById('simContent');
-            const btn = document.getElementById('nextMatchBtn');
-            
-            container.innerHTML = `
-                <div class="match-card">
-                    <div class="match-header">${header}</div>
+                matchCard.innerHTML = `
+                    <div class="match-header">Round ${index + 1} - ${match.round}</div>
                     <div class="match-teams">
-                        <div class="match-team ${result.team1.isUser ? 'user' : ''}">
-                            <div class="flag">${result.team1.flag}</div>
-                            <div class="name">${result.team1.name}</div>
+                        <div class="match-team user">
+                            <div class="badge">⭐</div>
+                            <div class="name">Your Team</div>
                         </div>
-                        <div class="match-score">
-                            ${result.score1} - ${result.score2}
-                            ${result.penalties ? '<br><small>(pens)</small>' : ''}
-                            ${result.extraTime && !result.penalties ? '<br><small>(AET)</small>' : ''}
-                        </div>
-                        <div class="match-team ${result.team2.isUser ? 'user' : ''}">
-                            <div class="flag">${result.team2.flag}</div>
-                            <div class="name">${result.team2.name}</div>
+                        <div class="match-score">${userScore} - ${opponentScore}</div>
+                        <div class="match-team">
+                            <div class="badge">${match.badge}</div>
+                            <div class="name">${match.team}</div>
                         </div>
                     </div>
-                    
                     <div class="match-events">
-                        ${result.events.map(e => `
+                        ${generateMatchEvents(userScore, opponentScore).map(event => `
                             <div class="event">
-                                <span class="minute">${e.minute}'</span>
-                                <span class="icon">${e.type === 'goal' ? '⚽' : e.type === 'yellow' ? '🟨' : '🟥'}</span>
-                                <span class="player-name">${e.player}</span>
-                                <span class="detail">${e.team === 'home' ? result.team1.name : result.team2.name}</span>
+                                <span class="minute">${event.minute}'</span>
+                                <span class="icon">${event.icon}</span>
+                                <span class="detail">${event.detail}</span>
+                                <span class="player-name">${event.player}</span>
                             </div>
                         `).join('')}
                     </div>
-                    
                     <div class="commentary-box">
-                        <p>"${result.commentary}"</p>
+                        <p>"${generateCommentary(isWin, userScore, opponentScore)}"</p>
                     </div>
-                </div>
-            `;
-            
-            btn.style.display = 'block';
-            btn.onclick = () => {
-                btn.style.display = 'none';
-                onContinue();
-            };
-        }
-
-        function showGroupStandings() {
-            const { groups, userGroup } = gameState.groupStage;
-            const group = groups[userGroup];
-            
-            // Simulate other matches in the group
-            for (let i = 0; i < group.length; i++) {
-                for (let j = i + 1; j < group.length; j++) {
-                    if (group[i].isUser || group[j].isUser) continue;
-                    
-                    const result = simulateMatch(group[i], group[j], 'group');
-                    if (result.score1 > result.score2) {
-                        group[i].points += 3;
-                    } else if (result.score1 < result.score2) {
-                        group[j].points += 3;
-                    } else {
-                        group[i].points += 1;
-                        group[j].points += 1;
-                    }
-                    group[i].gf += result.score1;
-                    group[i].ga += result.score2;
-                    group[i].gd += (result.score1 - result.score2);
-                    group[j].gf += result.score2;
-                    group[j].ga += result.score1;
-                    group[j].gd += (result.score2 - result.score1);
-                }
-            }
-            
-            // Sort group
-            group.sort((a, b) => b.points - a.points || b.gd - a.gd || b.gf - a.gf);
-            
-            const userTeam = group.find(t => t.isUser);
-            const userPosition = group.indexOf(userTeam);
-            const qualified = userPosition < 2;
-            
-            const container = document.getElementById('simContent');
-            container.innerHTML = `
-                <div class="match-card">
-                    <div class="match-header">GROUP ${userGroup} - FINAL STANDINGS</div>
-                    
-                    <table class="group-table">
-                        <thead>
-                            <tr>
-                                <th>Team</th>
-                                <th>P</th>
-                                <th>GD</th>
-                                <th>Pts</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${group.map((team, i) => `
-                                <tr class="${i < 2 ? 'qualified' : ''} ${team.isUser ? 'user-team' : ''}">
-                                    <td>
-                                        <div class="team-row">
-                                            <span>${team.flag}</span>
-                                            <span>${team.name}</span>
-                                        </div>
-                                    </td>
-                                    <td>3</td>
-                                    <td>${team.gd > 0 ? '+' : ''}${team.gd}</td>
-                                    <td>${team.points}</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                    
-                    <div class="commentary-box">
-                        <p>${qualified ? 
-                            '"Your Dream Team advances to the knockout rounds! The real competition begins now!"' :
-                            '"Crashed out in the group stages. Not the World Cup dream you were hoping for..."'
-                        }</p>
-                    </div>
-                </div>
-            `;
-            
-            const btn = document.getElementById('nextMatchBtn');
-            btn.style.display = 'block';
-            btn.textContent = qualified ? 'Round of 16' : 'See Results';
-            btn.onclick = () => {
-                btn.style.display = 'none';
-                if (qualified) {
-                    startKnockout(userTeam, 'R16');
-                } else {
-                    gameState.eliminated = true;
-                    showResults();
-                }
-            };
-        }
-
-        function startKnockout(userTeam, round) {
-            // Get a random opponent based on round
-            const countries = COUNTRIES[gameState.tournament.id];
-            const ratingRange = {
-                'R16': [75, 85],
-                'QF': [80, 88],
-                'SF': [83, 90],
-                'F': [85, 92]
-            }[round];
-            
-            const possibleOpponents = countries.filter(c => 
-                c.rating >= ratingRange[0] && c.rating <= ratingRange[1]
-            );
-            
-            const opponent = getRandomElement(possibleOpponents);
-            const result = simulateMatch(userTeam, opponent, round);
-            
-            gameState.matches.push(result);
-            
-            const roundNames = {
-                'R16': 'ROUND OF 16',
-                'QF': 'QUARTER-FINAL',
-                'SF': 'SEMI-FINAL',
-                'F': 'FINAL'
-            };
-            
-            const userWon = result.team1.isUser ? result.score1 > result.score2 : result.score2 > result.score1;
-            
-            displayMatch(result, roundNames[round], () => {
-                if (!userWon) {
-                    gameState.eliminated = true;
-                    gameState.knockoutRound = round;
-                    showResults();
-                } else if (round === 'F') {
-                    gameState.knockoutRound = 'CHAMPION';
-                    showResults();
-                } else {
-                    const nextRound = {
-                        'R16': 'QF',
-                        'QF': 'SF',
-                        'SF': 'F'
-                    }[round];
-                    startKnockout(userTeam, nextRound);
-                }
+                `;
+                
+                simContent.appendChild(matchCard);
             });
+
+            // Show final results
+            const finalWins = Math.floor(Math.random() * 2) + 1;
+            setTimeout(() => {
+                if (finalWins >= 2) {
+                    showWinScreen();
+                } else {
+                    showLossScreen();
+                }
+            }, 500);
         }
 
-        function showResults() {
-            showScreen('results');
-            
-            const isChampion = gameState.knockoutRound === 'CHAMPION';
-            const roundReached = gameState.knockoutRound || 'GROUP';
-            
-            const container = document.getElementById('resultsContent');
-            
-            // Calculate total stats
-            const totalGoals = gameState.matches.reduce((sum, m) => sum + m.userGoals, 0);
-            const totalConceded = gameState.matches.reduce((sum, m) => sum + m.opponentGoals, 0);
-            const wins = gameState.matches.filter(m => m.userWin).length;
-            const draws = gameState.matches.filter(m => m.draw).length;
-            const losses = gameState.matches.length - wins - draws;
-            
-            // Sort players by goals
-            const playerStats = gameState.team.map(t => ({
-                ...t.player,
-                position: t.position,
-                effectiveRating: t.player.rating + calculatePositionPenalty(t.player, t.position)
-            })).sort((a, b) => b.goals - a.goals);
-            
-            container.innerHTML = `
+        function generateMatches(count) {
+            const rounds = ['Group Stage', 'Round of 16', 'Quarter-Finals', 'Semi-Finals', 'Finals'];
+            const opponents = [
+                { team: 'Barcelona', badge: '🔵🔴', region: 'Spain' },
+                { team: 'Bayern Munich', badge: '🔴⚪', region: 'Germany' },
+                { team: 'AC Milan', badge: '🔴⚫', region: 'Italy' },
+                { team: 'Manchester United', badge: '🔴', region: 'England' },
+                { team: 'Liverpool', badge: '🔴', region: 'England' }
+            ];
+
+            const matches = [];
+            for (let i = 0; i < count; i++) {
+                const opponent = opponents[Math.floor(Math.random() * opponents.length)];
+                matches.push({
+                    round: rounds[i],
+                    team: opponent.team,
+                    badge: opponent.badge
+                });
+            }
+            return matches;
+        }
+
+        function generateScore() {
+            return Math.floor(Math.random() * 5);
+        }
+
+        function generateMatchEvents(userScore, opponentScore) {
+            const events = [];
+            const playerNames = gameState.team.map(p => p.name);
+
+            for (let i = 0; i < userScore; i++) {
+                events.push({
+                    minute: Math.floor(Math.random() * 85) + 5,
+                    icon: '⚽',
+                    detail: 'GOAL',
+                    player: playerNames[Math.floor(Math.random() * playerNames.length)]
+                });
+            }
+
+            return events.sort((a, b) => a.minute - b.minute);
+        }
+
+        function generateCommentary(isWin, userScore, opponentScore) {
+            const commentaries = {
+                win: [
+                    `Absolute dominance! ${userScore} goals showcase your team's quality.`,
+                    `What a performance! Your dream team delivered under pressure.`,
+                    `Clinical finishing and stellar defense. Onwards to glory!`
+                ],
+                loss: [
+                    `Close match, but it wasn't meant to be. Better luck next time!`,
+                    `The opposition was just too strong. You gave it your all.`,
+                    `Tough loss, but this team has the quality to bounce back.`
+                ]
+            };
+
+            const pool = isWin ? commentaries.win : commentaries.loss;
+            return pool[Math.floor(Math.random() * pool.length)];
+        }
+
+        function showWinScreen() {
+            showScreen('resultsScreen');
+            const resultsContent = document.getElementById('resultsContent');
+            resultsContent.innerHTML = `
                 <div class="trophy-display">
-                    <div class="trophy">${isChampion ? '🏆' : '😢'}</div>
-                    <h1 class="result-title ${isChampion ? 'winner' : 'loser'}">
-                        ${isChampion ? 'WORLD CHAMPIONS!' : 'ELIMINATED'}
-                    </h1>
-                    <p class="result-subtitle">
-                        ${isChampion ? 
-                            `Your Dream Team conquered ${gameState.tournament.name}!` : 
-                            `Knocked out in the ${roundReached === 'GROUP' ? 'Group Stage' : roundReached}`
-                        }
-                    </p>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="label">Team Rating</div>
-                        <div class="value">${calculateTeamRating()}</div>
+                    <div class="trophy">🏆</div>
+                    <h2 class="result-title winner">CHAMPIONS OF EUROPE!</h2>
+                    <p class="result-subtitle">Your dream team conquered Europe!</p>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="label">Avg Team Rating</div>
+                            <div class="value">${Math.round(gameState.team.reduce((sum, p) => sum + p.rating, 0) / gameState.team.length)}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="label">Players Selected</div>
+                            <div class="value">${gameState.team.length}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="label">Formation</div>
+                            <div class="value">${gameState.formation}</div>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="label">Matches</div>
-                        <div class="value">${gameState.matches.length}</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="label">Record</div>
-                        <div class="value">${wins}W ${draws}D ${losses}L</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="label">Goals</div>
-                        <div class="value">${totalGoals} - ${totalConceded}</div>
-                    </div>
-                </div>
-                
-                <h3 style="margin: 30px 0 20px; color: var(--text-secondary);">Player Statistics</h3>
-                
-                <table class="player-stats-table">
-                    <thead>
-                        <tr>
-                            <th>Player</th>
-                            <th>Nation</th>
-                            <th>Pos</th>
-                            <th>Rating</th>
-                            <th>Goals</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${playerStats.map(p => `
-                            <tr>
-                                <td>${p.name}</td>
-                                <td>${p.countryFlag}</td>
-                                <td>${p.position.replace(/_\d+$/, '')}</td>
-                                <td class="rating-cell">${p.effectiveRating}</td>
-                                <td>${p.goals}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-                
-                <div class="match-history">
-                    <h3>Match History</h3>
-                    ${gameState.matches.map(m => {
-                        const userScore = m.team1.isUser ? m.score1 : m.score2;
-                        const oppScore = m.team1.isUser ? m.score2 : m.score1;
-                        const opponent = m.team1.isUser ? m.team2 : m.team1;
-                        const won = userScore > oppScore;
-                        const draw = userScore === oppScore;
-                        
-                        return `
-                            <div class="history-item">
-                                <span class="round">${m.stage}</span>
-                                <span>${opponent.flag} ${opponent.name}</span>
-                                <span class="result ${won ? 'win' : draw ? '' : 'loss'}">
-                                    ${userScore} - ${oppScore}
-                                </span>
-                            </div>
-                        `;
-                    }).join('')}
                 </div>
             `;
-            
-            document.getElementById('playAgainBtn').onclick = () => {
-                // Reset game state
-                gameState = {
-                    difficulty: 'easy',
-                    ratingMode: 'tournament',
-                    tournament: null,
-                    formation: '4-3-3',
-                    rerollsLeft: 3,
-                    currentPositionIndex: 0,
-                    team: [],
-                    rolledCountry: null,
-                    selectedPlayer: null,
-                    matches: [],
-                    eliminated: false,
-                    groupStage: null,
-                    knockoutRound: null
-                };
-                
-                // Reset UI
-                document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
-                document.querySelector('.diff-btn.easy').classList.add('selected');
-                document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
-                document.querySelector('.rating-btn[data-rating="tournament"]').classList.add('selected');
-                document.getElementById('confirmTournamentBtn').disabled = true;
-                
-                showScreen('start');
-            };
         }
 
-        // ============ INIT ============
-        initStartScreen();
+        function showLossScreen() {
+            showScreen('resultsScreen');
+            const resultsContent = document.getElementById('resultsContent');
+            resultsContent.innerHTML = `
+                <div class="trophy-display">
+                    <div class="trophy">🥈</div>
+                    <h2 class="result-title loser">Campaign Ended</h2>
+                    <p class="result-subtitle">A respectable showing from your dream team</p>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="label">Avg Team Rating</div>
+                            <div class="value">${Math.round(gameState.team.reduce((sum, p) => sum + p.rating, 0) / gameState.team.length)}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="label">Players Selected</div>
+                            <div class="value">${gameState.team.length}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="label">Formation</div>
+                            <div class="value">${gameState.formation}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function resetGame() {
+            gameState = {
+                currentTournament: null,
+                currentClub: null,
+                difficulty: 'easy',
+                ratingBasis: 'tournament',
+                rerollsLeft: 3,
+                team: [],
+                selectedPlayer: null,
+                formation: '4-3-3',
+                showRatings: true
+            };
+            showScreen('startScreen');
+            document.getElementById('rerollsLeft').textContent = '3';
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
     </script>
 </body>
 </html>
