@@ -995,396 +995,375 @@
             ]
         };
 
+        const formations = {
+            '4-4-2': { positions: ['goalkeeper', 'defender', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward'], slots: [{ x: 50, y: 10 }, { x: 20, y: 30 }, { x: 40, y: 30 }, { x: 60, y: 30 }, { x: 80, y: 30 }, { x: 15, y: 55 }, { x: 40, y: 55 }, { x: 60, y: 55 }, { x: 85, y: 55 }, { x: 30, y: 80 }, { x: 70, y: 80 }] },
+            '3-5-2': { positions: ['goalkeeper', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward'], slots: [{ x: 50, y: 10 }, { x: 25, y: 30 }, { x: 50, y: 30 }, { x: 75, y: 30 }, { x: 10, y: 55 }, { x: 30, y: 55 }, { x: 50, y: 55 }, { x: 70, y: 55 }, { x: 90, y: 55 }, { x: 35, y: 80 }, { x: 65, y: 80 }] },
+            '5-3-2': { positions: ['goalkeeper', 'defender', 'defender', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward'], slots: [{ x: 50, y: 10 }, { x: 15, y: 30 }, { x: 35, y: 30 }, { x: 50, y: 30 }, { x: 65, y: 30 }, { x: 85, y: 30 }, { x: 25, y: 60 }, { x: 50, y: 60 }, { x: 75, y: 60 }, { x: 35, y: 85 }, { x: 65, y: 85 }] }
+        };
+
         let gameState = {
             currentTournament: null,
             currentClub: null,
             difficulty: 'easy',
-            ratingBasis: 'tournament',
-            rerollsLeft: 3,
+            ratingType: 'tournament',
+            selectedFormation: '4-4-2',
             team: [],
-            selectedPlayer: null,
-            formation: '4-3-3',
-            showRatings: true
+            rerolls: 3,
+            showRatings: true,
+            matchesWon: 0,
+            matchHistory: [],
+            currentPositionIndex: 0,
+            selectedPlayer: null
         };
 
-        // DOM Elements
-        const startBtn = document.getElementById('startGameBtn');
-        const tournamentGrid = document.getElementById('tournamentGrid');
-        const confirmTournamentBtn = document.getElementById('confirmTournamentBtn');
-        const rollClubBtn = document.getElementById('rollClubBtn');
-        const rerollBtn = document.getElementById('rerollBtn');
-        const confirmPlayerBtn = document.getElementById('confirmPlayerBtn');
-        const playAgainBtn = document.getElementById('playAgainBtn');
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
+        // Initialize game
+        function init() {
+            renderTournaments();
             setupEventListeners();
-        });
+        }
 
         function setupEventListeners() {
-            startBtn.addEventListener('click', startGame);
-            confirmTournamentBtn.addEventListener('click', goToBuilder);
-            rollClubBtn.addEventListener('click', rollClub);
-            rerollBtn.addEventListener('click', rerollClub);
-            confirmPlayerBtn.addEventListener('click', confirmPlayer);
-            playAgainBtn.addEventListener('click', resetGame);
-
             // Difficulty buttons
             document.querySelectorAll('.diff-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
                     this.classList.add('selected');
                     gameState.difficulty = this.dataset.diff;
-                    gameState.rerollsLeft = this.dataset.diff === 'easy' ? 3 : this.dataset.diff === 'medium' ? 1 : 0;
-                    gameState.showRatings = this.dataset.diff !== 'hard';
+                    if (gameState.difficulty === 'easy') gameState.rerolls = 3;
+                    else if (gameState.difficulty === 'medium') gameState.rerolls = 1;
+                    else gameState.rerolls = 0;
+                    gameState.showRatings = gameState.difficulty !== 'hard';
                 });
             });
 
-            // Rating buttons
+            // Rating type buttons
             document.querySelectorAll('.rating-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
                     this.classList.add('selected');
-                    gameState.ratingBasis = this.dataset.rating;
+                    gameState.ratingType = this.dataset.rating;
                 });
             });
 
-            // Formation buttons
-            setupFormations();
-        }
+            // Start game button
+            document.getElementById('startGameBtn').addEventListener('click', showTournamentScreen);
 
-        function startGame() {
-            showScreen('tournamentScreen');
-            renderTournaments();
+            // Tournament selection
+            document.getElementById('confirmTournamentBtn').addEventListener('click', startBuilder);
+
+            // Formation buttons
+            document.getElementById('formationOptions').addEventListener('click', e => {
+                if (e.target.classList.contains('formation-btn')) {
+                    document.querySelectorAll('.formation-btn').forEach(b => b.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                    gameState.selectedFormation = e.target.dataset.formation;
+                    renderPitch();
+                }
+            });
+
+            // Roll club button
+            document.getElementById('rollClubBtn').addEventListener('click', rollClub);
+            document.getElementById('rerollBtn').addEventListener('click', rollClub);
+
+            // Player selection
+            document.getElementById('confirmPlayerBtn').addEventListener('click', confirmPlayer);
+
+            // Next match button
+            document.getElementById('nextMatchBtn').addEventListener('click', startNextMatch);
+
+            // Play again button
+            document.getElementById('playAgainBtn').addEventListener('click', () => {
+                gameState = {
+                    currentTournament: null,
+                    currentClub: null,
+                    difficulty: 'easy',
+                    ratingType: 'tournament',
+                    selectedFormation: '4-4-2',
+                    team: [],
+                    rerolls: 3,
+                    showRatings: true,
+                    matchesWon: 0,
+                    matchHistory: [],
+                    currentPositionIndex: 0,
+                    selectedPlayer: null
+                };
+                showScreen('startScreen');
+            });
         }
 
         function renderTournaments() {
-            tournamentGrid.innerHTML = '';
-            tournaments.forEach(tournament => {
-                const card = document.createElement('div');
-                card.className = 'tournament-card';
-                if (gameState.currentTournament === tournament.id) {
-                    card.classList.add('selected');
-                }
-                card.innerHTML = `
-                    <div class="tournament-badge">${tournament.badge}</div>
+            const grid = document.getElementById('tournamentGrid');
+            grid.innerHTML = tournaments.map(t => `
+                <div class="tournament-card" data-id="${t.id}">
+                    <div class="tournament-badge">${t.badge}</div>
                     <div class="tournament-info">
-                        <h4>${tournament.name}</h4>
-                        <span>${tournament.years}</span>
-                        <span>Famous: ${tournament.famous}</span>
+                        <h4>${t.name}</h4>
+                        <span>${t.years}</span>
+                        <div style="margin-top: 8px; font-size: 0.8rem; color: var(--accent);">Famous: ${t.famous}</div>
                     </div>
-                `;
-                card.addEventListener('click', () => {
-                    gameState.currentTournament = tournament.id;
-                    renderTournaments();
-                    confirmTournamentBtn.disabled = false;
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.tournament-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    grid.querySelectorAll('.tournament-card').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    gameState.currentTournament = this.dataset.id;
+                    document.getElementById('confirmTournamentBtn').disabled = false;
                 });
-                tournamentGrid.appendChild(card);
             });
         }
 
-        function goToBuilder() {
-            showScreen('builderScreen');
-            setupFormations();
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function showTournamentScreen() {
+            showScreen('tournamentScreen');
+        }
+
+        function startBuilder() {
             gameState.team = [];
-            updateTeamRating();
-            rollClub();
+            gameState.currentPositionIndex = 0;
+            gameState.matchesWon = 0;
+            gameState.matchHistory = [];
+            showScreen('builderScreen');
+            renderFormations();
+            renderPitch();
+            updateTeamInfo();
         }
 
-        function setupFormations() {
-            const formationContainer = document.getElementById('formationOptions');
-            formationContainer.innerHTML = '';
-            const formations = ['4-3-3', '3-4-3', '4-4-2', '5-3-2'];
-            formations.forEach(formation => {
-                const btn = document.createElement('button');
-                btn.className = `formation-btn ${formation === gameState.formation ? 'selected' : ''}`;
-                btn.textContent = formation;
-                btn.addEventListener('click', () => {
-                    gameState.formation = formation;
-                    document.querySelectorAll('.formation-btn').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                });
-                formationContainer.appendChild(btn);
-            });
+        function renderFormations() {
+            const container = document.getElementById('formationOptions');
+            container.innerHTML = Object.keys(formations).map(f => 
+                `<button class="formation-btn ${f === '4-4-2' ? 'selected' : ''}" data-formation="${f}">${f}</button>`
+            ).join('');
         }
 
-        function rollClub() {
-            const clubs = clubsDatabase[gameState.currentTournament];
-            const randomClub = clubs[Math.floor(Math.random() * clubs.length)];
-            gameState.currentClub = randomClub;
-            document.getElementById('clubBadge').textContent = randomClub.split(' ')[0];
-            document.getElementById('clubName').textContent = randomClub;
+        function renderPitch() {
+            const pitch = document.getElementById('pitchContainer');
+            const formation = formations[gameState.selectedFormation];
             
-            if (gameState.rerollsLeft > 0) {
-                rerollBtn.style.display = 'inline-block';
-            } else {
-                rerollBtn.style.display = 'none';
-            }
-            
-            showPlayerSelection();
-        }
+            // Clear existing slots
+            pitch.querySelectorAll('.player-slot').forEach(s => s.remove());
 
-        function rerollClub() {
-            if (gameState.rerollsLeft > 0) {
-                gameState.rerollsLeft--;
-                document.getElementById('rerollsLeft').textContent = gameState.rerollsLeft;
-                rollClub();
-            }
-        }
+            formation.slots.forEach((slot, index) => {
+                const playerSlot = document.createElement('div');
+                playerSlot.className = 'player-slot';
+                if (index < gameState.team.length) playerSlot.classList.add('filled');
+                if (index === gameState.currentPositionIndex) playerSlot.classList.add('current');
 
-        function showPlayerSelection() {
-            const positionIndex = gameState.team.length;
-            const positions = ['goalkeeper', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward', 'forward', 'forward'];
-            
-            if (positionIndex >= 11) {
-                startSimulation();
-                return;
-            }
-
-            const currentPosition = positions[positionIndex];
-            document.getElementById('currentPosition').textContent = currentPosition.charAt(0).toUpperCase() + currentPosition.slice(1);
-            document.getElementById('positionCount').textContent = `Position ${positionIndex + 1} of 11`;
-
-            const playerGrid = document.getElementById('playerGrid');
-            playerGrid.innerHTML = '';
-
-            const availablePlayers = playerDatabase[currentPosition];
-            availablePlayers.forEach(player => {
-                const card = document.createElement('div');
-                card.className = 'player-card';
-                const displayRating = gameState.showRatings ? player.rating : '?';
-                card.innerHTML = `
-                    <div class="rating ${!gameState.showRatings ? 'hidden' : ''}">${displayRating}</div>
-                    <div class="name">${player.name}</div>
-                    <div class="position">${player.position}</div>
+                const player = gameState.team[index];
+                playerSlot.innerHTML = `
+                    <div class="slot-circle">
+                        ${player ? '✓' : ''}
+                    </div>
+                    <div class="slot-name">${player ? player.name : '?'}</div>
+                    ${player && gameState.showRatings ? `<div class="slot-rating">${player.rating}</div>` : ''}
+                    <div class="slot-position">${player ? player.position : formation.positions[index].substring(0, 3).toUpperCase()}</div>
                 `;
-                card.addEventListener('click', () => {
-                    gameState.selectedPlayer = player;
-                    document.querySelectorAll('.player-card').forEach(c => c.classList.remove('selected'));
-                    card.classList.add('selected');
-                    confirmPlayerBtn.disabled = false;
-                });
-                playerGrid.appendChild(card);
+
+                playerSlot.style.left = slot.x + '%';
+                playerSlot.style.top = slot.y + '%';
+
+                pitch.appendChild(playerSlot);
             });
-
-            document.getElementById('playerSelection').style.display = 'block';
-            document.getElementById('rollSection').style.display = 'none';
-            confirmPlayerBtn.disabled = true;
         }
 
-        function confirmPlayer() {
-            if (gameState.selectedPlayer) {
-                gameState.team.push({...gameState.selectedPlayer, club: gameState.currentClub});
-                updateTeamRating();
-                gameState.selectedPlayer = null;
-                document.getElementById('playerSelection').style.display = 'none';
-                document.getElementById('rollSection').style.display = 'block';
-                rollClub();
-            }
-        }
+        function updateTeamInfo() {
+            const formation = formations[gameState.selectedFormation];
+            document.getElementById('currentPosition').textContent = formation.positions[gameState.currentPositionIndex] === 'goalkeeper' ? 'Goalkeeper' 
+                : formation.positions[gameState.currentPositionIndex] === 'defender' ? 'Defender'
+                : formation.positions[gameState.currentPositionIndex] === 'midfielder' ? 'Midfielder' : 'Forward';
+            
+            document.getElementById('positionCount').textContent = `Position ${gameState.currentPositionIndex + 1} of 11`;
+            document.getElementById('rerollsLeft').textContent = gameState.rerolls;
 
-        function updateTeamRating() {
             const avgRating = gameState.team.length > 0 
                 ? Math.round(gameState.team.reduce((sum, p) => sum + p.rating, 0) / gameState.team.length)
                 : 0;
             document.getElementById('teamRating').textContent = avgRating;
         }
 
+        function rollClub() {
+            const clubs = clubsDatabase[gameState.currentTournament];
+            const badge = document.getElementById('clubBadge');
+            badge.classList.add('rolling');
+            
+            setTimeout(() => {
+                gameState.currentClub = clubs[Math.floor(Math.random() * clubs.length)];
+                badge.textContent = gameState.currentClub.split(' ')[0];
+                document.getElementById('clubName').textContent = gameState.currentClub;
+                badge.classList.remove('rolling');
+                
+                showPlayerSelection();
+            }, 1000);
+        }
+
+        function showPlayerSelection() {
+            const formation = formations[gameState.selectedFormation];
+            const positionType = formation.positions[gameState.currentPositionIndex];
+            const players = playerDatabase[positionType];
+            
+            const grid = document.getElementById('playerGrid');
+            grid.innerHTML = players.map(p => `
+                <div class="player-card" data-name="${p.name}">
+                    <div class="rating ${!gameState.showRatings ? 'hidden' : ''}">${gameState.showRatings ? p.rating : '?'}</div>
+                    <div class="name">${p.name}</div>
+                    <div class="position">${p.position}</div>
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.player-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    grid.querySelectorAll('.player-card').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    gameState.selectedPlayer = players.find(p => p.name === this.dataset.name);
+                    document.getElementById('confirmPlayerBtn').disabled = false;
+                });
+            });
+
+            document.getElementById('playerSelection').style.display = 'block';
+            document.getElementById('rollSection').style.display = 'none';
+            document.getElementById('rerollBtn').style.display = gameState.rerolls > 0 ? 'inline-block' : 'none';
+        }
+
+        function confirmPlayer() {
+            if (gameState.selectedPlayer) {
+                gameState.team.push(gameState.selectedPlayer);
+                gameState.currentPositionIndex++;
+
+                if (gameState.currentPositionIndex >= 11) {
+                    startSimulation();
+                } else {
+                    document.getElementById('playerSelection').style.display = 'none';
+                    document.getElementById('rollSection').style.display = 'block';
+                    document.getElementById('rollClubBtn').textContent = '🎲 Roll Club';
+                    document.getElementById('confirmPlayerBtn').disabled = true;
+                    document.getElementById('clubName').textContent = 'Press Roll';
+                    document.getElementById('clubBadge').textContent = '⚽';
+                    updateTeamInfo();
+                    renderPitch();
+                }
+            }
+        }
+
         function startSimulation() {
             showScreen('simScreen');
-            runSimulation();
+            startNextMatch();
         }
 
-        function runSimulation() {
-            const simContent = document.getElementById('simContent');
-            simContent.innerHTML = '';
+        function startNextMatch() {
+            if (gameState.matchesWon >= 6) {
+                showResults();
+            } else {
+                const opponents = [
+                    { name: 'Bayern Munich', strength: 85 },
+                    { name: 'Barcelona', strength: 87 },
+                    { name: 'AC Milan', strength: 83 },
+                    { name: 'Liverpool', strength: 84 },
+                    { name: 'Real Madrid', strength: 88 },
+                    { name: 'Manchester United', strength: 82 }
+                ];
 
-            // Simulate multiple matches
-            const matches = generateMatches(3);
-            matches.forEach((match, index) => {
-                const matchCard = document.createElement('div');
-                matchCard.className = 'match-card';
-                
-                const userScore = generateScore();
-                const opponentScore = generateScore();
-                const isWin = userScore > opponentScore;
-
-                matchCard.innerHTML = `
-                    <div class="match-header">Round ${index + 1} - ${match.round}</div>
-                    <div class="match-teams">
-                        <div class="match-team user">
-                            <div class="badge">⭐</div>
-                            <div class="name">Your Team</div>
-                        </div>
-                        <div class="match-score">${userScore} - ${opponentScore}</div>
-                        <div class="match-team">
-                            <div class="badge">${match.badge}</div>
-                            <div class="name">${match.team}</div>
-                        </div>
-                    </div>
-                    <div class="match-events">
-                        ${generateMatchEvents(userScore, opponentScore).map(event => `
-                            <div class="event">
-                                <span class="minute">${event.minute}'</span>
-                                <span class="icon">${event.icon}</span>
-                                <span class="detail">${event.detail}</span>
-                                <span class="player-name">${event.player}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="commentary-box">
-                        <p>"${generateCommentary(isWin, userScore, opponentScore)}"</p>
-                    </div>
-                `;
-                
-                simContent.appendChild(matchCard);
-            });
-
-            // Show final results
-            const finalWins = Math.floor(Math.random() * 2) + 1;
-            setTimeout(() => {
-                if (finalWins >= 2) {
-                    showWinScreen();
-                } else {
-                    showLossScreen();
-                }
-            }, 500);
-        }
-
-        function generateMatches(count) {
-            const rounds = ['Group Stage', 'Round of 16', 'Quarter-Finals', 'Semi-Finals', 'Finals'];
-            const opponents = [
-                { team: 'Barcelona', badge: '🔵🔴', region: 'Spain' },
-                { team: 'Bayern Munich', badge: '🔴⚪', region: 'Germany' },
-                { team: 'AC Milan', badge: '🔴⚫', region: 'Italy' },
-                { team: 'Manchester United', badge: '🔴', region: 'England' },
-                { team: 'Liverpool', badge: '🔴', region: 'England' }
-            ];
-
-            const matches = [];
-            for (let i = 0; i < count; i++) {
                 const opponent = opponents[Math.floor(Math.random() * opponents.length)];
-                matches.push({
-                    round: rounds[i],
-                    team: opponent.team,
-                    badge: opponent.badge
-                });
+                const userStrength = Math.round(gameState.team.reduce((s, p) => s + p.rating, 0) / gameState.team.length);
+                const userWins = Math.random() * userStrength > Math.random() * opponent.strength;
+
+                if (userWins) gameState.matchesWon++;
+                gameState.matchHistory.push({ opponent: opponent.name, won: userWins });
+
+                displayMatch(opponent, userWins);
             }
-            return matches;
         }
 
-        function generateScore() {
-            return Math.floor(Math.random() * 5);
+        function displayMatch(opponent, won) {
+            const userScore = won ? Math.floor(Math.random() * 3) + 1 : Math.floor(Math.random() * 2);
+            const opponentScore = won ? Math.floor(Math.random() * 2) : Math.floor(Math.random() * 3) + 1;
+            
+            const matchCard = document.createElement('div');
+            matchCard.className = 'match-card';
+            matchCard.innerHTML = `
+                <div class="match-header">Round ${gameState.matchHistory.length}</div>
+                <div class="match-teams">
+                    <div class="match-team user">
+                        <div class="badge">⚽</div>
+                        <div class="name">Your Team</div>
+                    </div>
+                    <div class="match-score">${userScore} - ${opponentScore}</div>
+                    <div class="match-team">
+                        <div class="badge">🏆</div>
+                        <div class="name">${opponent.name}</div>
+                    </div>
+                </div>
+                <div class="match-events">
+                    <div class="event">
+                        <span class="minute">45'</span>
+                        <span class="icon">${won ? '⚽' : '🎯'}</span>
+                        <span class="detail">Goal by</span>
+                        <span class="player-name">${gameState.team[Math.floor(Math.random() * gameState.team.length)].name}</span>
+                    </div>
+                    <div class="event">
+                        <span class="minute">60'</span>
+                        <span class="icon">🟨</span>
+                        <span class="detail">Yellow Card to</span>
+                        <span class="player-name">${gameState.team[Math.floor(Math.random() * gameState.team.length)].name}</span>
+                    </div>
+                </div>
+                <div class="commentary-box">
+                    <p>${won ? "Brilliant performance! Your team dominated the match with excellent teamwork." : "Tough loss today. Better luck in the next match!"}</p>
+                </div>
+            `;
+
+            document.getElementById('simContent').innerHTML = matchCard.innerHTML;
+            document.getElementById('nextMatchBtn').style.display = 'block';
         }
 
-        function generateMatchEvents(userScore, opponentScore) {
-            const events = [];
-            const playerNames = gameState.team.map(p => p.name);
-
-            for (let i = 0; i < userScore; i++) {
-                events.push({
-                    minute: Math.floor(Math.random() * 85) + 5,
-                    icon: '⚽',
-                    detail: 'GOAL',
-                    player: playerNames[Math.floor(Math.random() * playerNames.length)]
-                });
-            }
-
-            return events.sort((a, b) => a.minute - b.minute);
-        }
-
-        function generateCommentary(isWin, userScore, opponentScore) {
-            const commentaries = {
-                win: [
-                    `Absolute dominance! ${userScore} goals showcase your team's quality.`,
-                    `What a performance! Your dream team delivered under pressure.`,
-                    `Clinical finishing and stellar defense. Onwards to glory!`
-                ],
-                loss: [
-                    `Close match, but it wasn't meant to be. Better luck next time!`,
-                    `The opposition was just too strong. You gave it your all.`,
-                    `Tough loss, but this team has the quality to bounce back.`
-                ]
-            };
-
-            const pool = isWin ? commentaries.win : commentaries.loss;
-            return pool[Math.floor(Math.random() * pool.length)];
-        }
-
-        function showWinScreen() {
+        function showResults() {
             showScreen('resultsScreen');
-            const resultsContent = document.getElementById('resultsContent');
-            resultsContent.innerHTML = `
+            const trophy = gameState.matchesWon === 6 ? '🏆' : '🥈';
+            const title = gameState.matchesWon === 6 ? 'CHAMPIONS! 👑' : 'Tournament Finished';
+            
+            let historyHtml = gameState.matchHistory.map((m, i) => `
+                <div class="history-item">
+                    <span class="round">Round ${i + 1} vs ${m.opponent}</span>
+                    <span class="result ${m.won ? 'win' : 'loss'}">${m.won ? 'WIN' : 'LOSS'}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('resultsContent').innerHTML = `
                 <div class="trophy-display">
-                    <div class="trophy">🏆</div>
-                    <h2 class="result-title winner">CHAMPIONS OF EUROPE!</h2>
-                    <p class="result-subtitle">Your dream team conquered Europe!</p>
+                    <div class="trophy">${trophy}</div>
+                    <div class="result-title ${gameState.matchesWon === 6 ? 'winner' : 'loser'}">${title}</div>
+                    <div class="result-subtitle">You won ${gameState.matchesWon} out of 6 matches</div>
+                    
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="label">Avg Team Rating</div>
-                            <div class="value">${Math.round(gameState.team.reduce((sum, p) => sum + p.rating, 0) / gameState.team.length)}</div>
+                            <div class="label">Wins</div>
+                            <div class="value">${gameState.matchesWon}</div>
                         </div>
                         <div class="stat-card">
-                            <div class="label">Players Selected</div>
-                            <div class="value">${gameState.team.length}</div>
+                            <div class="label">Losses</div>
+                            <div class="value">${6 - gameState.matchesWon}</div>
                         </div>
                         <div class="stat-card">
-                            <div class="label">Formation</div>
-                            <div class="value">${gameState.formation}</div>
+                            <div class="label">Avg Rating</div>
+                            <div class="value">${Math.round(gameState.team.reduce((s, p) => s + p.rating, 0) / gameState.team.length)}</div>
                         </div>
+                    </div>
+
+                    <div class="match-history">
+                        <h3>Match History</h3>
+                        ${historyHtml}
                     </div>
                 </div>
             `;
         }
 
-        function showLossScreen() {
-            showScreen('resultsScreen');
-            const resultsContent = document.getElementById('resultsContent');
-            resultsContent.innerHTML = `
-                <div class="trophy-display">
-                    <div class="trophy">🥈</div>
-                    <h2 class="result-title loser">Campaign Ended</h2>
-                    <p class="result-subtitle">A respectable showing from your dream team</p>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="label">Avg Team Rating</div>
-                            <div class="value">${Math.round(gameState.team.reduce((sum, p) => sum + p.rating, 0) / gameState.team.length)}</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="label">Players Selected</div>
-                            <div class="value">${gameState.team.length}</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="label">Formation</div>
-                            <div class="value">${gameState.formation}</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function resetGame() {
-            gameState = {
-                currentTournament: null,
-                currentClub: null,
-                difficulty: 'easy',
-                ratingBasis: 'tournament',
-                rerollsLeft: 3,
-                team: [],
-                selectedPlayer: null,
-                formation: '4-3-3',
-                showRatings: true
-            };
-            showScreen('startScreen');
-            document.getElementById('rerollsLeft').textContent = '3';
-        }
-
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(screen => {
-                screen.classList.remove('active');
-            });
-            document.getElementById(screenId).classList.add('active');
-        }
+        // Start the game
+        init();
     </script>
 </body>
 </html>
