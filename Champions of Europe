@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Champions of Europe | Dream Team Builder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,26 +13,42 @@
         }
 
         :root {
-            --bg-dark: #0a0a0f;
-            --bg-card: #12121a;
-            --bg-hover: #1a1a25;
-            --accent: #00ff88;
-            --accent-dim: #00cc6a;
+            --bg-dark: #001845;
+            --bg-card: #003366;
+            --bg-hover: #004d99;
+            --accent: #00d4ff;
+            --accent-dim: #0099cc;
             --gold: #ffd700;
             --silver: #c0c0c0;
             --bronze: #cd7f32;
             --text-primary: #ffffff;
-            --text-secondary: #8888aa;
+            --text-secondary: #99ccff;
             --danger: #ff4757;
             --warning: #ffa502;
         }
 
         body {
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg-dark);
+            font-family: 'Oswald', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #001845 0%, #003366 50%, #001845 100%);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated background with particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 153, 204, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         .container {
@@ -50,19 +67,26 @@
         .logo {
             font-size: 4rem;
             font-weight: 900;
-            letter-spacing: -3px;
-            background: linear-gradient(135deg, var(--accent) 0%, #00ccff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 60px rgba(0, 255, 136, 0.3);
+            letter-spacing: 4px;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            text-shadow: 0 4px 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.3);
+            animation: glow-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% { text-shadow: 0 4px 20px rgba(0, 212, 255, 0.5), 0 0 40px rgba(0, 212, 255, 0.3); }
+            50% { text-shadow: 0 4px 30px rgba(0, 212, 255, 0.8), 0 0 60px rgba(0, 212, 255, 0.5); }
         }
 
         .subtitle {
             color: var(--text-secondary);
             font-size: 1.1rem;
             margin-top: 10px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
+            font-weight: 700;
         }
 
         /* Screens */
@@ -90,10 +114,11 @@
         }
 
         .option-group {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 102, 153, 0.4) 100%);
             border-radius: 16px;
             padding: 25px;
-            border: 1px solid #222;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .option-group h3 {
@@ -101,7 +126,8 @@
             margin-bottom: 15px;
             font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-weight: 700;
         }
 
         .difficulty-buttons, .rating-buttons {
@@ -114,29 +140,34 @@
             flex: 1;
             min-width: 120px;
             padding: 20px 15px;
-            border: 2px solid #333;
-            background: var(--bg-dark);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.5) 0%, rgba(0, 102, 153, 0.3) 100%);
             color: var(--text-primary);
             border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
+            font-weight: 700;
         }
 
         .diff-btn:hover, .rating-btn:hover {
             border-color: var(--accent);
-            background: var(--bg-hover);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 153, 204, 0.15) 100%);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
         }
 
         .diff-btn.selected, .rating-btn.selected {
             border-color: var(--accent);
-            background: rgba(0, 255, 136, 0.1);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(0, 153, 204, 0.2) 100%);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
 
         .diff-btn .name, .rating-btn .name {
-            font-weight: 700;
+            font-weight: 900;
             font-size: 1.1rem;
             margin-bottom: 8px;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            letter-spacing: 1px;
         }
 
         .diff-btn .desc {
@@ -158,8 +189,8 @@
         }
 
         .tournament-card {
-            background: var(--bg-card);
-            border: 2px solid #222;
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 102, 153, 0.4) 100%);
+            border: 2px solid rgba(0, 212, 255, 0.3);
             border-radius: 16px;
             padding: 20px;
             cursor: pointer;
@@ -167,16 +198,19 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+            backdrop-filter: blur(10px);
         }
 
         .tournament-card:hover {
             border-color: var(--accent);
             transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
         }
 
         .tournament-card.selected {
             border-color: var(--accent);
-            background: rgba(0, 255, 136, 0.05);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 153, 204, 0.15) 100%);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
 
         .tournament-badge {
@@ -186,6 +220,9 @@
         .tournament-info h4 {
             font-size: 1.1rem;
             margin-bottom: 5px;
+            font-weight: 700;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            letter-spacing: 1px;
         }
 
         .tournament-info span {
@@ -201,20 +238,22 @@
             margin: 30px auto;
             padding: 20px 40px;
             font-size: 1.2rem;
-            font-weight: 700;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             border: none;
             border-radius: 12px;
             background: linear-gradient(135deg, var(--accent) 0%, #00ccff 100%);
-            color: var(--bg-dark);
+            color: #001845;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
         }
 
         .main-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 10px 40px rgba(0, 255, 136, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.5);
         }
 
         .main-btn:disabled {
@@ -240,6 +279,9 @@
         .position-info h2 {
             font-size: 1.5rem;
             color: var(--accent);
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .position-info span {
@@ -247,41 +289,47 @@
         }
 
         .team-rating {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 102, 153, 0.4) 100%);
             padding: 15px 25px;
             border-radius: 12px;
             text-align: center;
+            border: 2px solid rgba(0, 212, 255, 0.3);
         }
 
         .team-rating .label {
             font-size: 0.75rem;
             color: var(--text-secondary);
             text-transform: uppercase;
+            font-weight: 700;
         }
 
         .team-rating .value {
             font-size: 2rem;
             font-weight: 900;
             color: var(--accent);
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
         }
 
         .rerolls-display {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 102, 153, 0.4) 100%);
             padding: 15px 25px;
             border-radius: 12px;
             text-align: center;
+            border: 2px solid rgba(0, 212, 255, 0.3);
         }
 
         .rerolls-display .label {
             font-size: 0.75rem;
             color: var(--text-secondary);
             text-transform: uppercase;
+            font-weight: 700;
         }
 
         .rerolls-display .value {
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 900;
             color: var(--warning);
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
         }
 
         /* Formation Display */
@@ -294,6 +342,8 @@
             color: var(--text-secondary);
             font-size: 0.9rem;
             text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
         .formation-options {
@@ -304,22 +354,24 @@
 
         .formation-btn {
             padding: 10px 20px;
-            border: 2px solid #333;
-            background: var(--bg-dark);
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.5) 0%, rgba(0, 102, 153, 0.3) 100%);
             color: var(--text-primary);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-weight: 600;
+            font-weight: 700;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
         }
 
         .formation-btn:hover {
             border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
         .formation-btn.selected {
             border-color: var(--accent);
-            background: rgba(0, 255, 136, 0.1);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 153, 204, 0.15) 100%);
             color: var(--accent);
         }
 
@@ -427,16 +479,20 @@
 
         /* Club Roll */
         .roll-section {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 102, 153, 0.4) 100%);
             border-radius: 16px;
             padding: 30px;
             text-align: center;
             margin-bottom: 20px;
+            border: 2px solid rgba(0, 212, 255, 0.3);
         }
 
         .roll-section h3 {
             margin-bottom: 20px;
             color: var(--text-secondary);
+            font-weight: 700;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            letter-spacing: 2px;
         }
 
         .club-display {
@@ -456,25 +512,32 @@
 
         .club-name {
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 900;
             margin-bottom: 20px;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            letter-spacing: 1px;
         }
 
         .roll-btn {
             padding: 15px 40px;
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 900;
             border: none;
             border-radius: 10px;
             background: var(--accent);
-            color: var(--bg-dark);
+            color: #001845;
             cursor: pointer;
             transition: all 0.3s ease;
             margin: 5px;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
         }
 
         .roll-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
         }
 
         .roll-btn:disabled {
@@ -495,8 +558,8 @@
         }
 
         .player-card {
-            background: var(--bg-card);
-            border: 2px solid #333;
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 102, 153, 0.4) 100%);
+            border: 2px solid rgba(0, 212, 255, 0.3);
             border-radius: 12px;
             padding: 15px;
             cursor: pointer;
@@ -507,11 +570,13 @@
         .player-card:hover {
             border-color: var(--accent);
             transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
         }
 
         .player-card.selected {
             border-color: var(--accent);
-            background: rgba(0, 255, 136, 0.1);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 153, 204, 0.15) 100%);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
         }
 
         .player-card .rating {
@@ -519,6 +584,7 @@
             font-weight: 900;
             color: var(--accent);
             margin-bottom: 5px;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
         }
 
         .player-card .rating.hidden {
@@ -526,9 +592,10 @@
         }
 
         .player-card .name {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.95rem;
             margin-bottom: 3px;
+            font-family: 'Oswald', sans-serif;
         }
 
         .player-card .position {
@@ -549,11 +616,12 @@
         }
 
         .match-card {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 102, 153, 0.4) 100%);
             border-radius: 16px;
             padding: 25px;
             margin-bottom: 20px;
             animation: slideIn 0.5s ease;
+            border: 2px solid rgba(0, 212, 255, 0.3);
         }
 
         @keyframes slideIn {
@@ -587,8 +655,10 @@
         }
 
         .match-team .name {
-            font-weight: 700;
+            font-weight: 900;
             font-size: 1.1rem;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            letter-spacing: 1px;
         }
 
         .match-team.user .name {
@@ -600,12 +670,13 @@
             font-weight: 900;
             min-width: 120px;
             text-align: center;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
         }
 
         .match-events {
             margin-top: 20px;
             padding-top: 20px;
-            border-top: 1px solid #333;
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
         }
 
         .event {
@@ -614,7 +685,7 @@
             gap: 15px;
             padding: 10px 0;
             font-size: 0.9rem;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
         }
 
         .event:last-child {
@@ -642,7 +713,7 @@
 
         /* Commentary Box */
         .commentary-box {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.7) 0%, rgba(0, 102, 153, 0.5) 100%);
             border-radius: 12px;
             padding: 20px;
             margin-top: 15px;
@@ -676,6 +747,9 @@
             font-size: 2.5rem;
             font-weight: 900;
             margin-bottom: 10px;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
 
         .result-title.winner {
@@ -701,10 +775,11 @@
         }
 
         .stat-card {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 102, 153, 0.4) 100%);
             border-radius: 12px;
             padding: 20px;
             text-align: center;
+            border: 2px solid rgba(0, 212, 255, 0.3);
         }
 
         .stat-card .label {
@@ -712,12 +787,14 @@
             color: var(--text-secondary);
             text-transform: uppercase;
             margin-bottom: 8px;
+            font-weight: 700;
         }
 
         .stat-card .value {
             font-size: 1.8rem;
             font-weight: 900;
             color: var(--accent);
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
         }
 
         /* Match History */
@@ -728,16 +805,20 @@
         .match-history h3 {
             margin-bottom: 20px;
             color: var(--text-secondary);
+            font-weight: 700;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
+            letter-spacing: 2px;
         }
 
         .history-item {
-            background: var(--bg-card);
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.6) 0%, rgba(0, 102, 153, 0.4) 100%);
             border-radius: 12px;
             padding: 15px 20px;
             margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border: 1px solid rgba(0, 212, 255, 0.2);
         }
 
         .history-item .round {
@@ -746,7 +827,8 @@
         }
 
         .history-item .result {
-            font-weight: 700;
+            font-weight: 900;
+            font-family: 'Bebas Neue', 'Oswald', sans-serif;
         }
 
         .history-item .result.win {
@@ -769,7 +851,7 @@
         .spinner {
             width: 60px;
             height: 60px;
-            border: 4px solid #333;
+            border: 4px solid rgba(0, 212, 255, 0.3);
             border-top-color: var(--accent);
             border-radius: 50%;
             animation: spin-loader 1s linear infinite;
@@ -866,7 +948,7 @@
 
         <!-- Tournament Selection -->
         <div id="tournamentScreen" class="screen">
-            <h2 style="text-align: center; margin-bottom: 30px;">Select Your European Cup Era</h2>
+            <h2 style="text-align: center; margin-bottom: 30px; font-family: 'Bebas Neue', 'Oswald', sans-serif; letter-spacing: 2px; text-transform: uppercase;">Select Your European Cup Era</h2>
             <div class="tournament-grid" id="tournamentGrid"></div>
             <button class="main-btn" id="confirmTournamentBtn" disabled>Build Your Team</button>
         </div>
@@ -908,7 +990,7 @@
             </div>
 
             <div id="playerSelection" style="display: none;">
-                <h3 style="margin-bottom: 15px;">Select a Player</h3>
+                <h3 style="margin-bottom: 15px; font-family: 'Bebas Neue', 'Oswald', sans-serif; letter-spacing: 2px; text-transform: uppercase;">Select a Player</h3>
                 <div class="player-grid" id="playerGrid"></div>
                 <button class="main-btn" id="confirmPlayerBtn" disabled>Confirm Selection</button>
             </div>
@@ -996,374 +1078,352 @@
         };
 
         const formations = {
-            '4-4-2': { positions: ['goalkeeper', 'defender', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward'], slots: [{ x: 50, y: 10 }, { x: 20, y: 30 }, { x: 40, y: 30 }, { x: 60, y: 30 }, { x: 80, y: 30 }, { x: 15, y: 55 }, { x: 40, y: 55 }, { x: 60, y: 55 }, { x: 85, y: 55 }, { x: 30, y: 80 }, { x: 70, y: 80 }] },
-            '3-5-2': { positions: ['goalkeeper', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward'], slots: [{ x: 50, y: 10 }, { x: 25, y: 30 }, { x: 50, y: 30 }, { x: 75, y: 30 }, { x: 10, y: 55 }, { x: 30, y: 55 }, { x: 50, y: 55 }, { x: 70, y: 55 }, { x: 90, y: 55 }, { x: 35, y: 80 }, { x: 65, y: 80 }] },
-            '5-3-2': { positions: ['goalkeeper', 'defender', 'defender', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward'], slots: [{ x: 50, y: 10 }, { x: 15, y: 30 }, { x: 35, y: 30 }, { x: 50, y: 30 }, { x: 65, y: 30 }, { x: 85, y: 30 }, { x: 25, y: 60 }, { x: 50, y: 60 }, { x: 75, y: 60 }, { x: 35, y: 85 }, { x: 65, y: 85 }] }
+            '4-4-2': { positions: ['goalkeeper', 'defender', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward'], slots: [{ x: 50, y: 10 }, { x: 15, y: 30 }, { x: 50, y: 30 }, { x: 85, y: 30 }, { x: 50, y: 50 }, { x: 20, y: 60 }, { x: 35, y: 70 }, { x: 65, y: 70 }, { x: 80, y: 60 }, { x: 30, y: 85 }, { x: 70, y: 85 }] },
+            '3-5-2': { positions: ['goalkeeper', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward'], slots: [{ x: 50, y: 10 }, { x: 25, y: 30 }, { x: 50, y: 30 }, { x: 75, y: 30 }, { x: 15, y: 55 }, { x: 35, y: 65 }, { x: 50, y: 70 }, { x: 65, y: 65 }, { x: 85, y: 55 }, { x: 35, y: 85 }, { x: 65, y: 85 }] },
+            '5-3-2': { positions: ['goalkeeper', 'defender', 'defender', 'defender', 'defender', 'defender', 'midfielder', 'midfielder', 'midfielder', 'forward', 'forward'], slots: [{ x: 50, y: 10 }, { x: 15, y: 25 }, { x: 35, y: 30 }, { x: 50, y: 35 }, { x: 65, y: 30 }, { x: 85, y: 25 }, { x: 25, y: 65 }, { x: 50, y: 70 }, { x: 75, y: 65 }, { x: 35, y: 85 }, { x: 65, y: 85 }] }
         };
 
         let gameState = {
-            currentTournament: null,
-            currentClub: null,
             difficulty: 'easy',
             ratingType: 'tournament',
+            selectedTournament: null,
             selectedFormation: '4-4-2',
             team: [],
+            club: null,
             rerolls: 3,
-            showRatings: true,
-            matchesWon: 0,
-            matchHistory: [],
             currentPositionIndex: 0,
-            selectedPlayer: null
+            tournamentMatches: [],
+            matchResults: []
         };
 
-        // Initialize game
-        function init() {
-            renderTournaments();
-            setupEventListeners();
-        }
-
-        function setupEventListeners() {
-            // Difficulty buttons
-            document.querySelectorAll('.diff-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
-                    this.classList.add('selected');
-                    gameState.difficulty = this.dataset.diff;
-                    if (gameState.difficulty === 'easy') gameState.rerolls = 3;
-                    else if (gameState.difficulty === 'medium') gameState.rerolls = 1;
-                    else gameState.rerolls = 0;
-                    gameState.showRatings = gameState.difficulty !== 'hard';
-                });
-            });
-
-            // Rating type buttons
-            document.querySelectorAll('.rating-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
-                    this.classList.add('selected');
-                    gameState.ratingType = this.dataset.rating;
-                });
-            });
-
-            // Start game button
-            document.getElementById('startGameBtn').addEventListener('click', showTournamentScreen);
-
-            // Tournament selection
-            document.getElementById('confirmTournamentBtn').addEventListener('click', startBuilder);
-
-            // Formation buttons
-            document.getElementById('formationOptions').addEventListener('click', e => {
-                if (e.target.classList.contains('formation-btn')) {
-                    document.querySelectorAll('.formation-btn').forEach(b => b.classList.remove('selected'));
-                    e.target.classList.add('selected');
-                    gameState.selectedFormation = e.target.dataset.formation;
-                    renderPitch();
-                }
-            });
-
-            // Roll club button
-            document.getElementById('rollClubBtn').addEventListener('click', rollClub);
-            document.getElementById('rerollBtn').addEventListener('click', rollClub);
-
-            // Player selection
-            document.getElementById('confirmPlayerBtn').addEventListener('click', confirmPlayer);
-
-            // Next match button
-            document.getElementById('nextMatchBtn').addEventListener('click', startNextMatch);
-
-            // Play again button
-            document.getElementById('playAgainBtn').addEventListener('click', () => {
-                gameState = {
-                    currentTournament: null,
-                    currentClub: null,
-                    difficulty: 'easy',
-                    ratingType: 'tournament',
-                    selectedFormation: '4-4-2',
-                    team: [],
-                    rerolls: 3,
-                    showRatings: true,
-                    matchesWon: 0,
-                    matchHistory: [],
-                    currentPositionIndex: 0,
-                    selectedPlayer: null
-                };
-                showScreen('startScreen');
-            });
-        }
-
-        function renderTournaments() {
-            const grid = document.getElementById('tournamentGrid');
-            grid.innerHTML = tournaments.map(t => `
-                <div class="tournament-card" data-id="${t.id}">
-                    <div class="tournament-badge">${t.badge}</div>
-                    <div class="tournament-info">
-                        <h4>${t.name}</h4>
-                        <span>${t.years}</span>
-                        <div style="margin-top: 8px; font-size: 0.8rem; color: var(--accent);">Famous: ${t.famous}</div>
-                    </div>
-                </div>
-            `).join('');
-
-            grid.querySelectorAll('.tournament-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    grid.querySelectorAll('.tournament-card').forEach(c => c.classList.remove('selected'));
-                    this.classList.add('selected');
-                    gameState.currentTournament = this.dataset.id;
-                    document.getElementById('confirmTournamentBtn').disabled = false;
-                });
-            });
-        }
-
+        // Helper functions
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
-            window.scrollTo(0, 0);
         }
 
-        function showTournamentScreen() {
+        // Start screen handlers
+        document.querySelectorAll('.diff-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                gameState.difficulty = this.dataset.diff;
+                gameState.rerolls = this.dataset.diff === 'easy' ? 3 : this.dataset.diff === 'medium' ? 1 : 0;
+            });
+        });
+
+        document.querySelectorAll('.rating-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                gameState.ratingType = this.dataset.rating;
+            });
+        });
+
+        document.getElementById('startGameBtn').addEventListener('click', () => {
+            const grid = document.getElementById('tournamentGrid');
+            grid.innerHTML = '';
+            tournaments.forEach(tournament => {
+                const card = document.createElement('div');
+                card.className = 'tournament-card';
+                card.innerHTML = `
+                    <div class="tournament-badge">${tournament.badge}</div>
+                    <div class="tournament-info">
+                        <h4>${tournament.name}</h4>
+                        <span>${tournament.years}</span>
+                        <span>Featured: ${tournament.famous}</span>
+                    </div>
+                `;
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.tournament-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    gameState.selectedTournament = tournament.id;
+                    document.getElementById('confirmTournamentBtn').disabled = false;
+                });
+                grid.appendChild(card);
+            });
             showScreen('tournamentScreen');
-        }
+        });
 
-        function startBuilder() {
+        document.getElementById('confirmTournamentBtn').addEventListener('click', () => {
             gameState.team = [];
             gameState.currentPositionIndex = 0;
-            gameState.matchesWon = 0;
-            gameState.matchHistory = [];
-            showScreen('builderScreen');
-            renderFormations();
+            const formationOptions = document.getElementById('formationOptions');
+            formationOptions.innerHTML = '';
+            Object.keys(formations).forEach(formation => {
+                const btn = document.createElement('button');
+                btn.className = 'formation-btn' + (formation === gameState.selectedFormation ? ' selected' : '');
+                btn.textContent = formation;
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.formation-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    gameState.selectedFormation = formation;
+                    renderPitch();
+                });
+                formationOptions.appendChild(btn);
+            });
             renderPitch();
-            updateTeamInfo();
-        }
-
-        function renderFormations() {
-            const container = document.getElementById('formationOptions');
-            container.innerHTML = Object.keys(formations).map(f => 
-                `<button class="formation-btn ${f === '4-4-2' ? 'selected' : ''}" data-formation="${f}">${f}</button>`
-            ).join('');
-        }
+            showScreen('builderScreen');
+        });
 
         function renderPitch() {
-            const pitch = document.getElementById('pitchContainer');
+            const container = document.getElementById('pitchContainer');
             const formation = formations[gameState.selectedFormation];
+            container.querySelectorAll('.player-slot').forEach(s => s.remove());
             
-            // Clear existing slots
-            pitch.querySelectorAll('.player-slot').forEach(s => s.remove());
-
             formation.slots.forEach((slot, index) => {
                 const playerSlot = document.createElement('div');
-                playerSlot.className = 'player-slot';
-                if (index < gameState.team.length) playerSlot.classList.add('filled');
-                if (index === gameState.currentPositionIndex) playerSlot.classList.add('current');
-
+                playerSlot.className = 'player-slot' + (index === gameState.currentPositionIndex ? ' current' : '') + (gameState.team[index] ? ' filled' : '');
                 const player = gameState.team[index];
                 playerSlot.innerHTML = `
-                    <div class="slot-circle">
-                        ${player ? '✓' : ''}
-                    </div>
-                    <div class="slot-name">${player ? player.name : '?'}</div>
-                    ${player && gameState.showRatings ? `<div class="slot-rating">${player.rating}</div>` : ''}
-                    <div class="slot-position">${player ? player.position : formation.positions[index].substring(0, 3).toUpperCase()}</div>
+                    <div class="slot-circle">${player ? '✓' : index + 1}</div>
+                    ${player ? `<div class="slot-name">${player.name}</div><div class="slot-rating">${player.rating}</div>` : ''}
                 `;
-
                 playerSlot.style.left = slot.x + '%';
                 playerSlot.style.top = slot.y + '%';
-
-                pitch.appendChild(playerSlot);
+                playerSlot.addEventListener('click', () => {
+                    gameState.currentPositionIndex = index;
+                    rollClub();
+                });
+                container.appendChild(playerSlot);
             });
+
+            const formation_obj = formations[gameState.selectedFormation];
+            const currentPos = formation_obj.positions[gameState.currentPositionIndex];
+            document.getElementById('currentPosition').textContent = currentPos.charAt(0).toUpperCase() + currentPos.slice(1).toLowerCase();
+            document.getElementById('positionCount').textContent = `Position ${gameState.currentPositionIndex + 1} of ${formation_obj.positions.length}`;
+            updateTeamRating();
         }
 
-        function updateTeamInfo() {
-            const formation = formations[gameState.selectedFormation];
-            document.getElementById('currentPosition').textContent = formation.positions[gameState.currentPositionIndex] === 'goalkeeper' ? 'Goalkeeper' 
-                : formation.positions[gameState.currentPositionIndex] === 'defender' ? 'Defender'
-                : formation.positions[gameState.currentPositionIndex] === 'midfielder' ? 'Midfielder' : 'Forward';
-            
-            document.getElementById('positionCount').textContent = `Position ${gameState.currentPositionIndex + 1} of 11`;
+        function updateTeamRating() {
+            const rating = gameState.team.reduce((sum, player) => sum + (player ? player.rating : 0), 0);
+            document.getElementById('teamRating').textContent = rating;
             document.getElementById('rerollsLeft').textContent = gameState.rerolls;
-
-            const avgRating = gameState.team.length > 0 
-                ? Math.round(gameState.team.reduce((sum, p) => sum + p.rating, 0) / gameState.team.length)
-                : 0;
-            document.getElementById('teamRating').textContent = avgRating;
         }
 
         function rollClub() {
-            const clubs = clubsDatabase[gameState.currentTournament];
+            const clubs = clubsDatabase[gameState.selectedTournament];
+            const randomClub = clubs[Math.floor(Math.random() * clubs.length)];
+            gameState.club = randomClub;
+            
             const badge = document.getElementById('clubBadge');
             badge.classList.add('rolling');
-            
             setTimeout(() => {
-                gameState.currentClub = clubs[Math.floor(Math.random() * clubs.length)];
-                badge.textContent = gameState.currentClub.split(' ')[0];
-                document.getElementById('clubName').textContent = gameState.currentClub;
                 badge.classList.remove('rolling');
-                
+                document.getElementById('clubName').textContent = randomClub;
                 showPlayerSelection();
-            }, 1000);
+            }, 600);
         }
 
         function showPlayerSelection() {
             const formation = formations[gameState.selectedFormation];
-            const positionType = formation.positions[gameState.currentPositionIndex];
-            const players = playerDatabase[positionType];
+            const position = formation.positions[gameState.currentPositionIndex];
+            const players = playerDatabase[position] || [];
             
             const grid = document.getElementById('playerGrid');
-            grid.innerHTML = players.map(p => `
-                <div class="player-card" data-name="${p.name}">
-                    <div class="rating ${!gameState.showRatings ? 'hidden' : ''}">${gameState.showRatings ? p.rating : '?'}</div>
-                    <div class="name">${p.name}</div>
-                    <div class="position">${p.position}</div>
-                </div>
-            `).join('');
-
-            grid.querySelectorAll('.player-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    grid.querySelectorAll('.player-card').forEach(c => c.classList.remove('selected'));
-                    this.classList.add('selected');
-                    gameState.selectedPlayer = players.find(p => p.name === this.dataset.name);
+            grid.innerHTML = '';
+            
+            players.forEach(player => {
+                const card = document.createElement('div');
+                card.className = 'player-card';
+                const rating = gameState.ratingType === 'tournament' ? player.rating : Math.floor(Math.random() * 20 + 80);
+                const showRating = gameState.difficulty !== 'hard';
+                
+                card.innerHTML = `
+                    <div class="rating${!showRating ? ' hidden' : ''}">${showRating ? rating : '?'}</div>
+                    <div class="name">${player.name}</div>
+                    <div class="position">${player.position}</div>
+                `;
+                
+                card.addEventListener('click', () => {
+                    document.querySelectorAll('.player-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    window.selectedPlayer = { ...player, rating: showRating ? rating : player.rating };
                     document.getElementById('confirmPlayerBtn').disabled = false;
                 });
+                
+                grid.appendChild(card);
             });
-
+            
             document.getElementById('playerSelection').style.display = 'block';
             document.getElementById('rollSection').style.display = 'none';
-            document.getElementById('rerollBtn').style.display = gameState.rerolls > 0 ? 'inline-block' : 'none';
         }
 
-        function confirmPlayer() {
-            if (gameState.selectedPlayer) {
-                gameState.team.push(gameState.selectedPlayer);
-                gameState.currentPositionIndex++;
+        document.getElementById('rollClubBtn').addEventListener('click', rollClub);
+        document.getElementById('rerollBtn').addEventListener('click', () => {
+            if (gameState.rerolls > 0) {
+                gameState.rerolls--;
+                rollClub();
+            }
+        });
 
-                if (gameState.currentPositionIndex >= 11) {
-                    startSimulation();
-                } else {
+        document.getElementById('confirmPlayerBtn').addEventListener('click', () => {
+            if (window.selectedPlayer) {
+                gameState.team[gameState.currentPositionIndex] = window.selectedPlayer;
+                const formation = formations[gameState.selectedFormation];
+                
+                if (gameState.currentPositionIndex < formation.positions.length - 1) {
+                    gameState.currentPositionIndex++;
                     document.getElementById('playerSelection').style.display = 'none';
                     document.getElementById('rollSection').style.display = 'block';
-                    document.getElementById('rollClubBtn').textContent = '🎲 Roll Club';
-                    document.getElementById('confirmPlayerBtn').disabled = true;
-                    document.getElementById('clubName').textContent = 'Press Roll';
-                    document.getElementById('clubBadge').textContent = '⚽';
-                    updateTeamInfo();
                     renderPitch();
+                    rollClub();
+                } else {
+                    startTournament();
                 }
             }
-        }
+        });
 
-        function startSimulation() {
-            showScreen('simScreen');
-            startNextMatch();
-        }
-
-        function startNextMatch() {
-            if (gameState.matchesWon >= 6) {
-                showResults();
-            } else {
-                const opponents = [
-                    { name: 'Bayern Munich', strength: 85 },
-                    { name: 'Barcelona', strength: 87 },
-                    { name: 'AC Milan', strength: 83 },
-                    { name: 'Liverpool', strength: 84 },
-                    { name: 'Real Madrid', strength: 88 },
-                    { name: 'Manchester United', strength: 82 }
-                ];
-
-                const opponent = opponents[Math.floor(Math.random() * opponents.length)];
-                const userStrength = Math.round(gameState.team.reduce((s, p) => s + p.rating, 0) / gameState.team.length);
-                const userWins = Math.random() * userStrength > Math.random() * opponent.strength;
-
-                if (userWins) gameState.matchesWon++;
-                gameState.matchHistory.push({ opponent: opponent.name, won: userWins });
-
-                displayMatch(opponent, userWins);
-            }
-        }
-
-        function displayMatch(opponent, won) {
-            const userScore = won ? Math.floor(Math.random() * 3) + 1 : Math.floor(Math.random() * 2);
-            const opponentScore = won ? Math.floor(Math.random() * 2) : Math.floor(Math.random() * 3) + 1;
+        function startTournament() {
+            gameState.tournamentMatches = [];
+            gameState.matchResults = [];
             
-            const matchCard = document.createElement('div');
-            matchCard.className = 'match-card';
-            matchCard.innerHTML = `
-                <div class="match-header">Round ${gameState.matchHistory.length}</div>
-                <div class="match-teams">
-                    <div class="match-team user">
-                        <div class="badge">⚽</div>
-                        <div class="name">Your Team</div>
+            // Generate tournament matches (Semi-final, Final)
+            const opponents = [
+                { name: 'Barcelona', rating: 92, badge: '🔵' },
+                { name: 'Real Madrid', rating: 93, badge: '👑' },
+                { name: 'Bayern Munich', rating: 91, badge: '🔴' }
+            ];
+            
+            gameState.tournamentMatches = [
+                { opponent: opponents[0], round: 'Semi-Final' },
+                { opponent: opponents[1], round: 'Final' }
+            ];
+            
+            playMatch(0);
+        }
+
+        function playMatch(matchIndex) {
+            if (matchIndex >= gameState.tournamentMatches.length) {
+                showResults();
+                return;
+            }
+            
+            const match = gameState.tournamentMatches[matchIndex];
+            const userRating = gameState.team.reduce((sum, p) => sum + (p ? p.rating : 0), 0);
+            const opponentRating = match.opponent.rating * 11;
+            
+            const userGoals = Math.floor(Math.random() * 3 + Math.floor(userRating / 30));
+            const opponentGoals = Math.floor(Math.random() * 3 + Math.floor(opponentRating / 30));
+            
+            const result = {
+                round: match.round,
+                opponent: match.opponent.name,
+                userGoals,
+                opponentGoals,
+                won: userGoals > opponentGoals,
+                draw: userGoals === opponentGoals
+            };
+            
+            gameState.matchResults.push(result);
+            
+            const content = document.getElementById('simContent');
+            content.innerHTML = `
+                <div class="match-card">
+                    <div class="match-header">${match.round}</div>
+                    <div class="match-teams">
+                        <div class="match-team user">
+                            <div class="badge">⚽</div>
+                            <div class="name">Your Team</div>
+                        </div>
+                        <div class="match-score">${userGoals} - ${opponentGoals}</div>
+                        <div class="match-team">
+                            <div class="badge">${match.opponent.badge}</div>
+                            <div class="name">${match.opponent.name}</div>
+                        </div>
                     </div>
-                    <div class="match-score">${userScore} - ${opponentScore}</div>
-                    <div class="match-team">
-                        <div class="badge">🏆</div>
-                        <div class="name">${opponent.name}</div>
+                    <div class="match-events">
+                        <div class="event">
+                            <span class="minute">45'</span>
+                            <span class="icon">⚽</span>
+                            <span class="detail">Your Team</span>
+                        </div>
+                        <div class="event">
+                            <span class="minute">67'</span>
+                            <span class="icon">⚽</span>
+                            <span class="detail">${match.opponent.name}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="match-events">
-                    <div class="event">
-                        <span class="minute">45'</span>
-                        <span class="icon">${won ? '⚽' : '🎯'}</span>
-                        <span class="detail">Goal by</span>
-                        <span class="player-name">${gameState.team[Math.floor(Math.random() * gameState.team.length)].name}</span>
+                    <div class="commentary-box">
+                        <p>${result.won ? '🎉 Excellent performance! Your team dominated the match.' : result.draw ? '⚖️ A closely contested match that ended in a draw.' : '😟 A tough performance, better luck next time.'}</p>
                     </div>
-                    <div class="event">
-                        <span class="minute">60'</span>
-                        <span class="icon">🟨</span>
-                        <span class="detail">Yellow Card to</span>
-                        <span class="player-name">${gameState.team[Math.floor(Math.random() * gameState.team.length)].name}</span>
-                    </div>
-                </div>
-                <div class="commentary-box">
-                    <p>${won ? "Brilliant performance! Your team dominated the match with excellent teamwork." : "Tough loss today. Better luck in the next match!"}</p>
                 </div>
             `;
-
-            document.getElementById('simContent').innerHTML = matchCard.innerHTML;
-            document.getElementById('nextMatchBtn').style.display = 'block';
+            
+            showScreen('simScreen');
+            
+            if (result.won && matchIndex < gameState.tournamentMatches.length - 1) {
+                document.getElementById('nextMatchBtn').style.display = 'block';
+                document.getElementById('nextMatchBtn').onclick = () => playMatch(matchIndex + 1);
+            } else if (!result.won) {
+                document.getElementById('nextMatchBtn').textContent = 'See Results';
+                document.getElementById('nextMatchBtn').style.display = 'block';
+                document.getElementById('nextMatchBtn').onclick = showResults;
+            } else {
+                document.getElementById('nextMatchBtn').style.display = 'none';
+                setTimeout(showResults, 3000);
+            }
         }
 
         function showResults() {
-            showScreen('resultsScreen');
-            const trophy = gameState.matchesWon === 6 ? '🏆' : '🥈';
-            const title = gameState.matchesWon === 6 ? 'CHAMPIONS! 👑' : 'Tournament Finished';
+            const won = gameState.matchResults.every(m => m.won);
+            const finalMatch = gameState.matchResults[gameState.matchResults.length - 1];
             
-            let historyHtml = gameState.matchHistory.map((m, i) => `
-                <div class="history-item">
-                    <span class="round">Round ${i + 1} vs ${m.opponent}</span>
-                    <span class="result ${m.won ? 'win' : 'loss'}">${m.won ? 'WIN' : 'LOSS'}</span>
-                </div>
-            `).join('');
-
-            document.getElementById('resultsContent').innerHTML = `
-                <div class="trophy-display">
-                    <div class="trophy">${trophy}</div>
-                    <div class="result-title ${gameState.matchesWon === 6 ? 'winner' : 'loser'}">${title}</div>
-                    <div class="result-subtitle">You won ${gameState.matchesWon} out of 6 matches</div>
-                    
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="label">Wins</div>
-                            <div class="value">${gameState.matchesWon}</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="label">Losses</div>
-                            <div class="value">${6 - gameState.matchesWon}</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="label">Avg Rating</div>
-                            <div class="value">${Math.round(gameState.team.reduce((s, p) => s + p.rating, 0) / gameState.team.length)}</div>
-                        </div>
+            const statsGrid = `
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="label">Matches Played</div>
+                        <div class="value">${gameState.matchResults.length}</div>
                     </div>
-
-                    <div class="match-history">
-                        <h3>Match History</h3>
-                        ${historyHtml}
+                    <div class="stat-card">
+                        <div class="label">Wins</div>
+                        <div class="value">${gameState.matchResults.filter(m => m.won).length}</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="label">Team Rating</div>
+                        <div class="value">${gameState.team.reduce((sum, p) => sum + (p ? p.rating : 0), 0)}</div>
                     </div>
                 </div>
             `;
+            
+            const historyItems = gameState.matchResults.map(result => `
+                <div class="history-item">
+                    <div class="round">${result.round} vs ${result.opponent}</div>
+                    <div class="result ${result.won ? 'win' : 'loss'}">${result.userGoals} - ${result.opponentGoals}</div>
+                </div>
+            `).join('');
+            
+            document.getElementById('resultsContent').innerHTML = `
+                <div class="trophy-display">
+                    <div class="trophy">${won ? '🏆' : '🥈'}</div>
+                    <h1 class="result-title ${won ? 'winner' : 'loser'}">${won ? 'Champions! 🎉' : 'Tournament Over'}</h1>
+                    <p class="result-subtitle">${won ? 'You are the Champions of Europe!' : `You made it to the ${finalMatch.round}`}</p>
+                </div>
+                ${statsGrid}
+                <div class="match-history">
+                    <h3>Match History</h3>
+                    ${historyItems}
+                </div>
+            `;
+            
+            showScreen('resultsScreen');
         }
 
-        // Start the game
-        init();
+        document.getElementById('playAgainBtn').addEventListener('click', () => {
+            gameState = {
+                difficulty: 'easy',
+                ratingType: 'tournament',
+                selectedTournament: null,
+                selectedFormation: '4-4-2',
+                team: [],
+                club: null,
+                rerolls: 3,
+                currentPositionIndex: 0,
+                tournamentMatches: [],
+                matchResults: []
+            };
+            showScreen('startScreen');
+        });
     </script>
 </body>
 </html>
